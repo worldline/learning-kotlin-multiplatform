@@ -1,0 +1,14 @@
+:root {
+    // brand colors
+    --c-brand: #920097;
+    --c-brand-light: #faaffd;
+}
+
+html.dark {
+    --c-brand: #920097;
+    --c-brand-light: #faaffd;
+}
+
+iframe {
+    width: 100%;
+}

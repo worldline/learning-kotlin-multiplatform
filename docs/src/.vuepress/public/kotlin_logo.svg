@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 26 24" role="img"  class="kt-header__logo" >
+<radialGradient id="kotlin_svg__b" cx="22.432" cy="3.493" r="21.679" gradientTransform="translate(-.19 .042) scale(.9998)" gradientUnits="userSpaceOnUse">
+<stop offset="0.003" stop-color="#e44857"></stop><stop offset="0.469" stop-color="#c711e1"></stop><stop offset="1" stop-color="#7f52ff"></stop></radialGradient>
+<path fill="url(#kotlin_svg__b)" d="M22.87 21.68H3.94V2.76h18.93l-9.66 9.32z"></path>
+
+</svg>
