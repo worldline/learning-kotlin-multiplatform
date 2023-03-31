@@ -1,0 +1,66 @@
+{
+  "questions": [
+    { 
+    "id":1, 
+    "label":"You can create an emulator to simulate the configuration of a particular type of Android device using a tool like", 
+    "correct_answer_id":3, 
+    "answers":[
+      {"id":1, "label":"Theme Editor"},
+      {"id":2, "label":"Android SDK Manager"},
+      {"id":3, "label":"AVD Manager"},
+      {"id":4, "label":"Virtual Editor"}
+     ]
+    },
+    {
+    "id":2, 
+    "label":"What parameter specifies the Android API level that Gradle should use to compile your app?", 
+    "correct_answer_id":2, 
+    "answers":[
+      {"id":1, "label":"minSdkVersion"},
+      {"id":2, "label":"compileSdkVersion"},
+      {"id":3, "label":"targetSdkVersion"},
+      {"id":4, "label":"testSdkVersion"}
+     ]
+    },
+     {
+    "id":3, 
+    "label":"True or false? Scroll view can contain only one view, or view group, as a child ?", 
+    "correct_answer_id":1, 
+    "answers":[
+      {"id":1, "label":"True"},
+      {"id":2, "label":"False"}
+     ]
+    },
+     {
+    "id":4, 
+    "label":"What phrase means that the compiler validates types while compiling?", 
+    "correct_answer_id":1, 
+    "answers":[
+      {"id":1, "label":"Type safety"},
+      {"id":2, "label":"Data binding"},
+      {"id":3, "label":"Type validation"},
+      {"id":4, "label":"Wrong text"}
+     ]
+    },
+     {
+    "id":5, 
+    "label":"True or false? When your app goes into the background, it's not guaranteed to be destroyed. It may only be stopping and waiting for the user to return to it.", 
+    "correct_answer_id":1, 
+    "answers":[
+      {"id":1, "label":"True"},
+      {"id":2, "label":"False"}
+     ]
+    },
+     {
+    "id":6, 
+    "label":"To keep the UI running smoothly, use ___ for long-running tasks, such as all database operations.", 
+    "correct_answer_id":1, 
+    "answers":[
+      {"id":1, "label":"Coroutines"},
+      {"id":2, "label":"ViewModels"},
+      {"id":3, "label":"Returns"},
+      {"id":4, "label":"Managed threads"}
+     ]
+    }
+  ]
+}
