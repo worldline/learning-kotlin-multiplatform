@@ -295,7 +295,7 @@ internal fun App() {
 * Run you first view on all platforms , it should work. 
 
 ::: tip
-You can see the answer [here]("../assets/sources/WelcomeScreen.kt")
+You can see a proposal of answer [here]("../assets/sources/WelcomeScreen.kt")
 :::
 
 ### ScoreScreen
@@ -414,7 +414,8 @@ You can declare the 2 other MutableState values and after use it on your composa
 incrementing so the question and his answers can change on the view.
 
 ::: tip
-Correction is available [here]("../assets/sources/QuizScreen.kt")
+Correction of `QuizScreen` available [here](../assets/sources/QuizScreen.kt)
+and the full sources can be retrieved [here](../assets/sources/km-part2-withcompose.zip) 
 :::
 
 ## Ressources

@@ -1,4 +1,4 @@
-# Connectivity
+# Connectivity (10min)
 
 Let's connect our Quiz app to internet. 
 
@@ -48,10 +48,43 @@ body:
 ```
 
 
-## Definition : [Coroutine](https://kotlinlang.org/docs/coroutines-overview.html)
+## Definition 
+### Data layer for KMP
+
+Data layer in KMM is under building but largly inspired by [Android Architecture pattern]("https://developer.android.com/topic/architecture/data-layer")
+
+#### Overview
+
+![data layer overview](../assets/images/data_layer.png)
+
+Repository classes are responsible for the following tasks:
+  * Exposing data to the rest of the app.
+  * Centralizing changes to the data.
+  * Resolving conflicts between multiple data sources.
+  * Abstracting sources of data from the rest of the app.
+  * Containing business logic.
+
+### [Kotlin flow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/)
+
+"A flow is an asynchronous data stream that sequentially emits values and completes normally or with an exception."
+
+There are multiple types of flow, for the codelab, we will focus on [`StateFlow`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
+
+A state flow is a hot flow because its active instance exists independently of the presence of collectors (our composables that consume the data)
+
+### [Coroutine](https://kotlinlang.org/docs/coroutines-overview.html)
 
 "Asynchronous or non-blocking programming is an important part of the development landscape. When creating server-side, desktop, or mobile applications, it's important to provide an experience that is not only fluid from the user's perspective, but also scalable when needed."
 
+### For the codelab
+
+To not overcomplexify the app, let's assume that :
+  * the QuizAPI provided by Ktor (cf below) is our data source
+  * the repository will use a state flow that emit the API answer once at application startup
+
+::: warning
+  Other Architecture layers for KMP (such as [ViewModels](https://developer.android.com/topic/libraries/architecture/viewmodel) are very experimental at this stage of KMP. View models are possible with third party libraries like [`precompose`]('https://tlaster.github.io/PreCompose/')
+:::
 
 ## Ktor, a multiplatform HTTP client
 
@@ -118,41 +151,30 @@ class QuizAPI {
 }
 ```
 
-### Data layer for KMP
+### Make all your dataclass become serializable
 
-Data layer in KMM is under building but largly inspired by [Android Architecture pattern]("https://developer.android.com/topic/architecture/data-layer")
+Ktor need it to transform the json string into your dataclasses
 
-#### Overview
+*Quiz.kt*
+```kotlin
+@kotlinx.serialization.Serializable
+data class Quiz(var questions: List<Question>)
+```
 
-![data layer overview](../assets/images/data_layer.png)
+*Question.kt*
+```kotlin
+import kotlinx.serialization.SerialInfo
+import kotlinx.serialization.SerialName
 
-Repository classes are responsible for the following tasks:
-  * Exposing data to the rest of the app.
-  * Centralizing changes to the data.
-  * Resolving conflicts between multiple data sources.
-  * Abstracting sources of data from the rest of the app.
-  * Containing business logic.
+@kotlinx.serialization.Serializable
+data class Question(val id:Int, val label:String, @SerialName("correct_answer_id") val correctAnswerId:Int, val answers:List<Answer>)
+```
 
-##### [Kotlin flow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/)
-
-"A flow is an asynchronous data stream that sequentially emits values and completes normally or with an exception."
-
-There are multiple types of flow, for the codelab, we will focus on [`StateFlow`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
-
-A state flow is a hot flow because its active instance exists independently of the presence of collectors (our composables that consume the data)
-
-
-
-### For the codelab
-
-To not overcomplexify the app, let's assume that :
-  * the QuizAPI is our data source
-  * the repository will use one state flow that emit the API answer one at application startup
-
-:::warning
-  Other Architecture layers for KMP (such as [ViewModels]('https://developer.android.com/topic/libraries/architecture/viewmodel')) are very experimental at this stage of KMP. View models are possible with third party libraries like [`precompose`]('https://tlaster.github.io/PreCompose/')
-:::
-
+*Answer.kt*
+```kotlin
+@kotlinx.serialization.Serializable
+data class Answer(val id: Int, val label: String )
+```
 
  ### Create your Repository class in `commonApp`
 
@@ -180,6 +202,28 @@ class QuizRepository()  {
     }
 }
 ```
+
+### Use the repository 
+
+Replace the mocke data for questions by the repository flow.
+
+`App.kt`(commonMain)
+```kotlin
+@Composable
+internal fun App() {
+    MaterialTheme {
+        val repository = QuizRepository()
+        questionScreen(repository.questionState.value)
+    }
+}
+```
+
+::: tip
+You can see a proposal of answer [here]("../assets/sources/km-part4-network.zip")
+:::
+
+
+An that's it , you quiz should now have a remote list of questions.
 
 ## Ressources
 - [Ktor client website](https://ktor.io/docs/getting-started-ktor-client.html)

@@ -1,3 +1,6 @@
-# Let's go further
+# Let's go further (5min)
 
-Kotlin is a modern programming language developed by JetBrains.
+## Manage image ressources and texts
+## Create Navigation between composable screens 
+
+
