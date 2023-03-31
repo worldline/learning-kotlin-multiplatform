@@ -239,10 +239,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
-### Declarative UI principles
+## How to create composables ?
 
-TODO Modifiers , column, Box , Card ... declaration and preview of a composable.
+Composables are UI components that can be simply declared with code as functions, properties (such as text color, fonts...) as function parameters and subviews are declared on function declaration.
 
+* An `@Composable` annotation come always before the composable function. 
+* Properties of size, behaviors of components can be set thanks to `Modifiers`
+* You can align components with containers composables such as `Column` (Vertically), `Box`, `Row` (Horizontally)
+* Also you can preview composables with the annotation `@Preview` before the composable annotation.
+
+Example: 2 text vertically aligned that fit all the width of the screen.
+
+```kotlin
+@Composable
+internal fun App() {
+    MaterialTheme {
+        Column(Modifier.fillMaxWidth()) {
+            Text( "My Text1", color = Color.Blue)
+            Text(text = "My Text2")
+        }
+    }
+}
+```
+
+::: tip
+For more information, you can have a look to [Android Jetpack Compose documentation]('https://developer.android.com/jetpack/compose/layouts/material')
+:::
 
 ## Create composable views for the Quiz
 
@@ -253,6 +275,10 @@ TODO Modifiers , column, Box , Card ... declaration and preview of a composable.
 
 You can now create your first view.
 For the Quiz we need a welcome screen displaying a Card centered with a button inside to start the quiz
+It is simply compose of the following composables :
+* a Card  rounded shape container
+* a Text 
+* a Button
 
 * Create a new composable `WelcomeScreen.kt` on commonMain module 
 * Make sure that the App() composable is using it has below 
@@ -272,11 +298,41 @@ internal fun App() {
 You can see the answer [here]("../assets/sources/WelcomeScreen.kt")
 :::
 
-## Data classes for the Quiz
+### ScoreScreen
 
-**UML** 
+![Score Screen preview](../assets/images/scorescreen.png)
+
+The second view will be quite similar but able de show final scores
+
+
+* Create a new composable `ScoreScreen.kt` on commonMain module 
+* Make sure that the App() composable is using it has below 
+* The composable will have a `String` value as parameter
+
+```kotlin
+@Composable
+internal fun App() {
+    MaterialTheme {
+        scoreScreen("10/20")
+    }
+}
+```
+
+* Run you first view on all platforms , it should work. 
+
+::: tip
+Correction is available [here]("../assets/sources/ScoreScreen.kt")
+:::
+
+
+### QuestionScreen
+
+#### Data classes for Quiz modeling
 
 ![class_diagram](../assets/images/uml.png)  
+
+We can create classes on the package `com.devoxxfr2023.km.network.data`
+
 **Answer.kt** (commonMain)
 ```kotlin
 package com.devoxxfr2023.kmm.network.data
@@ -299,17 +355,73 @@ package com.devoxxfr2023.kmm.network.data
 data class Quiz(var questions: List<Question>)
 ```
 
+#### Make the composable
 
+Now we can make a composable with interactions.
 
+![class_diagram](../assets/images/quizscreen.png)  
 
-# Ressources
+The screen is composed of  : 
+* The question label in a `Card`
+* Single choice answer component with `RadioButton`
+* A `Button` to submit the answer
+* A `LinearProgressIndicator` indicating the quiz progress
+
+After creating the UI view, we can pass to this composable the list of questions.
+When the `App`composable will create `questionScreen()` composable we will generate questions data list as follow :
+
+```kotlin
+@Composable
+internal fun App() {
+    MaterialTheme {
+        var questions = listOf(
+            Question(
+                1,
+                "Android is a great platform ?",
+                1,
+                listOf(Answer(1, "YES"), Answer(2, "NO"))
+            ),
+            Question(
+                1,
+                "Android is a bad platform ?",
+                2,
+                listOf(Answer(1, "YES"), Answer(2, "NO"))
+            )
+        )
+        questionScreen(questions)
+    }
+}
+```
+
+##### State management
+
+All views of question  will be one unique composable that updates with the correct question/answers data each time we are 
+clicking on the `next` button.
+
+We use `MutableState` value for that. It permit to keep data value and recompose the view when the data is changed.
+It's exactly what we need for our quiz page :
+* Keep the value of the question position on the list 
+* Keep the value of the answer selected by the user each time he switch between RadioButtons
+* Keep the score to get the final one at the end of the list.
+
+Here is an example of `MutableState` value declaration
+
+```kotlin
+    var questionProgress by remember { mutableStateOf(0) }
+    ...
+```
+You can declare the 2 other MutableState values and after use it on your composable ensuring that on the button click `questionProgress`is
+incrementing so the question and his answers can change on the view.
+
+::: tip
+Correction is available [here]("../assets/sources/QuizScreen.kt")
+:::
+
+## Ressources
 - [Jetpack Compose for iOS](https://betterprogramming.pub/jetpack-compose-for-ios-getting-started-step-by-step-e7be6f52edd4)
-- [Precompose navigation](https://github.com/Tlaster/PreCompose/blob/master/docs/component/navigation.md)
+- [Android Jetpack Compose documentation]('https://developer.android.com/jetpack/compose/layouts/material')
+- [Android Jetpack Compose](https://developer.android.com/jetpack/compose) 
+- [Kotlin Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
+- [SwiftUI](https://developer.apple.com/xcode/swiftui/)
 
-
-
-[Quiz|+questions: List]++-0..*>[Question]
-[Question|+id: Int;+label: String; +correctId:Int, +answers:List]++-0..*>[Answer]
-[Answer|+id: Int;+label:String]
-https://yuml.me/diagram/scruffy/class/draw
 

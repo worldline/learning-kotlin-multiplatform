@@ -15,20 +15,20 @@ internal fun welcomeScreen(){
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        text = "Quizz",
+                        text = "Quiz",
                         fontSize = 30.sp,
                         modifier = Modifier.padding(all = 10.dp)
                     )
                     Text(
                         modifier = Modifier.padding(all = 10.dp),
-                        text = "A simple Quizz to discovers KMP, KMM and compose.",
+                        text = "A simple Quiz to discovers KMP, KMM and compose.",
                     )
                     Button(
                         modifier = Modifier.padding(all = 10.dp),
                         onClick = {  }
 
                     ) {
-                        Text("Start the Quizz")
+                        Text("Start the Quiz")
                     }
                 }
             }

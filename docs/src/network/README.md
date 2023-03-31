@@ -1,12 +1,13 @@
 # Connectivity
 
+Let's connect our Quiz app to internet. 
+
 ## API used
 
 On this codelab, we will request a simple plain text json file hosted on this repo that will simulate a REST API call.
 The request & answers details are specified below :
 
 **Request**
-
 ```bash
 POST
 content-type: text/plain  
@@ -45,3 +46,13 @@ body:
   ]
 }
 ```
+
+## Ktor, a multiplatform HTTP client
+
+
+
+## Ressources
+- [Ktor client website](https://ktor.io/docs/getting-started-ktor-client.html)
+- [Ktor multiplatform documentation](https://kotlinlang.org/docs/multiplatform-mobile-ktor-sqldelight.html)
+
+
