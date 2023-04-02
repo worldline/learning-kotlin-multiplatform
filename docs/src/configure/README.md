@@ -119,7 +119,7 @@ package com.devoxxfr2023.km
 import platform.UIKit.UIDevice
 
 class IOSPlatform: Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+    override val name: String = "iOS"
 }
 actual fun getPlatform(): Platform = IOSPlatform()
 ```
@@ -131,9 +131,8 @@ If your are not using compose multiplatform, you can develop your views here.
 
 ### Android module (AndroidApp)
 
-Nothing speacial here it's a typical android app.
-
-Notice that your multiplatform library functions ``greet()`` is ready to use.
+The Android app declaration with ressouces, manifest and activities
+Notice that your multiplatform library functions ``greet()`` can be used there.
 
 MainActivity.kt
 ```kotlin

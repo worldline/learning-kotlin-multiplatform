@@ -96,6 +96,14 @@ Shared sources need it to use ktor library on your code
 
 `build.gradle.kts` (shared) 
 ```groovy
+
+plugins {
+...
+    kotlin("plugin.serialization") version "1.8.10" 
+}
+...
+
+
 val commonMain by getting {
   implementation("io.ktor:ktor-client-core:2.2.1") // core source of ktor
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4") // For making asynchronous calls
@@ -130,6 +138,14 @@ val desktopMain by getting {
         }
 ```
 
+### Enable Internet permissions ( Android Only)
+
+You need to enable internet on Android otherwise you will not be able to use ktor client
+
+*AndroidManifest.xml(androidApp)*
+```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+```
 ### Create the API client in `commonApp`
 
 */network/Quiz.kt*
@@ -146,7 +162,7 @@ class QuizAPI {
         }
     }
     suspend fun getAllQuestions(): Quiz {
-        return httpClient.get("").body("https://awl.li/devoxxkmm2023")
+        return httpClient.get("https://awl.li/devoxxkmm2023").body()
     }
 }
 ```
@@ -209,11 +225,18 @@ Replace the mocke data for questions by the repository flow.
 
 `App.kt`(commonMain)
 ```kotlin
+...
+private val repository = QuizRepository()
+...
+
 @Composable
 internal fun App() {
     MaterialTheme {
-        val repository = QuizRepository()
-        questionScreen(repository.questionState.value)
+        val questions = repository.questionState.collectAsState()
+
+        if(questions.value.isNotEmpty()) {
+            questionScreen(questions.value)
+        }
     }
 }
 ```
@@ -223,13 +246,15 @@ You can see a proposal of answer [here]("../assets/sources/km-part4-network.zip"
 :::
 
 
-An that's it , you quiz should now have a remote list of questions.
+An that's it, you quiz have now a remote list of questions.
+If you want to get navigation between your WelcomeScreen, QuizScreen and ScoreScreen,
+go to the next section →
 
 ## Ressources
 - [Ktor client website](https://ktor.io/docs/getting-started-ktor-client.html)
 - [Coroutine documentation](https://kotlinlang.org/docs/coroutines-overview.html)
 - [Ktor multiplatform documentation](https://kotlinlang.org/docs/multiplatform-mobile-ktor-sqldelight.html)
-- [Precompose navigation](https://github.com/Tlaster/PreCompose/blob/master/docs/component/navigation.md)
+
 
 
 

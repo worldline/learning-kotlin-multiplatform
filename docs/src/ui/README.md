@@ -418,6 +418,9 @@ Correction of `QuizScreen` available [here](../assets/sources/QuizScreen.kt)
 and the full sources can be retrieved [here](../assets/sources/km-part2-withcompose.zip) 
 :::
 
+Your Quiz have now all his composable screens made. If you want to connect your app and
+retrieving your questions from a remote API, go to the next section →
+
 ## Ressources
 - [Jetpack Compose for iOS](https://betterprogramming.pub/jetpack-compose-for-ios-getting-started-step-by-step-e7be6f52edd4)
 - [Android Jetpack Compose documentation]('https://developer.android.com/jetpack/compose/layouts/material')
