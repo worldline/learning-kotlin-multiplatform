@@ -2,7 +2,7 @@
 
 Discover kotlin multiplatform features in practice.
 
-## [→ Start the codelab ←]("https://worldline.github.io/learning-kotlin-multiplatform/")
+## [→ Start the codelab ←](https://worldline.github.io/learning-kotlin-multiplatform/)
 
 ## Summary 
 * Configure a multiplatform project 
