@@ -34,7 +34,7 @@ footer: Worldline © 2023 | tech at Worldline
 ![avatar](./assets/images/avatar.png)  
 **Gharbi Ibrahim**  
 [🔗 @__brah​](https://twitter.com/__brah)  
-[🔗 cv.gharbi.org](http://blog.worldline.tech)
+[🔗 cv.gharbi.org](http://cv.gharbi.org)
 
 ### Follow our Tech team
 
