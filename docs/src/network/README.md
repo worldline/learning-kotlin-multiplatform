@@ -242,7 +242,7 @@ internal fun App() {
 ```
 
 ::: tip
-The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part4-network.zip) 
+The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part4-withnetwork.zip) 
 :::
 
 
