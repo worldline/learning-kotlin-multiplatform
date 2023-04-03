@@ -19,7 +19,7 @@ features:
 footer: Worldline © 2023 | tech at Worldline
 ---
 
-# Who we are 
+## Who we are 
 
 ![avatar](./assets/images/logo_worldline.png)  
 
