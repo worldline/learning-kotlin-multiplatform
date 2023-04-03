@@ -14,6 +14,7 @@ Discover kotlin multiplatform features in practice.
 * Let's go further
     * Ressource management (image & strings), paging with compose 
 
+# KMP | Tech at Worldline
 ## Who we are ?
 
 ![avatar](docs/src/assets/images/logo_worldline.png)  
