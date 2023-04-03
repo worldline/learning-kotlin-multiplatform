@@ -480,7 +480,7 @@ desktopApp:run
 
 **If everything is fine, go to the next chapter →**
 ::: tip
-✅ Before going to the next chapter, you that can get the project configured at this step [here](../assets/sources/km-part0-initial.zip)
+✅ Before going to the next chapter, you that can get the project configured at this step [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part0-initial.zip)
 :::
 
 
