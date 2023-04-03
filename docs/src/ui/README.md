@@ -415,7 +415,7 @@ incrementing so the question and his answers can change on the view.
 
 ::: tip
 Correction of `QuizScreen` available [here](../assets/sources/QuizScreen.kt)
-and the full sources can be retrieved [here](../assets/sources/km-part2-withcompose.zip) 
+and the full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part2-withcompose) 
 :::
 
 Your Quiz have now all his composable screens made. If you want to connect your app and
