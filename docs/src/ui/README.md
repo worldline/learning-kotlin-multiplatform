@@ -264,6 +264,8 @@ internal fun App() {
 
 ::: tip
 For more information, you can have a look to [Android Jetpack Compose documentation]('https://developer.android.com/jetpack/compose/layouts/material')
+
+Also, the full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part2-withcompose.zip) 
 :::
 
 ## Create composable views for the Quiz
@@ -415,7 +417,7 @@ incrementing so the question and his answers can change on the view.
 
 ::: tip
 Correction of `QuizScreen` available [here](../assets/sources/QuizScreen.kt)
-and the full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part2-withcompose) 
+and the full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part3-withuistates.zip) 
 :::
 
 Your Quiz have now all his composable screens made. If you want to connect your app and
