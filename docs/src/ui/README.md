@@ -218,6 +218,7 @@ fun MainViewController(): UIViewController =
     }
 ```
 
+
 #### Use this composable on your xcode app by replacing iOSApp.swift code  (iosApp)
 
 iosApp/iosApp/iOSApp.swift
@@ -238,6 +239,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 ```
+
+::: tip
+Also, the full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part2-withcompose.zip) 
+:::
 
 ## How to create composables ?
 
@@ -264,8 +269,6 @@ internal fun App() {
 
 ::: tip
 For more information, you can have a look to [Android Jetpack Compose documentation]('https://developer.android.com/jetpack/compose/layouts/material')
-
-Also, the full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part2-withcompose.zip) 
 :::
 
 ## Create composable views for the Quiz
