@@ -242,8 +242,9 @@ internal fun App() {
 ```
 
 ::: tip
-You can see a proposal of answer [here]("../assets/sources/km-part4-network.zip")
+The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part4-network.zip) 
 :::
+
 
 
 An that's it, you quiz have now a remote list of questions.
