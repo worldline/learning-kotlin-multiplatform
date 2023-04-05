@@ -221,7 +221,7 @@ class QuizRepository()  {
 
 ### Use the repository 
 
-Replace the mocke data for questions by the repository flow.
+Replace mocked data for questions by the repository flow.
 
 `App.kt`(commonMain)
 ```kotlin

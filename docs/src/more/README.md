@@ -25,6 +25,33 @@ val commonMain by getting {
 
 ```
 
+### Replace `AndroidApp`, `desktopApp` root view by precompose view
+
+*MaintActivity.kt (`AndroidApp`)*
+
+```kotlin
+...
+import moe.tlaster.precompose.lifecycle.PreComposeActivity
+import moe.tlaster.precompose.lifecycle.setContent
+
+class MainActivity : PreComposeActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            AndroidApp()
+...
+```
+
+*Maint.kt (`desktopApp`)*
+```kotlin
+...
+import moe.tlaster.precompose.PreComposeWindow
+
+fun main() = application { // kotlin application
+        PreComposeWindow(onCloseRequest = ::exitApplication, title = "QuizzApp") {
+                DesktopApp() 
+...
+```
 
 ### Create your navigation host 
 
@@ -164,6 +191,13 @@ Button(
 ...
 ```
 
+::: warning
+
+Depending of your JDK used, compiler can complain about mismatch of jvm version for android and desktop.
+In that case, update your `jvmtarget` defined in `build.gradle.kts` (shared) 
+
+:::
+
 ## Manage image ressources and texts
 
 For now on KMP , there is no ideal solutions for managing images and texts for all platforms.
@@ -187,6 +221,11 @@ code to retrieve the image.
 
 *Platform.kt (commonMain)*
 ```kotlin
+...
+        return "Hello, ${platform.name}!"
+    }
+}
+
 @Composable
 internal expect fun getMyImage( imageName:String): Painter
 ```
