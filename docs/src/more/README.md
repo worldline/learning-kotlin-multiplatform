@@ -260,6 +260,8 @@ internal actual fun getMyImage(imageName: String ) = painterResource("images/$im
 ::: warning
 For now no iOS support is available.
 We simply provide a dummy function implementation.
+You can use Ktor for image download instead of image ressources for now
+
 :::
 
 *Platform.kt (iosMain)*
@@ -286,7 +288,11 @@ if(getPlatform().name != "iOS")
 ...
 ```
 
-The same principles apply on text ressources. 
+::: tip
+For text, color ressources, you can use [Moko]('https://github.com/icerockdev/moko-resources') third party library
+:::
+
 
 ## Ressources
 - [Precompose navigation](https://github.com/Tlaster/PreCompose/blob/master/docs/component/navigation.md)
+- [Moko]('https://github.com/icerockdev/moko-resources')
