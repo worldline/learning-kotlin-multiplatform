@@ -3,11 +3,11 @@
 ## Prerequisites
 
 - Basic knowledge of kotlin development (nullability,inline & lambda functions mainly)
-- [Android Studio IDE]('https://developer.android.com/studio') with latest stable version **Electric Eel** version or above 
+- [Android Studio IDE](https://developer.android.com/studio) with latest stable version **Electric Eel** version or above 
 - A good connectivity
 
 ::: tip
-For more information about your DEV environment and installs please have a look to jetbrain related [docs]("https://kotlinlang.org/docs/multiplatform-mobile-setup.html#next-step")
+For more information about your DEV environment and installs please have a look to jetbrain related [docs](https://kotlinlang.org/docs/multiplatform-mobile-setup.html#next-step)
 :::
 
 
@@ -53,7 +53,7 @@ Here are expected screens at the end of this codelab.
 ![screens](../assets/images/screens.png)
 
 ::: tip
-You can generate composables based on designs on Figma thanks to the plugin [Google Relay](https://www.figma.com/community/plugin/1041056822461507786/Relay-for-Figma)
+You can generate composables based on designs on Figma thanks to the plugin [Google Relay](https://www.figma.com/community/plugin/1041056822461507786/Relay-for-Figma). A dedicated section on android developer documentation describe all the steps [here](https://developer.android.com/jetpack/compose/tooling/relay?hl=fr)
 :::
 
 # See also

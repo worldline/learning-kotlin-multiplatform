@@ -15,7 +15,7 @@ For this codelab we will mainly focus on navigation feature of PreCompose.
 ### Add `PreCompose` dependency to your project
 
 *gradle.build.kts (shared)*
-```groovy
+```kotlin
 ...
 val commonMain by getting {
             dependencies {
@@ -51,6 +51,14 @@ fun main() = application { // kotlin application
         PreComposeWindow(onCloseRequest = ::exitApplication, title = "QuizzApp") {
                 DesktopApp() 
 ...
+```
+
+*IosApp.kt (`iosMain`)*
+```kotlin 
+fun MainViewController(): UIViewController =
+    PreComposeApplication(title = "QuizApp") {
+        App()
+    }
 ```
 
 ### Create your navigation host 
@@ -277,8 +285,7 @@ internal actual fun getMyImage( imageName:String): Painter {
 *WelcomeScreen.kt and ScoreScreen.kt*
 
 ```kotlin
-if(getPlatform().name != "iOS")
-...
+if(!getPlatform().name.contains("ios",true))
     Image(
         painter = getMyImage("logo"),
         contentDescription = "Logo of the quiz app", // decorative

@@ -43,6 +43,10 @@ kdoctor
 
 **✅ You are all set for the initial project configuration**
 
+::: tip
+Before going to the next chapter, you that can get the project configured at this step [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part0-initial.zip)
+:::
+
 
 ## How it works ?
 
@@ -50,7 +54,7 @@ kdoctor
 
 There are two views for KMM projects in Android studio :
 * **Android view (default)** : a logical view grouping and sorting android releated files. It's a very convenient view when you are dealing with android/kotlin code. This view also groups the gradle configurations files making easier to use this view for global project configuration. But from there no iOS swift code (the module simply not shows up), android modules (androidMain, androidApp) folders are hidden but content is listed.
-* **Project view** : a filesystem view of your project. From there you can open you iOS swift source code and have de full control of your files, directories
+* **Project view** : a filesystem view of your project. From there you can open you iOS swift source code and have the full control of your files, directories
 
 You can switch between them on the project tab in the IDE
 
@@ -119,14 +123,14 @@ package com.devoxxfr2023.km
 import platform.UIKit.UIDevice
 
 class IOSPlatform: Platform {
-    override val name: String = "iOS"
+        override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
 }
 actual fun getPlatform(): Platform = IOSPlatform()
 ```
 
 ### 3 - Apps modules 
 
-The modules that will use the developped common library. Here you can configure android/iOs final apps.
+The modules that will use the developped common library. Here you can configure Android/iOS final apps.
 If your are not using compose multiplatform, you can develop your views here.
 
 ### Android module (AndroidApp)
@@ -202,17 +206,15 @@ The file define
 * includes of specific app modules (iosApp, androidApp) 
 * repositories used for plugins and third partiy libraries dependancies.
 
-```groovy
+```kotlin
 ...
 rootProject.name = "km"
-include(":androidApp")
-include(":shared")
-include(":iosApp")
+include(":androidApp", ":shared", ":iosApp")
 ```
 
 ::: warning  
 You can add the include of ``iosApp`` on the project.
-It is not included here because build system is specific to iOS with ``xcodebuild``
+It is not included by default because the build system is specific to iOS with ``xcodebuild``
 but at least it will make ``iosApp`` module appear on the Android project tab view
 :::
 
@@ -221,7 +223,7 @@ but at least it will make ``iosApp`` module appear on the Android project tab vi
 
 It contains the libraries version used on the global project
 
-```groovy
+```kotlin
 plugins {
     //trick: for the same plugin versions in all sub-modules
     id("com.android.application").version("7.4.2").apply(false)
@@ -243,7 +245,7 @@ You can configure :
 
 #### Plugins needed
 
-```groovy
+```kotlin
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -255,7 +257,7 @@ plugins {
 
 * with Android, ios app declaration and [Cocoapods iOS dependancy manager](https://guides.cocoapods.org/) configuration
 
-```groovy
+```kotlin
 kotlin {
     android {
         ... }
@@ -272,7 +274,7 @@ kotlin {
 It define dependencies for packaging correctly the common lib development.
 You can also add third party dependencies for your shared library with ``implementation`` keyword
 
-```groovy
+```kotlin
 sourceSets {
         val commonMain by getting {
               dependencies {}
@@ -299,7 +301,7 @@ For this codelab you can remove every ``***Test`` sourceset declaration, we will
 
 * There is also on this file the library configuration 
 
-```groovy
+```kotlin
 android {
     namespace = "com.devoxxfr2023.km"
     compileSdk = 33
@@ -316,7 +318,7 @@ android {
 
 Android standard gradle configuration files, define your android app version, your final app dependencies.
 
-```groovy
+```kotlin
 android { ... }
 dependencies {
     implementation(project(":shared"))
@@ -349,13 +351,13 @@ You need to add manually your ``desktopApp`` & ``desktopMain`` modules on your p
 ├── shared
     └── androidMain
     └── iosMain
-    └── desktopMain
+    └── desktopMain ←(CREATE THE FILE TREE)
         └── kotlin
             └── com
                 └── devoxxfr2023
                     └── km
                         └── Platform.kt
-├── desktopApp
+├── desktopApp ←(CREATE THE FILE TREE)
     └── build.gradle.kts
     └── src
         └── jvmMain
@@ -366,22 +368,22 @@ You need to add manually your ``desktopApp`` & ``desktopMain`` modules on your p
 ### Declare the desktop app 
 
 ``setting.gradle.kts`` 
-```groovy
+```kotlin
 ...
 include(":androidApp", ":shared", ":iosApp", ":desktopApp")
 ```
 
 ### add jvm dependancy in ``build.gradle.kts`` (global)
 
-```groovy
+```kotlin
 ...
-   id("org.jetbrains.kotlin.jvm") version "1.8.0" apply false
+   id("org.jetbrains.kotlin.jvm").version("1.8.0").apply(false)
 ...
 ```
 
 ### Create the ``build.gradle.kts`` (desktopApp)
 
-```groovy
+```kotlin
 plugins {
     kotlin("multiplatform")
     application
@@ -403,17 +405,16 @@ kotlin {
         }
     }
 
-application{
-    mainClass.set("MainKt")
-}
-
+    application{
+        mainClass.set("MainKt")
+    }
 }
 
 ```
 
 ### Update ``build.gradle.kts`` (shared)
 
-```groovy
+```kotlin
 
 kotlin {
     ...
@@ -427,7 +428,7 @@ kotlin {
 
 ### Create your Platform.kt (desktopMain)
 
-```groovy
+```kotlin
 package com.devoxxfr2023.km
 
 class DesktopPlatform: Platform {
@@ -439,7 +440,7 @@ actual fun getPlatform(): Platform = DesktopPlatform()
 
 ### Create your Main.kt (desktopApp)
 
-```groovy
+```kotlin
 import com.devoxxfr2023.km.Greeting
 
 fun main(){
@@ -478,12 +479,11 @@ desktopApp:run
 ![hello desktop](../assets/images/hello_desktop.png)
 ![hello ios](../assets/images/hello_ios.png)
 
-**If everything is fine, go to the next chapter →**
+**✅ If everything is fine, go to the next chapter →**
+
 ::: tip
-✅ Before going to the next chapter, you that can get the project configured at this step [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part0-initial.zip)
+If not, you can get the project configured at this step [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part1-withdesktop.zip)
 :::
-
-
 
 # Ressources 
 - [Android studio/Gradle compatibility guide](https://developer.android.com/studio/releases#android_gradle_plugin_and_android_studio_compatibility)

@@ -51,7 +51,7 @@ body:
 ## Definition 
 ### Data layer for KMP
 
-Data layer in KMM is under building but largly inspired by [Android Architecture pattern]("https://developer.android.com/topic/architecture/data-layer")
+Data layer in KMM is under building but largly inspired by [Android Architecture pattern](https://developer.android.com/topic/architecture/data-layer)
 
 #### Overview
 
@@ -95,7 +95,7 @@ Ktor includes a multiplatform asynchronous HTTP client, which allows you to make
 Shared sources need it to use ktor library on your code
 
 `build.gradle.kts` (shared) 
-```groovy
+```kotlin
 
 plugins {
 ...
@@ -115,7 +115,7 @@ val commonMain by getting {
 Then on the same file for each platform (android,iOS,desktop), the specific client version needs to be added :
 
 `build.gradle.kts` (shared) 
-```groovy
+```kotlin
 val androidMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-android:2.2.1") // for Android
@@ -195,7 +195,7 @@ data class Answer(val id: Int, val label: String )
  ### Create your Repository class in `commonApp`
 
 */network/QuizRepository.kt*
-```groovy
+```kotlin
 class QuizRepository()  {
 
     private val quizAPI = QuizAPI()

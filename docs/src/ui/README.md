@@ -19,7 +19,7 @@ UIKit provides a variety of features for building apps, including components you
 #### Add compose library support for all platforms
 
 build.gradle.kts (global)
-```groovy
+```kotlin
 ...
     id("org.jetbrains.compose").version("1.3.1").apply(false)
 ...
@@ -35,18 +35,22 @@ kotlin.native.cacheKind=none
 :::
 
 build.gradle.kts (shared)
-```groovy
+```kotlin
 plugins {
-    id("org.jetbrains.compose")
+    id("org.jetbrains.compose") // in dependencies declaration
     kotlin("native.cocoapods")
+    ...
+    cocoapods {
+    ...
+            // Mandatory : on cocoapods config define your lib as static 
+            isStatic = true 
+    }
+    ...
 
-    ...
-            isStatic = true // Mandatory : on cocoapods config define your lib as static 
-    ...
   sourceSets {
     val commonMain by getting {
             dependencies {
-                implementation(compose.ui)
+                implementation(compose.ui) // Add compose libraries to shared modile
                 implementation(compose.foundation)
                 implementation(compose.material)
                 implementation(compose.runtime)
@@ -55,11 +59,12 @@ plugins {
 
     val desktopMain by getting {
             dependencies {
-                api(compose.preview)
+                api(compose.preview) // Add compose livrary to desktop module
     
     ...
 
    dependencies {
+        // compose previews dependancies
         implementation("androidx.compose.ui:ui-tooling-preview:1.4.0")
         debugImplementation("androidx.compose.ui:ui-tooling:1.4.0")
    }
@@ -90,7 +95,7 @@ internal fun App() {
 #### Check your compose dependencies on the Android project 
 
 build.gradle.kts (androidApp)
-```groovy
+```kotlin
 ...
     implementation("androidx.compose.ui:ui:1.3.1")
     implementation("androidx.compose.ui:ui-tooling:1.3.1")
@@ -144,7 +149,7 @@ class MainActivity : ComponentActivity() {
 #### Update your gradle configuration
 
  *build.gradle.kts (desktopApp)*
- ```groovy
+ ```kotlin
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
@@ -161,16 +166,17 @@ plugins {
             }
         }
 ...
-    compose.desktop { // the block replace 
-        application { // application previous declaration for gradle task "run"
-            mainClass = "MainKt"
-            nativeDistributions {
-                targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-                packageName = "desktop"
-                packageVersion = "1.0.0"
-            }
+// The compose block declaration is out of kotlin block
+compose.desktop { // the block replace 
+    application { // application previous declaration for gradle task "run"
+        mainClass = "MainKt"
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "desktop"
+            packageVersion = "1.0.0"
         }
     }
+}
 ```
 
 #### Share the App() composable on the Desktop library source (desktopMain)
@@ -194,7 +200,7 @@ import androidx.compose.ui.window.application
 import com.devoxxfr2023.km.DesktopApp
 
 fun main() = application { // kotlin application
-    Window(onCloseRequest = ::exitApplication, title = "QuizzApp") {
+    Window(onCloseRequest = ::exitApplication, title = "QuizApp") {
         DesktopApp() // composable view shared
     }
 }
@@ -300,7 +306,7 @@ internal fun App() {
 * Run you first view on all platforms , it should work. 
 
 ::: tip
-You can see a proposal of answer [here]("../assets/sources/WelcomeScreen.kt")
+You can see a proposal of answer [here]("https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/WelcomeScreen.kt")
 :::
 
 ### ScoreScreen
@@ -326,7 +332,7 @@ internal fun App() {
 * Run you first view on all platforms , it should work. 
 
 ::: tip
-Correction is available [here]("../assets/sources/ScoreScreen.kt")
+Correction is available [here]("https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/ScoreScreen.kt")
 :::
 
 
@@ -419,7 +425,7 @@ You can declare the 2 other MutableState values and after use it on your composa
 incrementing so the question and his answers can change on the view.
 
 ::: tip
-Correction of `QuizScreen` available [here](../assets/sources/QuizScreen.kt)
+Correction of `QuizScreen` available [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/QuizScreen.kt)
 and the full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part3-withuistates.zip) 
 :::
 
