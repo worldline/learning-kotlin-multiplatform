@@ -296,7 +296,7 @@ sourceSets {
 ```
 
 ::: tip
-For this codelab you can remove every ``***Test`` sourceset declaration, we will not use it
+For this Hands-on Lab you can remove every ``***Test`` sourceset declaration, we will not use it
 :::
 
 * There is also on this file the library configuration 

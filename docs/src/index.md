@@ -1,10 +1,10 @@
 ---
 home: true
 heroImage: ./logo.png
-heroText:  Codelab - Kotlin multiplatform with compose  (Android, iOS & Desktop)
+heroText:  Hands-on Lab - Kotlin multiplatform with compose  (Android, iOS & Desktop)
 tagline: Discover kotlin multiplatform features in practice.
 actions:
-  - text: Start the codelab →
+  - text: Start the Hands-on Lab →
     link: /overview/
     type: primary
 features:
@@ -30,7 +30,7 @@ footer: Worldline © 2023 | tech at Worldline
 * 7000+ engineers​ in over 40 countries​
 * A huge & diverse​ tech-stack
 
-### Follow trainers of this codelab
+### Follow trainers of this Hands-on Lab
 
 ![avatar](./assets/images/avatar.png)  
 **Gharbi Ibrahim**  

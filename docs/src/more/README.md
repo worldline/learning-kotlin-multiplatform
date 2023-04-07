@@ -10,7 +10,7 @@ It can enables feature similar to Android Jetpack compose such as :
 * ViewModel from Android Architecture pattern
 * Molecule that improve business logic development thanks to flows
 
-For this codelab we will mainly focus on navigation feature of PreCompose.
+For this Hands-on Lab we will mainly focus on navigation feature of PreCompose.
 
 ### Add `PreCompose` dependency to your project
 
@@ -71,7 +71,7 @@ Routes are path between all the composable screens that you will call later on y
 ![routes overview](../assets/images/routes.png)
 
 
-For this codelab we need 3 routes for : 
+For this Hands-on Lab we need 3 routes for : 
 * At startup to the `WelcomeScreen`
 * from Welcome screen to the `QuizScreen`
 * from the final question `QuizScreen`to the `ScoreScreen` 

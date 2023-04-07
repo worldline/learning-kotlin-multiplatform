@@ -29,7 +29,7 @@ For more information about your DEV environment and installs please have a look 
 It's a modern toolkit for building native UI. Quickly bring your app to life with less code, powerful tools, and intuitive Kotlin APIs.
 It is based on [Android Jetpack Compose](https://developer.android.com/jetpack/compose) declarative UI approach ( which is similar also to [iOS SwiftUI](https://developer.apple.com/xcode/swiftui/) )
 
-## Codelab objectives
+## Hands-on Lab objectives
 
 ![capture](../assets/images/overview.png)
 
@@ -48,7 +48,7 @@ We will create a simple quiz application that provides :
 
 ### Design screens
 
-Here are expected screens at the end of this codelab.
+Here are expected screens at the end of this Hands-on Lab.
 
 ![screens](../assets/images/screens.png)
 

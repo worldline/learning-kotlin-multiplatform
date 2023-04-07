@@ -4,7 +4,7 @@ Let's connect our Quiz app to internet.
 
 ## API used
 
-On this codelab, we will request a simple plain text json file hosted on this repo that will simulate a REST API call.
+On this Hands-on Lab, we will request a simple plain text json file hosted on this repo that will simulate a REST API call.
 The request & answers details are specified below :
 
 **Request**
@@ -68,7 +68,7 @@ Repository classes are responsible for the following tasks:
 
 "A flow is an asynchronous data stream that sequentially emits values and completes normally or with an exception."
 
-There are multiple types of flow, for the codelab, we will focus on [`StateFlow`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
+There are multiple types of flow, for the Hands-on Lab, we will focus on [`StateFlow`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
 
 A state flow is a hot flow because its active instance exists independently of the presence of collectors (our composables that consume the data)
 
@@ -76,7 +76,7 @@ A state flow is a hot flow because its active instance exists independently of t
 
 "Asynchronous or non-blocking programming is an important part of the development landscape. When creating server-side, desktop, or mobile applications, it's important to provide an experience that is not only fluid from the user's perspective, but also scalable when needed."
 
-### For the codelab
+### For the Hands-on Lab
 
 To not overcomplexify the app, let's assume that :
   * the QuizAPI provided by Ktor (cf below) is our data source
