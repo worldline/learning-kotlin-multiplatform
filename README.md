@@ -4,6 +4,8 @@ Discover kotlin multiplatform features in practice.
 
 ## [→ Start the codelab ←](https://worldline.github.io/learning-kotlin-multiplatform/)
 
+![avatar](docs/src/assets/images/qrcode.png)  
+
 ## Summary 
 * Configure a multiplatform project 
     * Shared library principles for Android,iOS and Desktop jvm 
@@ -34,7 +36,7 @@ Discover kotlin multiplatform features in practice.
 
 ### Follow our Tech team
 
-* [🔗 blog.worldline.tech](http://blog.worldline.tech)
-* [🔗 @WorldlineTech​](https://twitter.com/worldlinetech)
+[🔗 blog.worldline.tech](http://blog.worldline.tech)     
+[🔗 @WorldlineTech​](https://twitter.com/worldlinetech)
 
 Worldline © 2023 | Tech at Worldline
