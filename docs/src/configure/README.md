@@ -69,7 +69,7 @@ A shared library module linked to all project platforms (```commonMain```). Cont
 On the sample, It's a simple greet function, that will use a per platform ```getPlatform()``` function
 
 
-Greeting.kt
+::: details Greeting.kt
 ```kotlin
 package com.devoxxfr2023.km
 
@@ -81,6 +81,7 @@ class Greeting {
     }
 }
 ```
+:::
 
 ### 2 -  KMM specific library modules (iosMain, androidMain)
 
@@ -97,7 +98,7 @@ When you need a specific implementation for Android and iOS of getPlatform() to 
 More information about platform specific functions in KMP [here](https://kotlinlang.org/docs/multiplatform-connect-to-apis.html))
 ::: 
 
-platform.kt (commonMain)
+::: details platform.kt (commonMain)
 ```kotlin
 package com.devoxxfr2023.km
 
@@ -106,8 +107,9 @@ interface Platform {
 }
 expect fun getPlatform(): Platform
 ```
+:::
 
-Platform.kt (androidMain)
+::: details Platform.kt (androidMain)
 ```kotlin
 package com.devoxxfr2023.km
 
@@ -116,8 +118,9 @@ class AndroidPlatform : Platform {
 }
 actual fun getPlatform(): Platform = AndroidPlatform()
 ```
+:::
 
-Platform.kt(iosMain)
+::: details Platform.kt(iosMain)
 ```kotlin
 package com.devoxxfr2023.km
 import platform.UIKit.UIDevice
@@ -127,6 +130,7 @@ class IOSPlatform: Platform {
 }
 actual fun getPlatform(): Platform = IOSPlatform()
 ```
+:::
 
 ### 3 - Apps modules 
 
@@ -138,7 +142,7 @@ If your are not using compose multiplatform, you can develop your views here.
 The Android app declaration with ressouces, manifest and activities
 Notice that your multiplatform library functions ``greet()`` can be used there.
 
-MainActivity.kt
+::: details MainActivity.kt
 ```kotlin
 package com.devoxxfr2023.km.android
 import com.devoxxfr2023.km.Greeting
@@ -149,7 +153,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             var greet = Greeting().greet()
             ...
-```            
+```  
+:::
 
 ### iOS module (AndroidApp)
 
@@ -157,7 +162,7 @@ For ```iOSApp``` project you can open the .xcworkspace with Xcode for completion
 
 Notice that your multiplatform library functions ``greet()`` is ready to use.
 
-ContentView.swift
+::: details ContentView.swift
 ```swift
 import SwiftUI
 import shared
@@ -167,6 +172,7 @@ struct ContentView: View {
 	...
 
 ```
+:::
 
 ### 4 - Gradle configurations
 
@@ -344,6 +350,7 @@ You need to add manually your ``desktopApp`` & ``desktopMain`` modules on your p
 
 ### Files & folders structure to create 
 
+::: details  file tree
 ```bash
 ├── iosApp
 ├── androidApp
@@ -364,6 +371,7 @@ You need to add manually your ``desktopApp`` & ``desktopMain`` modules on your p
             └── kotlin
                 └── Main.kt
 ```
+:::
 
 ### Declare the desktop app 
 
