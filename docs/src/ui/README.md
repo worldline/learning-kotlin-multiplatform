@@ -18,12 +18,13 @@ UIKit provides a variety of features for building apps, including components you
 
 #### Add compose library support for all platforms
 
-build.gradle.kts (global)
+::: details build.gradle.kts (global)
 ```kotlin
 ...
     id("org.jetbrains.compose").version("1.3.1").apply(false)
 ...
 ```
+:::
 
 ::: warning
 for iOS experimental compatibility, some gradle environment variables need to be set in ``gradle.properties``
@@ -34,7 +35,7 @@ kotlin.native.cacheKind=none
 ```
 :::
 
-build.gradle.kts (shared)
+::: details build.gradle.kts (shared)
 ```kotlin
 plugins {
     id("org.jetbrains.compose") // in dependencies declaration
@@ -70,6 +71,7 @@ plugins {
    }
 
 ```
+:::
 
 #### Create a new App.kt file in `commonMain` source files
 
@@ -94,7 +96,7 @@ internal fun App() {
 
 #### Check your compose dependencies on the Android project 
 
-build.gradle.kts (androidApp)
+::: details build.gradle.kts (androidApp)
 ```kotlin
 ...
     implementation("androidx.compose.ui:ui:1.3.1")
@@ -104,11 +106,12 @@ build.gradle.kts (androidApp)
     implementation("androidx.compose.material:material:1.3.1")
     implementation("androidx.activity:activity-compose:1.6.1")
 ```
+:::
 
 
 #### Share the App() composable on the Android library source (androidMain)
 
-* create a new kotlin file ``AndroidApp.kt``
+::: details create a new kotlin file ``AndroidApp.kt``
 
 ```kotlin
 package com.devoxxfr2023.km
@@ -120,6 +123,7 @@ fun AndroidApp() {
     App()
 }
 ```
+:::
 
 #### Use this composable on your app Activity (androidApp)
 
@@ -148,7 +152,7 @@ class MainActivity : ComponentActivity() {
 
 #### Update your gradle configuration
 
- *build.gradle.kts (desktopApp)*
+ ::: details *build.gradle.kts (desktopApp)*
  ```kotlin
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
@@ -178,6 +182,7 @@ compose.desktop { // the block replace
     }
 }
 ```
+:::
 
 #### Share the App() composable on the Desktop library source (desktopMain)
 
@@ -210,7 +215,7 @@ fun main() = application { // kotlin application
 
 #### Share the App() composable on the iOS library source (iosMain)
 
-* Create a new kotlin file named ``IosApp.kt``
+::: details Create a new kotlin file named ``IosApp.kt``
 
 ```kotlin
 package com.devoxxfr2023.km
@@ -223,11 +228,12 @@ fun MainViewController(): UIViewController =
         App()
     }
 ```
+:::
 
 
 #### Use this composable on your xcode app by replacing iOSApp.swift code  (iosApp)
 
-iosApp/iosApp/iOSApp.swift
+::: details iosApp/iosApp/iOSApp.swift
 ```swift
 import SwiftUI
 import shared
@@ -245,6 +251,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 ```
+:::
 
 ::: tip
 Also, the full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part2-withcompose.zip) 
@@ -259,7 +266,7 @@ Composables are UI components that can be simply declared with code as functions
 * You can align components with containers composables such as `Column` (Vertically), `Box`, `Row` (Horizontally)
 * Also you can preview composables with the annotation `@Preview` before the composable annotation.
 
-Example: 2 text vertically aligned that fit all the width of the screen.
+Example: 2 texts vertically aligned that fit all the width of the screen.
 
 ```kotlin
 @Composable
@@ -306,7 +313,48 @@ internal fun App() {
 * Run you first view on all platforms , it should work. 
 
 ::: tip
-You can see a proposal of answer [here]("https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/WelcomeScreen.kt")
+
+::: details You can see a proposal of answer [below]("https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/WelcomeScreen.kt")
+```kotlin
+@Composable()
+internal fun welcomeScreen(){
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth().fillMaxHeight()
+    ) {
+        Card(
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier.padding(10.dp),
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                if(getPlatform().name != "ios")
+
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "Quiz",
+                        fontSize = 30.sp,
+                        modifier = Modifier.padding(all = 10.dp)
+                    )
+                    Text(
+                        modifier = Modifier.padding(all = 10.dp),
+                        text = "A simple Quiz to discovers KMP, KMM and compose.",
+                    )
+                    Button(
+                        modifier = Modifier.padding(all = 10.dp),
+                        onClick = {  }
+
+                    ) {
+                        Text("Start the Quiz")
+                    }
+                }
+            }
+        }
+    }
+}
+```
+:::
 :::
 
 ### ScoreScreen
@@ -332,7 +380,69 @@ internal fun App() {
 * Run you first view on all platforms , it should work. 
 
 ::: tip
-Correction is available [here]("https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/ScoreScreen.kt")
+
+::: details Correction is available [below]("https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/ScoreScreen.kt")
+
+```kotlin
+package com.devoxxfr2023.km
+
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+@Composable()
+internal fun scoreScreen(score: String){
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth().fillMaxHeight()
+    ) {
+        Card(
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier.padding(10.dp),
+            backgroundColor = Color.Green
+
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                if(getPlatform().name != "ios")
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+                    Text(
+                        fontSize = 15.sp,
+                        text = "score",
+                    )
+                    Text(
+                        fontSize = 30.sp,
+                        text = score,
+                    )
+                    Button(
+                        modifier = Modifier.padding(all = 20.dp),
+                        onClick = {
+                        }
+                    ) {
+                        Icon(Icons.Filled.Refresh, contentDescription = "Localized description")
+                        Text(text = "Retake the Quiz",)
+
+                    }
+                }
+            }
+        }
+    }
+}
+```
+:::
 :::
 
 
@@ -344,27 +454,30 @@ Correction is available [here]("https://github.com/worldline/learning-kotlin-mul
 
 We can create classes on the package `com.devoxxfr2023.km.network.data`
 
-**Answer.kt** (commonMain)
+::: details **Answer.kt** (commonMain)
 ```kotlin
 package com.devoxxfr2023.kmm.network.data
 
 data class Answer(val id: Int, val label: String )
 ```
+:::
 
-**Question.kt** (commonMain)
+::: details **Question.kt** (commonMain)
 ```kotlin
 package com.devoxxfr2023.kmm.network.data
 
 data class Question(val id:Int, val label:String, val correctAnswerId:Int, val answers:List<Answer>)
 ```
+:::
 
 
-**Quiz.kt.kt** (commonMain)
+::: details **Quiz.kt.kt** (commonMain)
 ```kotlin
 package com.devoxxfr2023.kmm.network.data
 
 data class Quiz(var questions: List<Question>)
 ```
+:::
 
 #### Make the composable
 
