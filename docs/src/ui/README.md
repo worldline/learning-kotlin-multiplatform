@@ -314,8 +314,7 @@ internal fun App() {
 
 ::: tip
 
-::: details You can see a proposal of answer [below](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/WelcomeScreen.kt)
-```kotlin
+::: details You can see a proposal of answer
 @Composable()
 internal fun welcomeScreen(){
 
@@ -381,7 +380,7 @@ internal fun App() {
 
 ::: tip
 
-::: details Correction is available [below](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/ScoreScreen.kt)
+::: details Correction is available
 
 ```kotlin
 package com.devoxxfr2023.km
@@ -454,7 +453,7 @@ internal fun scoreScreen(score: String){
 
 We can create classes on the package `com.devoxxfr2023.km.network.data`
 
-::: details **Answer.kt** (commonMain)
+::: details Answer.kt (commonMain)
 ```kotlin
 package com.devoxxfr2023.kmm.network.data
 
@@ -462,7 +461,7 @@ data class Answer(val id: Int, val label: String )
 ```
 :::
 
-::: details **Question.kt** (commonMain)
+::: details Question.kt (commonMain)
 ```kotlin
 package com.devoxxfr2023.kmm.network.data
 
@@ -471,7 +470,7 @@ data class Question(val id:Int, val label:String, val correctAnswerId:Int, val a
 :::
 
 
-::: details **Quiz.kt.kt** (commonMain)
+::: details Quiz.kt.kt (commonMain)
 ```kotlin
 package com.devoxxfr2023.kmm.network.data
 
