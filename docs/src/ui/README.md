@@ -314,7 +314,7 @@ internal fun App() {
 
 ::: tip
 
-::: details You can see a proposal of answer [below]("https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/WelcomeScreen.kt")
+::: details You can see a proposal of answer [below](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/WelcomeScreen.kt)
 ```kotlin
 @Composable()
 internal fun welcomeScreen(){
@@ -381,7 +381,7 @@ internal fun App() {
 
 ::: tip
 
-::: details Correction is available [below]("https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/ScoreScreen.kt")
+::: details Correction is available [below](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/ScoreScreen.kt)
 
 ```kotlin
 package com.devoxxfr2023.km
