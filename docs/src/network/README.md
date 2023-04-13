@@ -72,9 +72,9 @@ There are multiple types of flow, for the Hands-on Lab, we will focus on [`State
 
 A state flow is a hot flow because its active instance exists independently of the presence of collectors (our composables that consume the data)
 
-### [Coroutine](https://kotlinlang.org/docs/coroutines-overview.html)
+### [Coroutine](https://kotlinlang.org/docs/coroutines-basics.html#your-first-coroutine)
 
-"Asynchronous or non-blocking programming is an important part of the development landscape. When creating server-side, desktop, or mobile applications, it's important to provide an experience that is not only fluid from the user's perspective, but also scalable when needed."
+"A coroutine is an instance of suspendable computation. It is conceptually similar to a thread, in the sense that it takes a block of code to run that works concurrently with the rest of the code. However, a coroutine is not bound to any particular thread. It may suspend its execution in one thread and resume in another one."
 
 ### For the Hands-on Lab
 
