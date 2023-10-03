@@ -112,7 +112,7 @@ val commonMain by getting {
 
 Then on the same file for each platform (android,iOS,desktop), the specific client version needs to be added :
 
-`build.gradle.kts` (module : shared) 
+::: details build.gradle.kts (module : shared) 
 ```kotlin
 val androidMain by getting {
             dependencies {
@@ -135,6 +135,7 @@ val desktopMain by getting {
             }
         }
 ```
+:::
 
 #### Enable Internet permissions ( Android Only)
 
