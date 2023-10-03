@@ -19,13 +19,13 @@ kdoctor
 ```
 :::
 
-## 🧪 Fork the KMP template provided by JetBrains
+## 🧪 Clone the KMP template provided by JetBrains
 
 [![Sample sources](../assets/images/kmp_sample_src.png)](https://github.com/JetBrains/compose-multiplatform-template)
 
 Because kotlin mutiplatform is evolving a lot, the best template compatible for Android, iOS and Desktop is available on a dedicated github project [here](https://github.com/JetBrains/compose-multiplatform-template)
 
-* Fork the project 
+* Clone the project 
 * Open it with Android Studio
 
 

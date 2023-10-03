@@ -2,7 +2,7 @@
 
 ## 📚 Reminder 
 
-### [Kotlin Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
+### [Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
 
 Compose Multiplatform simplifies and accelerates UI development for Desktop and Web applications, and allows extensive UI code sharing between Android, iOS, Desktop and Web.
 It's a modern toolkit for building native UI. Quickly bring your app to life with less code, powerful tools, and intuitive Kotlin APIs.

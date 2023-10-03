@@ -331,6 +331,28 @@ if(!getPlatform().name.contains("ios",true))
 For text, color ressources, you can use [Moko]('https://github.com/icerockdev/moko-resources') third party library
 :::
 
+
+##  👷‍♂️  Integrate a Web target 
+
+Even though the official template does not support the web target, we can use the sample GitHub project Kotlin/kotlin-wasm-examples/compose-imageviewer with fortunately support all compose targets.
+
+The web target can be run with:
+ 
+ ``` bash
+ ./gradlew --console=plain :webApp:wasmRun. 
+```
+
+ :::warning
+ > Under construction
+ :::
+
+ ##  👷‍♂️ Store your questions on a local database
+
+ :::warning
+ > Under construction
+ :::
+
+
 **✅ If everything is fine,  congrats, you've just finish this codelab. You can now experiment your kotlin skills eveywhere !**
 
 ## 📖 Further reading
