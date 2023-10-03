@@ -224,12 +224,12 @@ desktopApp:run
 
 ![hello desktop](../assets/images/hello_desktop.png)
 
-**✅ If everything is fine, go to the next chapter →**
-
+## 🎯 Solutions
 ::: tip
 Before going to the next step, you that can get the project configured at this step [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part0-initial.zip)
 :::
 
+**✅ If everything is fine, go to the next chapter →**
 
 ## 📖 Further reading 
 - [Android studio/Gradle compatibility guide](https://developer.android.com/studio/releases#android_gradle_plugin_and_android_studio_compatibility)

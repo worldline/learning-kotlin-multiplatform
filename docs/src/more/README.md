@@ -28,7 +28,7 @@ val commonMain by getting {
 
 #### Replace `AndroidApp`, `desktopApp` root view by precompose view
 
-::: details MaintActivity.kt (`AndroidApp`)
+::: details MaintActivity.kt (module : androidApp)
 ```kotlin
 ...
 import moe.tlaster.precompose.lifecycle.PreComposeActivity

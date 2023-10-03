@@ -63,7 +63,7 @@ internal fun App() {
 
 * Run you first view on all platforms , it should work. 
 
-## 🎯 Solution
+### 🎯 Solutions
 
 ::: details WelcomeScreen.kt (SourseSet : commonMain)
 @Composable()
@@ -128,7 +128,7 @@ internal fun App() {
 
 * Run you first view on all platforms , it should work. 
 
-## 🎯 Solution
+### 🎯 Solutions
 
 ::: details ScoreScreen.kt (SourseSet : commonMain)
 
@@ -239,7 +239,7 @@ Here is an example of `MutableState` value declaration
 You can declare the 2 other MutableState values and after use it on your composable ensuring that on the button click `questionProgress`is
 incrementing so the question and his answers can change on the view.
 
-## 🎯 Solution
+### 🎯 Solutions
 
 ::: details QuestionScreen.kt (SourceSet : commonMain)
 ```` kotlin 
