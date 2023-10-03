@@ -98,14 +98,14 @@ Shared sources need it to use ktor library on your code
 ``` kotlin
 plugins {
 ...
-    kotlin("plugin.serialization") version "1.8.10" 
+    kotlin("plugin.serialization") version "1.9.10" 
 }
 ...
 val commonMain by getting {
-  implementation("io.ktor:ktor-client-core:2.2.1") // core source of ktor
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4") // For making asynchronous calls
-  implementation("io.ktor:ktor-client-content-negotiation:2.2.1") // Simplify handling of content type based deserialization 
-  implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.1") // make your dataclasses serializable
+                implementation("io.ktor:ktor-client-core:2.3.4") // core source of ktor
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3") // For making asynchronous calls
+                implementation("io.ktor:ktor-client-content-negotiation:2.3.4") // Simplify handling of content type based deserialization
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.4") // make your dataclasses serializable
   ...
 ```
 ::: 
@@ -116,14 +116,14 @@ Then on the same file for each platform (android,iOS,desktop), the specific clie
 ```kotlin
 val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-android:2.2.1") // for Android
+                implementation("io.ktor:ktor-client-android:2.3.4") // for Android
             }
         }
 ...
-val iosMain by getting {
+val iosMain by creating {
             ...
             dependencies {
-                implementation("io.ktor:ktor-client-darwin:2.2.1") //for iOS
+                implementation("io.ktor:ktor-client-darwin:2.3.4") //for iOS
             }
 
         }
@@ -131,7 +131,7 @@ val iosMain by getting {
 val desktopMain by getting {
             dependencies {
                ...
-                implementation("io.ktor:ktor-client-apache:2.2.1") // for Desktop
+                implementation("io.ktor:ktor-client-apache:2.3.4") // for Desktop
             }
         }
 ```
@@ -144,12 +144,24 @@ You need to enable internet on Android otherwise you will not be able to use kto
 ::: details AndroidManifest.xml(module : androidApp)
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
 ::: 
 #### Create the API client in `commonApp`
 
 ::: details network.Quiz.kt  (SourceSet : commonMain)
 ``` kotlin
+package network
+
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.get
+import io.ktor.http.ContentType
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
+import network.data.Quiz
+
 class QuizAPI {
     private val httpClient = HttpClient {
         install(ContentNegotiation) {
