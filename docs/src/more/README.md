@@ -57,8 +57,9 @@ fun main() = application { // kotlin application
 
 ::: details IosApp.kt (module : iosMain)
 ```kotlin 
+import moe.tlaster.precompose.PreComposeApplication
 fun MainViewController(): UIViewController =
-    PreComposeApplication(title = "QuizApp") {
+    PreComposeApplication() {
         App()
     }
 ```
@@ -213,7 +214,7 @@ In that case, update your `jvmtarget` defined in `build.gradle.kts` (shared)
 ## 🎯 Solutions
 
 ::: tip
-The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part4-withnetwork.zip) 
+The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/4.navigation.zip) 
 :::
 
 ## 👷‍♂️ Manage  your ressources
