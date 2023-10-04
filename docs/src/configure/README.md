@@ -226,7 +226,7 @@ desktopApp:run
 
 ## 🎯 Solutions
 ::: tip
-Before going to the next step, you that can get the project configured at this step [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part0-initial.zip)
+Before going to the next step, you that can get the project configured at this step [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/1.initial.zip)
 :::
 
 **✅ If everything is fine, go to the next chapter →**

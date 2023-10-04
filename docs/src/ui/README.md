@@ -417,7 +417,7 @@ Your Quiz have now all his composable screens made. Let's connect it to the Inte
 **✅ If everything is fine, go to the next chapter →**
 
 ::: tip
-The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part3-withuistates.zip) 
+The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/2.ui.zip) 
 :::
 
 

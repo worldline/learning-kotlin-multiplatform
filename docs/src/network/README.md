@@ -260,7 +260,7 @@ internal fun App() {
 ### 🎯 Solutions
 
 ::: tip
-The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/sources/km-part4-withnetwork.zip) 
+The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/3.network.zip) 
 :::
 
 
