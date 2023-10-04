@@ -32,16 +32,14 @@ https://github.com/worldline/learning-kotlin-multiplatform/tree/main/docs/src/as
 
 ### 🔗 👨‍🏫 Follow trainers of this codelab
 
+![avatar](docs/src/assets/images/avatar.png) 
+- **Gharbi Ibrahim**   
+- [🔗 @__brah​](https://twitter.com/__brah)
+- [🔗 cv.gharbi.org](https://cv.gharbi.org)  
 
-![avatar](docs/src/assets/images/avatar2.png)  
-**Benabbas Yassine**  
-[🔗 @yostane​](https://twitter.com/yostane)  
-
-
-![avatar](docs/src/assets/images/avatar.png)  
-**Gharbi Ibrahim**  
-[🔗 @__brah​](https://twitter.com/__brah)  
-[🔗 cv.gharbi.org](https://cv.gharbi.org)
+![avatar](docs/src/assets/images/avatar2.png)
+- **Benabbas Yassine**
+- [🔗 @yostane​](https://twitter.com/yostane)
 
 ### Follow our Tech team
 
