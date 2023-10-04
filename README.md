@@ -16,6 +16,9 @@ Discover kotlin multiplatform features in practice.
 * Let's go further
     * Ressource management (image & strings), paging with compose 
 
+##  🎯 Solutions 
+https://github.com/worldline/learning-kotlin-multiplatform/tree/main/docs/src/assets/solutions
+
 # KMP | Tech at Worldline
 ## Who we are ?
 
@@ -27,12 +30,18 @@ Discover kotlin multiplatform features in practice.
 * 7000+ engineers​ in over 40 countries​
 * A huge & diverse​ tech-stack
 
-### Follow trainers of this codelab
+### 🔗 👨‍🏫 Follow trainers of this codelab
+
+
+![avatar](docs/src/assets/images/avatar2.png)  
+**Benabbas Yassine**  
+[🔗 @yostane​](https://twitter.com/yostane)  
+
 
 ![avatar](docs/src/assets/images/avatar.png)  
 **Gharbi Ibrahim**  
 [🔗 @__brah​](https://twitter.com/__brah)  
-[🔗 cv.gharbi.org](http://blog.worldline.tech)
+[🔗 cv.gharbi.org](https://cv.gharbi.org)
 
 ### Follow our Tech team
 
