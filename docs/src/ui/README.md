@@ -1,4 +1,4 @@
-# User interface (30 min)
+# User interface
 
 ## 📚 Reminder 
 
