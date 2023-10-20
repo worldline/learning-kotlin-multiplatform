@@ -1,4 +1,4 @@
-# Connectivity (10min)
+# Connectivity
 
 Let's connect our Quiz app to internet. 
 
