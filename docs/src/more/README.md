@@ -333,14 +333,21 @@ For text, color ressources, you can use [Moko]('https://github.com/icerockdev/mo
 :::
 
 
-##  👷‍♂️  Integrate a Web target 
+##  👷‍♂️  Integrate a JS Web target 
 
 Even though the official template does not support the web target, we can use the sample GitHub project Kotlin/kotlin-wasm-examples/compose-imageviewer with fortunately support all compose targets.
+ ./gradlew --console=plain :webApp:wasmRun. 
+
 
 The web target can be run with:
  
  ``` bash
- ./gradlew --console=plain :webApp:wasmRun. 
+./gradlew jsApp:jsBrowserDevelopmentRun
+ 
+
+<google chrome path> --disable-web-security --user-data-dir=/Users/xxxx/Desktop/googlechrometmp http://localhost:8080/
+
+
 ```
 
  :::warning
@@ -359,3 +366,6 @@ The web target can be run with:
 ## 📖 Further reading
 - [Precompose navigation](https://github.com/Tlaster/PreCompose/blob/master/docs/component/navigation.md)
 - [Moko]('https://github.com/icerockdev/moko-resources')
+- [KMP awesome libs database](https://github.com/terrakok/kmp-awesome)
+- [Animation in compose cheat sheet](https://storage.googleapis.com/android-stories/compose/Compose_Animation_Cheat_Sheet.pdf)
+- [The accompagnist : a group of libraries that aim to supplement Compose](https://google.github.io/accompanist/)

@@ -10,6 +10,11 @@
 For more information about your DEV environment and installs please have a look to jetbrain related [docs](https://kotlinlang.org/docs/multiplatform-mobile-setup.html#next-step)
 :::
 
+### IDE support overview
+
+![IDE support table](../assets/images/IDE_support.jpg)
+
+
 ## Hands-on Lab objectives
 
 ![capture](../assets/images/overview.png)
@@ -42,4 +47,7 @@ You can generate composables based on designs on Figma thanks to the plugin [Goo
 - [Github repository for this training](https://github.com/worldline/learning-kotlin-multiplatform)
 - [Official Kotlin multiplatform documentation](https://kotlinlang.org/docs/home.html)
 - [People in space sample app](https://github.com/joreilly/PeopleInSpace)
-
+- [Compose/Gradle compatibility guide ](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html)
+- [AGP/ Android studio compatibility guide ](https://developer.android.com/studio/releases?hl=fr#android_gradle_plugin_and_android_studio_compatibility)
+- [Compose multiplatform wizard](https://terrakok.github.io/Compose-Multiplatform-Wizard/)
+- [Compose multiplatform web wizard](https://terrakok.github.io/kmp-web-wizard/)

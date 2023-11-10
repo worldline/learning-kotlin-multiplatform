@@ -427,5 +427,8 @@ The full solution for this section is availabe [here](https://github.com/worldli
 - [Android Jetpack Compose](https://developer.android.com/jetpack/compose) 
 - [Kotlin Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
-
-
+- [Composables snippets](https://www.jetpackcompose.app/snippets)
+- [Composables widget database](https://www.composables.com/)
+- [Compare declarative UI](https://www.jetpackcompose.app/compare-declarative-frameworks/JetpackCompose-vs-SwiftUI-vs-Flutter)
+- [KMP samples list](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html)
+- [Jetpack compose composables](https://developer.android.com/jetpack/compose/components)
