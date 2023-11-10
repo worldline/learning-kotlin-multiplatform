@@ -1,4 +1,4 @@
-# 🚀 Let's start (5 min)
+# 🚀 Let's start
 
 ## Prerequisites
 

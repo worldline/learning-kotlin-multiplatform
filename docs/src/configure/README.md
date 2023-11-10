@@ -1,4 +1,4 @@
-# Configure a KMP project (10 min)
+# Configure a KMP project
 
 ## 🧪 Plugins installation
 

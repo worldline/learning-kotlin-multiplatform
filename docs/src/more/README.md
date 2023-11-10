@@ -1,4 +1,4 @@
-# Let's go further (5min)
+# Let's go further
 
 ##  🧪 Create Navigation between composable screens 
 
