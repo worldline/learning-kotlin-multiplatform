@@ -51,3 +51,4 @@ You can generate composables based on designs on Figma thanks to the plugin [Goo
 - [AGP/ Android studio compatibility guide ](https://developer.android.com/studio/releases?hl=fr#android_gradle_plugin_and_android_studio_compatibility)
 - [Compose multiplatform wizard](https://terrakok.github.io/Compose-Multiplatform-Wizard/)
 - [Compose multiplatform web wizard](https://terrakok.github.io/kmp-web-wizard/)
+- [Figma Now in android](https://www.figma.com/community/file/1164313362327941158/now-in-android-case-study)
