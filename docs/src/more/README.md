@@ -369,3 +369,4 @@ The web target can be run with:
 - [KMP awesome libs database](https://github.com/terrakok/kmp-awesome)
 - [Animation in compose cheat sheet](https://storage.googleapis.com/android-stories/compose/Compose_Animation_Cheat_Sheet.pdf)
 - [The accompagnist : a group of libraries that aim to supplement Compose](https://google.github.io/accompanist/)
+- [AAkira libs database](https://github.com/AAkira/Kotlin-Multiplatform-Libraries#repository)
