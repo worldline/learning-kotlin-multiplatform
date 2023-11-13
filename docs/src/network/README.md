@@ -281,6 +281,7 @@ go to the next section →
 - [Ktor client website](https://ktor.io/docs/getting-started-ktor-client.html)
 - [Coroutine documentation](https://kotlinlang.org/docs/coroutines-overview.html)
 - [Ktor multiplatform documentation](https://kotlinlang.org/docs/multiplatform-mobile-ktor-sqldelight.html)
+- [REST API basics](https://www.youtube.com/watch?v=-mN3VyJuCjM&list=WL&index=3)
 
 
 
