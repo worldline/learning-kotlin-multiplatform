@@ -20,7 +20,7 @@ For this Hands-on Lab we will mainly focus on navigation feature of PreCompose.
 val commonMain by getting {
             dependencies {
                 ...
-                api("moe.tlaster:precompose:1.3.15")
+                api("moe.tlaster:precompose:1.5.7")
 ...
 
 ```
