@@ -354,8 +354,6 @@ The web target can be run with:
  > Under construction
  :::
 
- ##  👷‍♂️ Store your questions on a local database
-
  :::warning
  > Under construction
  :::

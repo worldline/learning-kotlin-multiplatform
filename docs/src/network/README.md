@@ -269,6 +269,12 @@ The full sources can be retrieved [here](https://github.com/worldline/learning-k
  > Under construction
  :::
 
+ ###  🧪 Create a Ktor server module inside your actual project
+
+Limitation : You need to create the module from IntelliJ community or ultimate , not on Android Studio
+
+ ### 🎯 Solutions
+
 
 An that's it, you quiz have now a remote list of questions.
 If you want to get navigation between your WelcomeScreen, QuizScreen and ScoreScreen,
