@@ -32,5 +32,7 @@ Before going to the next step, you that can get the project configured at this s
 **✅ If everything is fine, go to the next chapter →**
 
 ## 📖 Further reading 
-- [Android studio/Gradle compatibility guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html)
+- [SQL Delight tutorial (obsolete)](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html)
+- [SQL Delight lib ](https://github.com/cashapp/sqldelight)
+
 
