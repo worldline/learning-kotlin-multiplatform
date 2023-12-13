@@ -29,6 +29,10 @@ Because kotlin mutiplatform is evolving a lot, the best template compatible for 
 * Open it with Android Studio
 
 
+::: tip
+Newly available, a online template generator is now official from [Jetbrain website](https://kmp.jetbrains.com/)
+:::
+
 ## 📚  A Guided tour of the sample project
 
 ::: tip
