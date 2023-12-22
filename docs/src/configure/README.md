@@ -233,6 +233,17 @@ desktopApp:run
 Before going to the next step, you that can get the project configured at this step [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/1.initial.zip)
 :::
 
+## Basic logging
+
+A logger is provided by [`Ktor client library`] (https://ktor.io/docs/logging.html) for basic logs.
+
+::: tip
+
+Use can have more advanced logging and debugging thanks to third party libs such as [`NSExceptionKT`](https://github.com/rickclephas/NSExceptionKt) or [`CrachKiOS`](https://github.com/touchlab/CrashKiOS) or [`Kermit`](https://github.com/touchlab/Kermit) or [`Napier`](https://github.com/AAkira/Napier)
+
+:::
+
+
 **✅ If everything is fine, go to the next chapter →**
 
 ## 📖 Further reading 

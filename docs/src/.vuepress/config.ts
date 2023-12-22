@@ -30,6 +30,7 @@ export default defineUserConfig({
           "/network/",
           "/database/",
           "/more/",
+          "/js/",
         ], 
   }),
 

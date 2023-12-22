@@ -25,10 +25,10 @@ Pay attention also with beta, alpha version of Android studio that could produce
 
 
 
-## 🧪 add and use your sqldelight database to your quizz to retrieve network only if you  your quizz data are older than 5 minutes
+## 🧪 Add sqldelight db to your quizz 
 
 > Refer to the multiplatform implementation of SQLDelight in official Github pages
-> 👉 https://cashapp.github.io/sqldelight/2.0.0/multiplatform_sqlite/
+> 👉 [https://cashapp.github.io/sqldelight/2.0.0/multiplatform_sqlite/](https://cashapp.github.io/sqldelight/2.0.0/multiplatform_sqlite/)
 
 
 #### Add the correct dependancies to the project
@@ -79,6 +79,19 @@ plugins {
 
 #### Create you SQLDelight model 'QuizDatabase.sq'
 
+#### Create your Database datasource by generating insert and update suspending functions
+
+#### Update your repository by instanciating your database
+
+Your repository handle the following cases :
+* If there is no network and it's the first time launch of the app : handle and error 
+* if there is no network and you have db datas : return on the flow the db data
+* if there is network and db data are younger than 5 min : return on the flow the db data
+* if there is network and db data are older than 5 min : retourn on the flow the network data and reset db data
+
+
+## 🎯 Solutions
+
 ::: details QuizDatabase.sq (ressources of commonMain)*
 
 ```sql
@@ -94,6 +107,7 @@ CREATE TABLE questions (
     correctAnswerId INTEGER  NOT NULL
  );
 
+
  CREATE TABLE answers (
     id INTEGER NOT NULL,
     label TEXT NOT NULL,
@@ -104,6 +118,8 @@ CREATE TABLE questions (
           ON UPDATE CASCADE
           ON DELETE CASCADE
  );
+
+
 
  selectUpdateTimestamp:
  SELECT *
@@ -122,14 +138,11 @@ CREATE TABLE questions (
  deleteAnswers:
  DELETE FROM answers;
 
- selectAllQuestions:
- SELECT *
- FROM questions;
 
- selectAllAnswersFromQuestion:
+ selectAllQuestionsWithAnswers:
  SELECT *
- FROM answers
- WHERE question_id = :questionId;
+ FROM questions
+ INNER JOIN answers ON questions.id = answers.question_id;
 
  insertQuestion:
  INSERT INTO questions(id, label,correctAnswerId)
@@ -138,44 +151,58 @@ CREATE TABLE questions (
  insertAnswer:
  INSERT INTO answers(id, label,question_id)
  VALUES (?, ?, ?);
+
 ```
 :::
-
-#### Create your Database datasource by generating insert and update suspending functions
 
 ::: details network/QuizDB.kt (commonMain)
 ``` kotlin
 package network
 
+
+import app.cash.sqldelight.async.coroutines.awaitAsList
+import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
 import app.cash.sqldelight.db.SqlDriver
 import com.myapplication.common.cache.Database
-import com.myapplication.common.cache.QuizDatabaseQueries
+import kotlinx.coroutines.CoroutineScope
 import network.data.Answer
 import network.data.Question
 
-class QuizDB(sqlDriver: SqlDriver) {
+class QuizDbDataSource(private val sqlDriver: SqlDriver, private val coroutineScope: CoroutineScope) {
 
-    private val database = Database(sqlDriver)
-    private val quizQueries: QuizDatabaseQueries = database.quizDatabaseQueries
+    private  var database=Database(sqlDriver)
+    private  var quizQueries=database.quizDatabaseQueries
 
-    suspend fun getUpdateTimeStamp():Long = quizQueries.selectUpdateTimestamp().executeAsOneOrNull()?.timestamprequest ?: 0L
+
+    suspend fun getUpdateTimeStamp():Long = quizQueries.selectUpdateTimestamp().awaitAsOneOrNull()?.timestamprequest ?: 0L
+
 
     suspend fun setUpdateTimeStamp(timeStamp:Long)  {
         quizQueries.deleteTimeStamp()
         quizQueries.insertTimeStamp(timeStamp)
     }
 
-        suspend fun getAllQuestions() = quizQueries.selectAllQuestions(
-        mapper = { id, label, correctAnswer  ->
-            Question(id,label,correctAnswer,getAnswersByQuestionId(id)
-            )
-        }).executeAsList()
+     suspend fun getAllQuestions(): List<Question> {
+         return quizQueries.selectAllQuestionsWithAnswers().awaitAsList()
 
-    private fun getAnswersByQuestionId(idQuestion:Long) = quizQueries.selectAllAnswersFromQuestion(
-        questionId = idQuestion,
-        mapper = { id, label, _ ->
-            Answer(id, label)
-        }).executeAsList()
+             .groupBy {it.question_id }
+             .map { (questionId, rowList) ->
+
+             Question(
+                 id = questionId,
+                 label = rowList.first().label,
+                 correctAnswerId = rowList.first().correctAnswerId,
+                 answers = rowList.map { answer ->
+                     Answer(
+                         id = answer.id_,
+                         label = answer.label_
+                     )
+                 }
+             )
+         }
+     }
+
+
 
     suspend fun insertQuestions(questions:List<Question>) {
         quizQueries.deleteQuestions();
@@ -191,21 +218,79 @@ class QuizDB(sqlDriver: SqlDriver) {
 ```
 :::
 
-#### Update your repository by instanciating your database
+::: details QuizRepository.kt
+```kotlin
+package network
 
-Your repository handle the following cases :
-* If there is no network and it's the first time launch of the app : handle and error 
-* if there is no network and you have db datas : return on the flow the db data
-* if there is network and db data are younger than 5 min : return on the flow the db data
-* if there is network and db data are older than 5 min : retourn on the flow the network data and reset db data
+import app.cash.sqldelight.db.SqlDriver
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
+import network.data.Question
 
 
-## 🎯 Solutions
-::: tip
-Before going to the next step, you that can get the project configured at this step [here](#)
+class QuizRepository(sqlDriver: SqlDriver)  {
+
+    private val mockDataSource = MockDataSource()
+    private val quizAPI = QuizApiDatasource()
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    private var quizDB = QuizDbDataSource(sqlDriver,coroutineScope)
+
+    private var _questionState=  MutableStateFlow(listOf<Question>())
+    var questionState = _questionState
+
+    init {
+        updateQuiz()
+    }
+
+    private suspend fun fetchQuiz(): List<Question> = quizAPI.getAllQuestions().questions
+
+    private suspend fun fetchAndStoreQuiz(): List<Question>{
+        val questions  = fetchQuiz()
+        quizDB.insertQuestions(questions)
+        quizDB.setUpdateTimeStamp(Clock.System.now().epochSeconds)
+        return questions
+    }
+    private fun updateQuiz(){
+
+
+        coroutineScope.launch {
+            _questionState.update {
+                try {
+                    val lastRequest = quizDB.getUpdateTimeStamp()
+                    if(lastRequest == 0L || lastRequest - Clock.System.now().epochSeconds > 300000){
+                        fetchAndStoreQuiz()
+                    }else{
+                        quizDB.getAllQuestions()
+                    }
+                } catch (e: NullPointerException) {
+                    fetchAndStoreQuiz()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    mockDataSource.generateDummyQuestionsList()
+                }
+
+            }
+        }
+    }
+}
+```
 :::
 
+::: tip
+if you want to store  simple key-value data, you can use [`Multiplatform-Settings`](https://github.com/russhwolf/multiplatform-settings) or [`DataStore multiplatform`]('https://developer.android.com/reference/kotlin/androidx/datastore/package-summary.html')
+:::
+
+:::tip
+For not using SQLight ORM, you can use [`Realm kotlin`](https://github.com/realm/realm-kotlin) or [KStore](https://github.com/xxfast/KStore)
+:::
+
+
 **✅ If everything is fine, go to the next chapter →**
+
 
 ## 📖 Further reading 
 - [SQL Delight tutorial (obsolete)](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html)

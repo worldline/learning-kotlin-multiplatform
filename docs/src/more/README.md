@@ -1,4 +1,4 @@
-# Let's go further
+# Navigation & Ressources
 
 ##  🧪 Create Navigation between composable screens 
 
@@ -217,13 +217,12 @@ In that case, update your `jvmtarget` defined in `build.gradle.kts` (shared)
 The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/4.navigation.zip) 
 :::
 
-## 👷‍♂️ Manage  your ressources
+## 👷‍♂️ Manage  ressources
 
+- For common code, store your resource files in the resources directory of the commonMain source set.
+- For platform-specific code, store your resource files in the resources directory of the corresponding source set.
 
-::: warning 
-This section is deprecated since Jetbrain release his experimental API `painterResource` from `org.jetbrains.compose.resource` package
-
-
+ Jetbrain release his experimental API `painterResource` from `org.jetbrains.compose.resource` package
 ```kotlin
 @ExperimentalResourceApi
 @Composable
@@ -236,128 +235,63 @@ public fun painterResource(
 - **XML Vector Drawables** have the same format as for Android (https://developer.android.com/reference/android/graphics/drawable/VectorDrawable) except that external references to Android resources are not supported. 
 - Note that XML Vector Drawables are not supported for Web target currently.
   
+### Android
+To make your resources accessible from the resource library, use the following configuration in your build.gradle.kts file:
 
-
-> Stay tuned, update is under construction for this section
-:::
-
-For now on KMP , there is no ideal solutions for managing images and texts for all platforms.
-
-The current solution is to use KMP possibilities for custom compose function implementation.
-
-Each platform will have his own implementation of `getMyImage` function that will do the specific
-code to retrieve the image.
-
-#### Add the image correctly on the project
-
-##### On the androidMain ressources
-
-![Android image](../assets/images/android_image.png)
-
-##### On the commonMain ressources
-
-![Android image](../assets/images/common_image.png)
-
-#### Declare the KMP function
-
-::: details Platform.kt (SourceSet : commonMain)
 ```kotlin
-...
-        return "Hello, ${platform.name}!"
+android {
+    // …
+    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+}
+```
+
+For iOS, the Compose Multiplatform Gradle plugin handles resource deployment. The plugin stores resource files in the compose-resources directory of the resulting application bundle.
+
+```kotlin
+val commonMain by getting {
+    dependencies {
+        // Your dependencies
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+        implementation(compose.components.resources)
     }
 }
-@Composable
-internal expect fun getMyImage( imageName:String): Painter
 ```
-:::
 
-#### Android 
+Nothing to do for desktop App 
 
-::: details Platform.kt (SourceSet : androidMain)
+### Usage on the app
+
 ```kotlin
-@Composable
-internal actual fun getMyImage( imageName:String): Painter {
-    val c = R.drawable::class.java
-    val field: Field = c.getField(imageName)
-    val id: Int = field.getInt(null)
-    return painterResource(id)
+Image(
+    painterResource("compose-multiplatform.xml"),
+    null // description
+)
+```
 
+### Access fonts and string resources
+
+For more ressource management possibilities for font and String management, you can use a third party lib :
+-  [Moko]('https://github.com/icerockdev/moko-resources') 
+- [Libres](https://github.com/Skeptick/libres)
+
+
+### Usage of other custom  ressources types 
+
+```kotlin
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+fun App() {
+    var text: String? by remember { mutableStateOf(null) }
+
+    LaunchedEffect(Unit) {
+        text = String(resource("welcome.txt").readBytes())
+    }
+
+    text?.let {
+        Text(it)
+    }
 }
 ```
-:::
-
-#### Desktop 
-
-::: details Platform.kt (SourceSet : desktopMain)
-```kotlin
-@Composable
-internal actual fun getMyImage(imageName: String ) = painterResource("images/$imageName.png")
-```
-:::
-
-#### iOS
-
-::: warning
-For now no iOS support is available.
-We simply provide a dummy function implementation.
-You can use Ktor for image download instead of image ressources for now
-
-:::
-
-::: details Platform.kt (SourceSet : iosMain)
-```kotlin
-@Composable
-internal actual fun getMyImage( imageName:String): Painter {
-    TODO("Not yet implemented")
-}
-```
-:::
-#### Usage on the app
-
-::: details WelcomeScreen.kt and ScoreScreen.kt (SourceSet : commonMain)
-
-```kotlin
-if(!getPlatform().name.contains("ios",true))
-    Image(
-        painter = getMyImage("logo"),
-        contentDescription = "Logo of the quiz app", // decorative
-        contentScale = ContentScale.Fit,
-        modifier = Modifier.width(150.dp).padding(20.dp)
-        )
-...
-```
-:::
-
-::: tip
-For text, color ressources, you can use [Moko]('https://github.com/icerockdev/moko-resources') third party library
-:::
-
-
-##  👷‍♂️  Integrate a JS Web target 
-
-Even though the official template does not support the web target, we can use the sample GitHub project Kotlin/kotlin-wasm-examples/compose-imageviewer with fortunately support all compose targets.
- ./gradlew --console=plain :webApp:wasmRun. 
-
-
-The web target can be run with:
- 
- ``` bash
-./gradlew jsApp:jsBrowserDevelopmentRun
- 
-
-<google chrome path> --disable-web-security --user-data-dir=/Users/xxxx/Desktop/googlechrometmp http://localhost:8080/
-
-
-```
-
- :::warning
- > Under construction
- :::
-
- :::warning
- > Under construction
- :::
-
 
 **✅ If everything is fine,  congrats, you've just finish this codelab. You can now experiment your kotlin skills eveywhere !**
 
@@ -368,3 +302,4 @@ The web target can be run with:
 - [Animation in compose cheat sheet](https://storage.googleapis.com/android-stories/compose/Compose_Animation_Cheat_Sheet.pdf)
 - [The accompagnist : a group of libraries that aim to supplement Compose](https://google.github.io/accompanist/)
 - [AAkira libs database](https://github.com/AAkira/Kotlin-Multiplatform-Libraries#repository)
+

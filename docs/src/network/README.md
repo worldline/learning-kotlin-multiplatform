@@ -2,7 +2,8 @@
 
 Let's connect our Quiz app to internet. 
 
-## 📚 Reminder  
+## 📚 Architecture  
+
 ### Data layer for KMP
 
 Data layer in KMP is under building but largly inspired by [Android Architecture pattern](https://developer.android.com/topic/architecture/data-layer)
@@ -29,6 +30,83 @@ A state flow is a hot flow because its active instance exists independently of t
 "A coroutine is an instance of suspendable computation. It is conceptually similar to a thread, in the sense that it takes a block of code to run that works concurrently with the rest of the code. However, a coroutine is not bound to any particular thread. It may suspend its execution in one thread and resume in another one."
 
 
+###  🧪 Create your first DataSource and Repository
+
+* Create a mock datasource, that generate a list of question
+* Use it with a repository on your QuizScreen
+
+::: warning 
+Domain layer framework such as [`ViewModels`](https://developer.android.com/topic/libraries/architecture/viewmodel) are not available by default on KMP. You can use a third party library such as [`Moko-MVVM`](https://github.com/icerockdev/moko-mvvm) or [`KMM-ViewModel`](https://github.com/rickclephas/KMM-ViewModel) or  [`precompose`]('https://tlaster.github.io/PreCompose/')
+
+:::
+
+ ### 🎯 Solutions
+
+::: details MockDataSource.kt
+``` kotlin 
+package network
+
+import network.data.Answer
+import network.data.Question
+
+class MockDataSource {
+
+    suspend fun generateDummyQuestionsList():List<Question>{
+        return generateQuestionsList()
+    }
+    fun generateQuestionsList():List<Question>{
+        return listOf(
+            Question(
+                1,
+                "Android is a great platform ?",
+                1,
+                listOf(
+                    Answer( 1,"YES"),
+                    Answer(2,"NO")
+                )
+            ),
+            Question(
+                1,
+                "Android is a bad platform ?",
+                2,
+                listOf(
+                    Answer( 1,"YES"),
+                    Answer(2,"NO")
+                )
+            )
+        )
+
+    }
+
+}
+```
+:::
+
+::: details  QuizRepository.kt
+``` kotlin
+package network
+
+class QuizRepository(sqlDriver: SqlDriver)  {
+
+    private val mockDataSource = MockDataSource()
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    private var _questionState=  MutableStateFlow(listOf<Question>())
+    var questionState = _questionState
+
+    init {
+        updateQuiz()
+    }
+
+    private fun updateQuiz(){
+        coroutineScope.launch {
+            _questionState.update {
+                    mockDataSource.generateDummyQuestionsList()
+            }
+        }
+    }
+}
+```
+:::
 
 ## Connect my Quizz to the internet
 
@@ -81,9 +159,6 @@ To not overcomplexify the app, let's assume that :
   * the QuizAPI provided by Ktor (cf below) is our data source
   * the repository will use a state flow that emit the API answer once at application startup
 
-::: warning
-  Other Architecture layers for KMP (such as [ViewModels](https://developer.android.com/topic/libraries/architecture/viewmodel) are very experimental at this stage of KMP. View models are possible with third party libraries like [`precompose`]('https://tlaster.github.io/PreCompose/')
-:::
 
 ###  🧪 Ktor as a multiplatform HTTP client
 
@@ -264,16 +339,175 @@ The full sources can be retrieved [here](https://github.com/worldline/learning-k
 :::
 
 
-###  👷‍♂️ Ktor as a rest API server
- :::warning
- > Under construction
- :::
+## Ktor as a rest API server
 
- ##  🧪 Create a Ktor server module inside your actual project
+ ###  🧪 Create a Ktor server module inside your actual project
 
 Limitation : You need to create the module from IntelliJ community or ultimate , not on Android Studio
 
- ## 🎯 Solutions
+ ### 🎯 Solutions
+
+ ::: details main.kt
+
+``` kotlin 
+fun main() {
+    embeddedServer(Netty, port = 9080, host = "localhost", module = Application::module)
+        .start(wait = true)
+}
+
+fun Application.module() {
+
+    install(CORS) {
+        allowMethod(HttpMethod.Options)
+        allowMethod(HttpMethod.Post)
+        allowMethod(HttpMethod.Get)
+        allowHeader(HttpHeaders.AccessControlAllowOrigin)
+        allowHeader(HttpHeaders.ContentType)
+        anyHost()
+    }
+
+    install(ContentNegotiation) {
+        json()
+    }
+    configureRouting()
+}
+```
+:::
+
+
+::: details routing.kt
+
+```kotlin
+package com.example.plugins
+
+import io.ktor.server.application.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlin.random.Random
+
+@Serializable
+data class Quiz(var questions: List<Question>)
+
+@Serializable
+data class Answer(val id: Long, val label: String )
+
+@Serializable
+data class Question(val id:Long, val label:String, @SerialName("correct_answer_id") val correctAnswerId:Int, val answers:List<Answer>)
+
+fun Application.configureRouting() {
+
+    routing {
+        get("/quiz") {
+            call.respond(generateQuiz())
+        }
+    }
+}
+
+fun generateQuiz(): Quiz {
+    val quizQuestions = mutableListOf<Question>()
+
+    val questions = listOf(
+        "What is the primary goal of Kotlin Multiplatform?",
+        "How does Kotlin Multiplatform facilitate code sharing between platforms?",
+        "Which platforms does Kotlin Multiplatform support?",
+        "What is a common use case for Kotlin Multiplatform?",
+        "What is a shared code module in Kotlin Multiplatform called?",
+        "How does Kotlin Multiplatform handle platform-specific implementations?",
+        "What languages can be interoperable with Kotlin Multiplatform?",
+        "What tooling supports Kotlin Multiplatform development?",
+        "What is the benefit of using Kotlin Multiplatform for mobile development?",
+        "How does Kotlin Multiplatform differ from Kotlin Native and Kotlin/JS?"
+    )
+
+    val answers = listOf(
+        listOf(
+            "To share code between multiple platforms",
+            "To exclusively compile code to JavaScript",
+            "To build only Android applications",
+            "To create iOS-only applications"
+        ),
+        listOf(
+            "By sharing business logic and adapting UI",
+            "By writing separate code for each platform",
+            "By using only Java libraries",
+            "By using code translation tools"
+        ),
+        listOf(
+            "Android, iOS, and web",
+            "Only Android",
+            "Only iOS",
+            "Only web applications"
+        ),
+        listOf(
+            "Developing a cross-platform app",
+            "Building a desktop-only application",
+            "Creating a server-side application",
+            "Writing a standalone mobile app"
+        ),
+        listOf(
+            "Shared module",
+            "Kotlin file",
+            "Code package",
+            "Platform code"
+        ),
+        listOf(
+            "Through expect and actual declarations",
+            "By automatically translating code",
+            "By restricting to a single platform",
+            "By excluding platform-specific features"
+        ),
+        listOf(
+            "Java, JavaScript, Swift",
+            "C++, C#, Python",
+            "HTML, CSS, Ruby",
+            "Rust, TypeScript, Perl"
+        ),
+        listOf(
+            "IntelliJ IDEA, Android Studio",
+            "Eclipse, NetBeans",
+            "Visual Studio Code",
+            "Xcode"
+        ),
+        listOf(
+            "Code reuse and sharing",
+            "Improved performance",
+            "Simplified UI development",
+            "Enhanced debugging tools"
+        ),
+        listOf(
+            "Kotlin Multiplatform allows sharing code between different platforms using common modules.",
+            "Kotlin Native is exclusively for iOS development.",
+            "Kotlin/JS is only for web development.",
+            "Kotlin Multiplatform is entirely distinct from other Kotlin flavors."
+        )
+    )
+
+    for (i in questions.indices) {
+        val shuffledAnswers = answers[i].shuffled(Random(i))
+        val correctAnswerId = shuffledAnswers.indexOfFirst { it == answers[i][0] } + 1
+        val question = Question(i + 1L, questions[i], correctAnswerId, shuffledAnswers.mapIndexed { index, answer ->
+            Answer(index + 1L, answer)
+        })
+        quizQuestions.add(question)
+    }
+
+    return Quiz(quizQuestions)
+}
+```
+:::
+
+## Image loading from internet 
+
+To load an image from the internet, you can use the following third-party Compose Multiplatform libraries
+- [Compose Image Loader ](https://github.com/qdsfdhvh/compose-imageloader)
+- [Kamel](https://github.com/Kamel-Media/Kamel)
+
+
+::: tip
+If you want well-known retrofit style lib, you can use [KtorFit](https://github.com/Foso/Ktorfit) to separate endpoint declaration from httpclient configuration 
+:::
 
 
 An that's it, you quiz have now a remote list of questions.

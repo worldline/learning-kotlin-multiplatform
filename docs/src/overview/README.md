@@ -14,6 +14,12 @@ For more information about your DEV environment and installs please have a look 
 
 ![IDE support table](../assets/images/IDE_support.jpg)
 
+
+### Apps using KMP 
+
+![capture](../assets/images/apps.png)
+
+
 ### KMP roadmap 
 
 [See the roadmap 2024 on official Jetbrain blog](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-development-roadmap-for-2024/)
