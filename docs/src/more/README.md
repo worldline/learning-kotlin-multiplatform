@@ -20,50 +20,14 @@ For this Hands-on Lab we will mainly focus on navigation feature of PreCompose.
 val commonMain by getting {
             dependencies {
                 ...
-                api("moe.tlaster:precompose:1.5.7")
+                api("moe.tlaster:precompose:1.5.10")
 ...
 
 ```
 ::: 
 
-#### Replace `AndroidApp`, `desktopApp` root view by precompose view
 
-::: details MaintActivity.kt (module : androidApp)
-```kotlin
-...
-import moe.tlaster.precompose.lifecycle.PreComposeActivity
-import moe.tlaster.precompose.lifecycle.setContent
 
-class MainActivity : PreComposeActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            AndroidApp()
-...
-```
-:::
-
-::: details Maint.kt (module : desktopApp)
-```kotlin
-...
-import moe.tlaster.precompose.PreComposeWindow
-
-fun main() = application { // kotlin application
-        PreComposeWindow(onCloseRequest = ::exitApplication, title = "QuizzApp") {
-                DesktopApp() 
-...
-```
-:::
-
-::: details IosApp.kt (module : iosMain)
-```kotlin 
-import moe.tlaster.precompose.PreComposeApplication
-fun MainViewController(): UIViewController =
-    PreComposeApplication() {
-        App()
-    }
-```
-:::
 #### Create your navigation host 
 
 The navigation host is the configuration class that defines routes 
@@ -134,6 +98,19 @@ for example, the `WelcomeScreen` composable is now declared as follows :
 internal fun welcomeScreen(navigator: Navigator){
     ...
 
+```
+:::
+
+### Declare your App composable as a PrecomposeApp
+::: details App.kt (module : shared)
+```kotlin 
+
+@Composable
+fun App(){
+    MaterialApp{
+        PreComposeApp {
+            rootNavHost() 
+        }
 ```
 :::
 
