@@ -4,6 +4,11 @@ Let's connect our Quiz app to internet.
 
 ## 📚 Architecture  
 
+:::tip Architecture basics
+**Everything You NEED to Know About Client Architecture Patterns**
+<iframe width="560" height="315" src="https://www.youtube.com/embed/I5c7fBgvkNY" title="Everything You NEED to Know About Client Architecture Patterns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+:::
+
 ### Data layer for KMP
 
 Data layer in KMP is under building but largly inspired by [Android Architecture pattern](https://developer.android.com/topic/architecture/data-layer)
