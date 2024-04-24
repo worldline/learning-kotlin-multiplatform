@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Basic knowledge of kotlin development (nullability,inline & lambda functions mainly). For more information, please refer to the [Worldline kotlin training](https://worldline.github.io/learning-kotlin/)
-- [Android Studio IDE](https://developer.android.com/studio) with latest stable version **Giraffe** version or above 
+- [Android Studio IDE](https://developer.android.com/studio) with latest stable version **Iguana** version or above 
 - A good connectivity
 
 ::: tip

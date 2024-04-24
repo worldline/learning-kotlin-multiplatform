@@ -2,7 +2,7 @@
 
 ## 🧪 Plugins installation
 
-* Open Android Studio Giraffe or above
+* Open Android Studio Iguana or above
 * Select ``Plugins`` tab  
 * search for [``Kotlin Multiplatform``](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) and click on install button
 * search for [``Compose Multiplatform``](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support) and click on install button  
