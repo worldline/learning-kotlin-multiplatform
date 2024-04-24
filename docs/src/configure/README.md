@@ -19,18 +19,17 @@ kdoctor
 ```
 :::
 
-## 🧪 Clone the KMP template provided by JetBrains
+## 🧪 Clone the KMP template 
 
-[![Sample sources](../assets/images/kmp_sample_src.png)](https://github.com/JetBrains/compose-multiplatform-template)
+![Initial project sources](../assets/images/kmp_sample_src.png)
 
-Because kotlin mutiplatform is evolving a lot, the best template compatible for Android, iOS and Desktop is available on a dedicated github project [here](https://github.com/JetBrains/compose-multiplatform-template)
+For your hand-on lab today, here is the initial project initiating a KMP project for Android, iOS and Desktop [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/0.startup.zip)
 
-* Clone the project 
+* Download the zip project 
 * Open it with Android Studio
 
-
 ::: tip
-Newly available, a online template generator is now official from [Jetbrain website](https://kmp.jetbrains.com/)
+Newly available for your next KMP projects, an online template generator is now official from [Jetbrain website](https://kmp.jetbrains.com/)
 :::
 
 ## 📚  A Guided tour of the sample project
