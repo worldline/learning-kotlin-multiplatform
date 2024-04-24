@@ -14,6 +14,14 @@ For more information about your DEV environment and installs please have a look 
 
 ![IDE support table](../assets/images/IDE_support.jpg)
 
+::: tip
+
+[Fleet](https://www.jetbrains.com/fleet/) is becoming more and more the best IDE to consider for KMP developpement with additional features such as better preview management
+
+Consider also installing [Jetbrain ToolBox](https://www.jetbrains.com/toolbox-app/) for managing multiple versions ( Beta , Alpha , stable) of Android Studio or Fleet
+
+:::
+
 
 ### Apps using KMP 
 
