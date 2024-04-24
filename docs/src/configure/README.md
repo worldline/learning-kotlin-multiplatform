@@ -19,7 +19,7 @@ kdoctor
 ```
 :::
 
-## 🧪 Download the initial KMP with compose template 
+## 🧪 Download the initial project 
 
 ![Initial project sources](../assets/images/kmp_sample_src.png)
 
