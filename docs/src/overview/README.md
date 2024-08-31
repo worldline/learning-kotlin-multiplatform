@@ -35,7 +35,7 @@ Consider also installing [Jetbrain ToolBox](https://www.jetbrains.com/toolbox-ap
 
 ## Hands-on Lab objectives
 
-![capture](../assets/images/overview.png)
+![capture](../assets/images/overview2.png)
 
 ### Functionnally
 
@@ -73,3 +73,4 @@ You can generate composables based on designs on Figma thanks to the plugin [Goo
 - [Kotlin EDUCATION](https://kotlinlang.org/education/)
 -[Jetbrain tutorial](https://www.youtube.com/watch?v=5_W5YKPShZ4)
 -[CrossPlatform ?](https://ionic.io/resources/articles/ionic-react-vs-react-native)
+- [KMP vs Flutter ?](https://developers.googleblog.com/en/making-development-across-platforms-easier-for-developers/)

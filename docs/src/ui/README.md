@@ -13,7 +13,7 @@ It is based on [Android Jetpack Compose](https://developer.android.com/jetpack/c
 Composables are UI components that can be simply declared with code as functions, properties (such as text color, fonts...) as function parameters and subviews are declared on function declaration.
 
 * An `@Composable` annotation come always before the composable function. 
-* Properties of size, behaviors of components can be set thanks to `Modifiers`
+* Properties of size, behaviors of components can be set thanks to `Modifiers`. It permit to decorate and augent composables
 * You can align components with containers composables such as `Column` (Vertically), `Box`, `Row` (Horizontally)
 * Also you can preview composables with the annotation `@Preview` before the composable annotation.
 
