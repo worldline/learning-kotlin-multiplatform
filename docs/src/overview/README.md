@@ -9,16 +9,8 @@
 ::: tip
  
 For more information about your DEV environment and installs please have a look to jetbrain related [docs](https://kotlinlang.org/docs/multiplatform-mobile-setup.html#next-step)
-:::
-
-### IDE support overview
-
-![IDE support table](../assets/images/IDE_support.jpg)
-
-::: tip
 
 Consider also installing [Jetbrain ToolBox](https://www.jetbrains.com/toolbox-app/) for managing multiple versions ( Beta , Alpha , stable) of Android Studio or Fleet
-
 :::
 
 

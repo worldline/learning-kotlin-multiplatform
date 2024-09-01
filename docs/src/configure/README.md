@@ -34,6 +34,8 @@ For your hand-on lab today, you can download the initial project by downloading 
 * `Download` the zip project 
 * Open it with `Fleet`
 
+![template](../assets/images/template.png)
+
 
 ## 📚  A Guided tour of the sample project
 
