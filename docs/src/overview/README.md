@@ -3,10 +3,11 @@
 ## Prerequisites
 
 - Basic knowledge of kotlin development (nullability,inline & lambda functions mainly). For more information, please refer to the [Worldline kotlin training](https://worldline.github.io/learning-kotlin/)
-- [Android Studio IDE](https://developer.android.com/studio) with latest stable version **Iguana** version or above 
+- [Fleet IDE](https://www.jetbrains.com/fleet/) is the dedicated IDE to consider for KMP developpement with exclusive features such as better preview management
 - A good connectivity
 
 ::: tip
+ 
 For more information about your DEV environment and installs please have a look to jetbrain related [docs](https://kotlinlang.org/docs/multiplatform-mobile-setup.html#next-step)
 :::
 
@@ -15,8 +16,6 @@ For more information about your DEV environment and installs please have a look 
 ![IDE support table](../assets/images/IDE_support.jpg)
 
 ::: tip
-
-[Fleet](https://www.jetbrains.com/fleet/) is becoming more and more the best IDE to consider for KMP developpement with additional features such as better preview management
 
 Consider also installing [Jetbrain ToolBox](https://www.jetbrains.com/toolbox-app/) for managing multiple versions ( Beta , Alpha , stable) of Android Studio or Fleet
 

@@ -1,6 +1,13 @@
 # Configure a KMP project
 
-## 🧪 Plugins installation
+[Fleet IDE](https://www.jetbrains.com/fleet/) is the dedicated IDE to consider for KMP developpement with exclusive features such as better preview management
+
+Simply download it thanks to [Jetbrain ToolBox App](https://www.jetbrains.com/toolbox-app/)
+![toolbox](../assets/images/toolbox.png)
+
+::: tip
+
+It is also possible to use [Android Studio IDE](https://developer.android.com/studio) with latest stable version **koala** version or above. You can do the following to prepare it to support KMP
 
 * Open Android Studio Iguana or above
 * Select ``Plugins`` tab  
@@ -9,7 +16,6 @@
 ![plugins installation](../assets/images/plugins_install.png)
 * restart your IDE
 
-::: tip
 For macOS devs only,[``kdoctor``](https://github.com/Kotlin/kdoctor) command line interface (CLI) is available.
 It will help you to ensure that your computer is correctly configured for KMP development.
 
@@ -23,14 +29,11 @@ kdoctor
 
 ![Initial project sources](../assets/images/kmp_sample_src.png)
 
-For your hand-on lab today, here is the initial project initiating a KMP project for Android, iOS and Desktop [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/0.startup.zip)
+For your hand-on lab today, you can download the initial project by downloading KMP official sample for Android, iOS and Desktop & Web [here: kmp.jetbrains.com](https://kmp.jetbrains.com/)
+* Select :  ☑️ Android ☑️ iOS ☑️ Desktop ☑️ Web 
+* `Download` the zip project 
+* Open it with `Fleet`
 
-* Download the zip project 
-* Open it with Android Studio
-
-::: tip
-Newly available for your next KMP projects, an online template generator is now official from [Jetbrain website](https://kmp.jetbrains.com/)
-:::
 
 ## 📚  A Guided tour of the sample project
 
@@ -46,9 +49,9 @@ There are two views for KMP projects in Android studio :
 
 You can switch between them on the project tab in the IDE
 
-![project_structure.png](../assets/images/project_structure.png)
+![project_structure.png](../assets/images/fleet.png)
 
-#### 1 - The crossplatform library module (shared)
+#### 1 - The crossplatform library module (ComposeApp)
 
 A shared library module linked to all project platforms (```commonMain```). Contains the source code common to all your supported platforms.
 
