@@ -2,31 +2,20 @@
 
 ##  🧪 Create Navigation between composable screens 
 
-[`PreCompose`](https://github.com/Tlaster/PreCompose/blob/master/docs/component/navigation.md) is a third party library that enables missing features
-of the KMP beta. 
+Compose multiplatform navigation library enable a navigation with `navigation host`
 
-It can enables feature similar to Android Jetpack compose such as : 
-* Navigation with navigation host
-* ViewModel from Android Architecture pattern
-* Molecule that improve business logic development thanks to flows
 
-For this Hands-on Lab we will mainly focus on navigation feature of PreCompose.
+#### Add `Navigation` dependency to your project
 
-#### Add `PreCompose` dependency to your project
-
-::: details gradle.build.kts (module : shared)
+::: details gradle.build.kts (module : composeApp)
 ```kotlin
 ...
-val commonMain by getting {
-            dependencies {
-                ...
-                api("moe.tlaster:precompose:1.5.10")
+ commonMain.dependencies {
+            ...
+            implementation(libs.kotlin.navigation)
 ...
-
 ```
 ::: 
-
-
 
 #### Create your navigation host 
 
@@ -43,43 +32,58 @@ For this Hands-on Lab we need 3 routes for :
 * from Welcome screen to the `QuizScreen`
 * from the final question `QuizScreen`to the `ScoreScreen` 
 
-::: details Navhost.kt (SourceSet: commonMain)
+::: details App.kt (SourceSet: commonMain)
 ```kotlin
-private val quizRepository = QuizRepository()
-
 @Composable
-internal fun rootNavHost() {
+fun App(
+    viewModel: QuizViewModel = viewModel { QuizViewModel() },
+    navController: NavHostController = rememberNavController()
+) {
 
-    val navigator = rememberNavigator()
-    NavHost(
-        navigator = navigator,
-        navTransition = NavTransition(),
-        initialRoute = "/welcome",
-    ) {
-        scene(
-            route = "/welcome",
-            navTransition = NavTransition(),
+    MaterialTheme {
+        NavHost(
+            navController = navController,
+            startDestination = "/welcome",
         ) {
-            welcomeScreen(navigator)
-        }
-        scene(
-            route = "/quiz",
-            navTransition = NavTransition(),
-        ) {
-
-            val questions = quizRepository.questionState.collectAsState()
-
-            if (questions.value.isNotEmpty()) {
-                questionScreen(navigator, questions.value)
+            composable(route = "/welcome") {
+                welcomeScreen(
+                    onStartButtonPushed = {
+                        navController.navigate(route = "/quiz")
+                    }
+                )
             }
-        }
-        scene(
-            route = "/score/{score}",
-            navTransition = NavTransition(),
-        ) { backStackEntry ->
-            backStackEntry.path<String>("score")?.let { score ->
-                scoreScreen(navigator, score)
+            composable(route = "/quiz") {
+
+                val questions by viewModel.questionState.collectAsState()
+
+                if (questions.isNotEmpty()) {
+                    questionScreen(
+                        questions = questions,
+                        onFinishButtonPushed = { score: Int, questionSize: Int ->
+
+                            /* FOR SPEAKER TALK DEMO ON WEB APP */ if (getPlatform().name == "WASM") viewModel.postStats(
+                            score,
+                            "user-${(0..1000).random()}"
+                        )
+                            navController.navigate(route = "/score/$score/$questionSize")
+                        },
+                        /* FOR SPEAKER TALK DEMO ON WEB APP */
+                        onSaveStatQuestion = { id: Long, question: String, answerId: Long, correctAnswerId: Long, answer: String ->
+                            viewModel.addStats(id, question, answerId, correctAnswerId, answer)
+                        }
+                    )
+                }
             }
+            composable(route = "/score/{score}/{total}") {
+                scoreScreen(
+                    score = it.arguments?.getString("score").toString(),
+                    total = it.arguments?.getString("total").toString(),
+                    onResetButtonPushed = {
+                        navController.navigate(route = "/quiz")
+                    }
+                )
+            }
+
         }
     }
 }
@@ -101,67 +105,51 @@ internal fun welcomeScreen(navigator: Navigator){
 ```
 :::
 
-### Declare your App composable as a PrecomposeApp
-::: details App.kt (module : shared)
-```kotlin 
-
-@Composable
-fun App(){
-    MaterialApp{
-        PreComposeApp {
-            rootNavHost() 
-        }
-```
-:::
-
 #### Use the navigation host
 
-##### instantiate the navHost on the App main composable.
-Because the `WelcomeScreen` was set as initialRoute, it will start correctly the quizz
+##### Use the callback
 
-::: details App.kt (SourceSet : commonMain)*
-
-```kotlin
-@Composable
-internal fun App() {
-    MaterialTheme {
-        rootNavHost()
-    }
-}
-```
-:::
-
-##### User the `navigator`on screen buttons click
+Use `onStartButtonPushed` declared on screen instantiation in the `NavHost` on welcome screen buttons click
 
 ::: details WelcomeScreen.kt (SourceSet: commonMain)
 ```kotlin
 ...
-Button(
-    modifier = Modifier.padding(all = 10.dp),
-    onClick = { navigator.navigate(route = "/quiz") }
-) {
-    Text("Start the Quizz")
-}
+    Button(
+        modifier = Modifier.padding(all = 10.dp),
+        onClick = { onStartButtonPushed() }
+    ) {
 ...
 ```
+
+The same can be done for other screens
 
 *QuestionScreen.kt* (commonMain)
 ```kotlin
 ...
 Button(
-    modifier = Modifier.padding(bottom = 20.dp),
-    onClick = {
-        if(selectedAnswer == questions[questionProgress].correctAnswerId) {
-            score++ // Increment the score when answer is correct
-        }
-        if (questionProgress < questions.size - 1) {
-            questionProgress++ // Case 1 : Still some questions
-            selectedAnswer = 1 // -> recompose QuizQuestion
-        }else{
-            // Case 2 : no more questions
-            // -> navigate to score screen
-            navigator.navigate("/score/$score out of ${questions.size}")
-        }
+                modifier = Modifier.padding(bottom = 20.dp),
+                onClick = {
+                    /* FOR SPEAKER TALK DEMO ON WEB APP */
+                    if (getPlatform().name == "WASM") {
+                        onSaveStatQuestion(
+                            questions[questionProgress].id,
+                            questions[questionProgress].label,
+                            selectedAnswer,
+                            questions[questionProgress].correctAnswerId,
+                            questions[questionProgress].answers[selectedAnswer.toInt() - 1].label
+                        )
+                    }
+
+                    if (selectedAnswer == questions[questionProgress].correctAnswerId) {
+                        score++
+                    }
+                    if (questionProgress < questions.size - 1) {
+                        questionProgress++
+                        selectedAnswer = 1
+                    } else {
+                        onFinishButtonPushed(score, questions.size)
+                    }
+                }
 }
 ...
 ```
@@ -170,28 +158,21 @@ Button(
 ::: details ScoreScreen.kt (SourceSet : commonMain)
 ```kotlin
 ...
-Button(
-    modifier = Modifier.padding(all = 20.dp),
+ Button(
+     modifier = Modifier.padding(all = 20.dp),
     onClick = {
-        navigator.navigate(route = "/quiz")
-    }
-) {
-    Icon(Icons.Filled.Refresh, contentDescription = "Localized description")
-    Text(text = "Retake the Quizz",)
-}
+        onResetButtonPushed()
+     }
+ ) 
 ...
 ```
 :::
 
-::: warning
-Depending of your JDK used, compiler can complain about mismatch of jvm version for android and desktop.
-In that case, update your `jvmtarget` defined in `build.gradle.kts` (shared) 
-:::
 
 ## 🎯 Solutions
 
 ::: tip
-The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/4.navigation.zip) 
+The full sources can be retrieved [here](#) 
 :::
 
 ## 👷‍♂️ Manage  ressources

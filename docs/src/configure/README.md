@@ -329,13 +329,11 @@ android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
 androidx-activityCompose = "1.9.0"
-androidx-appcompat = "1.7.0"
-androidx-constraintlayout = "2.1.4"
-androidx-core-ktx = "1.13.1"
+
 logback = "1.5.6"
 navigation = "2.7.0-alpha07"
 androidx-viewmodel = "2.8.0-rc03"
-androidx-material = "1.12.0"
+
 compose-plugin = "1.6.11"
 
 kotlinxCoroutinesCore = "1.8.1"
@@ -350,9 +348,6 @@ androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecy
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kotlin-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
-androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
-androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorVersion" }
@@ -366,9 +361,6 @@ kstore = { module = "io.github.xxfast:kstore", version.ref = "kstore" }
 kstore-file = { module = "io.github.xxfast:kstore-file", version.ref = "kstore" }
 kstore-storage = { module = "io.github.xxfast:kstore-storage", version.ref = "kstore" }
 harawata-appdirs = { module = "net.harawata:appdirs", version.ref = "appdirs" }
-
-# Web
-#ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktorVersion" }
 
 # Server
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktorVersion" }
