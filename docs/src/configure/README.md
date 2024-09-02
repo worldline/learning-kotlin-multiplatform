@@ -45,19 +45,17 @@ If you already understand KMP project structure, you can skip this session
 
 #### Project Structure
 
-There are two views for KMP projects in Android studio :
-* **Android view (default)** : a logical view grouping and sorting android releated files. It's a very convenient view when you are dealing with android/kotlin code. This view also groups the gradle configurations files making easier to use this view for global project configuration. But from there no iOS swift code (the module simply not shows up), android modules (androidMain, androidApp) folders are hidden but content is listed.
-* **Project view** : a filesystem view of your project. From there you can open you iOS swift source code and have the full control of your files, directories
+The gradle plugin of Kotlin Multiplatform ( KMP ) organize the code thanks to 2 essential notion of Gradle/Java :
+* A `Module` is a set of classes and packages that form a complete whole with a build description file `build.gradle`. Modules have been introduced to improve safety and to make the platform more modular.
+* A `Source sets` give us a powerful way to structure source code in our Gradle projects. A SourceSet represents a logical group of Kotlin source and resource files.
 
-You can switch between them on the project tab in the IDE
+![project_structure.png](../assets/images/project_struct.png)
 
-![project_structure.png](../assets/images/fleet.png)
+#### 1  - `composeApp` module : The crossplatform library module 
 
-#### 1 - The crossplatform library module (ComposeApp)
+A shared library module linked to all project platforms. It contains the source code common to all your supported platforms.
 
-A shared library module linked to all project platforms (```commonMain```). Contains the source code common to all your supported platforms.
-
-##### 1.1 - Shared kotlin source files (commonMain)
+##### 2 - `commonMain` sourceSet : Shared & multiplatform Kotlin source files
 
 This is the place where you will code all your cross platform composables.
 
@@ -65,36 +63,34 @@ On the sample, your first composable function ```App() ``` is already configured
 
 ::: details App.kt
 ```kotlin
-@OptIn(ExperimentalResourceApi::class)
 @Composable
+@Preview
 fun App() {
     MaterialTheme {
-        var greetingText by remember { mutableStateOf("Hello, World!") }
-        var showImage by remember { mutableStateOf(false) }
+        var showContent by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = {
-                greetingText = "Hello, ${getPlatformName()}"
-                showImage = !showImage
-            }) {
-                Text(greetingText)
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!")
             }
-            AnimatedVisibility(showImage) {
-                Image(
-                    painterResource("compose-multiplatform.xml"),
-                    contentDescription = "Compose Multiplatform icon"
-                )
+            AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
+                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Text("Compose: $greeting")
+                }
             }
         }
     }
+}
 ```
 :::
 
 
-#### 2 -  KMP specific library modules (iosMain, androidMain)
+#### 3 - `androidMain`, `desktopMain`, `iosMain`, `wasmJsMain` sourceSets: KMP specific library modules
 
 One submodule per platform, linked to the common module sources. It gives the possibility to make specific implementations of functions per platform 
 
-##### 2.1 - Platform specific source file
+#####  Platform specific source file
 
 When you need a specific implementation for Android and iOS of getPlatform() to return the platform name, KMP uses :
 
@@ -107,52 +103,66 @@ More information about platform specific functions in KMP [here](https://kotlinl
 
 For exemple on this specific template, a ```getPlatformName``` fuction is referenced on the common code and implemented specificly on each sourceset with the right platform name
 
-::: details app.kt (SourceSet : commonMain)
+::: details platform.kt (SourceSet : commonMain)
 ```kotlin
 expect fun getPlatform(): Platform
 ```
 :::
 
-::: details main.desktop.kt (SourceSet : desktopMain)
+::: details Platform.desktop.kt (SourceSet : desktopMain)
 ```kotlin
 actual fun getPlatformName(): String = "Desktop"
 ```
 :::
 
-::: details main.android.kt (SourceSet : androidMain)
+::: details Platform.android.kt (SourceSet : androidMain)
 ```kotlin
 actual fun getPlatformName(): String = "Android"
 ```
 :::
 
-::: details main.ios.kt(SourceSet : iosMain)
+::: details Platform.ios.kt(SourceSet : iosMain)
 ```kotlin
 actual fun getPlatformName(): String = "iOS"
 ```
 :::
 
-#### 3 - Apps modules 
+::: tip
 
-The modules that will use the developped common library. Here you can configure Android/iOS final apps.
-If your are not using compose multiplatform, you can develop your views here.
+On each platform sourceSet (`androidMain`, `desktopMain`, `iosMain`, `wasmJsMain`) , you can can native SDK function wrapped in Kotlin.
 
-On this template a wrapper is used to use the root ```App()``` composable on each specific modules
-Then the ```App()``` composable is used on each platform library code
+Ex: on Platform.ios.kt a UIDevice function is called :
+```kotlin
+UIDevice.currentDevice.systemName()
+```
 
-#### In Desktop app module (DesktopApp)
+:::
+
+
+#####  Platform specific composables
+
+
+On this template a wrapper is used to use the root multiplatform composable  ```App()```  on each specific sourceSet `Main`class  :
+* `onCreate` callback of an `Activity` for Android 
+* A `ViewController` class for iOS 
+* ...
+Then you can code and declare your composables on the  ```App()``` composable to code multiplatform.
+
+#### For Desktop  (DesktopMain)
 
 ::: details main.desktop.kt(SourceSet : desktopMain)
 ```kotlin
-@Composable fun MainView() = App()
-
-@Preview
-@Composable
-fun AppPreview() {
-    App()
+fun main() = application {
+    Window(
+        onCloseRequest = ::exitApplication,
+        title = "Quiz",
+    ) {
+        App()
+    }
 }
 ```
 ::: 
-#### In Android app module  (AndroidApp)
+#### For Android   (AndroidMain)
 
 The Android app declaration with ressouces, manifest and activities
 A ```MainView``` android composable is created from the App() composable.
@@ -167,22 +177,22 @@ Then the composable is declared on the activity.
 
 ::: details MainActivity.kt (androidApp)
 ```kotlin
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MainView()
+            App()
         }
     }
 }
 ```
 ::: 
-####  In iOS app module  (IosApp)
+#### 4. for iOS  (IosMain)
 
-For ```iOSApp``` project you can open the .xcworkspace with Xcode for completion, build specific configurations
+For ```iOSApp``` project you can open the .xcodeproj with Xcode for completion, build specific configurations
 
-It's the same principles, a swift mainviewcontroller is created from the composable ```App()```
+It's the same principles, a swift `MainViewController` that is created from the composable ```App()```
 
 ::: details main.ios.kt(SourceSet : iosMain)
 ```kotlin
@@ -190,45 +200,111 @@ fun MainViewController() = ComposeUIViewController { App() }
 ```
 :::
 
-Then on your ContentView.swift code the template  call for ```MainViewController()``` as entry of the app
+Then on the .xcodeproj, `ContentView.swift` convert the `MainViewController` into a swiftUI view.
 
 ::: details ContentView.swift (iosApp)
 ```kotlin
 ...
- func makeUIViewController(context: Context) -> UIViewController {
-        Main_iosKt.MainViewController()
+struct ComposeView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        MainViewControllerKt.MainViewController()
     }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}
+
+struct ContentView: View {
+    var body: some View {
+        ComposeView()
+                .ignoresSafeArea(.keyboard) // Compose has own keyboard handler
+    }
+}
 ...
 ```
 :::
 
-With those configuration you can now develop you composable only in the ```commonMain``` SourceSet and deploy your app in Android, iOS and Destop targets
+With those configuration you can now develop your composable  in the ```commonMain``` SourceSet and deploy your app for Android, iOS and Destop targets
+
 
 ## 🧪 Deploy your apps 
 
-To defines gradle configuration for deploying your development apps, you need to create a running configuration
-describing gradle tasks
+To defines gradle configuration for deploying your development apps, you need to create a running configuration for fleet by creating a `run.json`file in `.fleet`folder. 
 
-![topbar](../assets/images/android_studio_topbar.png)
-*deployment topbar*
+::: details .fleet/run.json 
+```json
+{
+    "configurations": [
 
-#### Running configuration for Android, iOS 
+        {
+            "name": "composeApp",
+            "type": "gradle",
+            "workingDir": "$PROJECT_DIR$",
+            "tasks": [":server:classes"],
+            "initScripts": {
+                "flmapper": "ext.mapPath = { path -> path }",
+                "Build learning-kotlin-multiplatform-src": "System.setProperty('org.gradle.java.compile-classpath-packaging', 'true')"
+            }
+        },
+        {
+            "name": "server",
+            "type": "jps-run",
+            "workingDir": "$PROJECT_DIR$",
+            "dependsOn": ["composeApp"],
+            "mainClass": "com.worldline.quiz.ApplicationKt",
+            "module": "Quiz.server.main",
+            "options": ["-Dfile.encoding=UTF-8"]
+        },
+        {
+            "name": "iOS",
+            "type": "xcode-app",
+            "workingDir": "$PROJECT_DIR$",
+            "allowParallelRun": true,
+            "buildTarget": {
+                "project": "iosApp",
+                "target": "iosApp"
+            },
+            "configuration": "Debug"
+        },
+        {
+            "name": "wasmJs",
+            "type": "gradle",
+            "workingDir": "$PROJECT_DIR$",
+            "tasks": ["wasmJsBrowserDevelopmentRun"],
+            "args": ["-p", "$PROJECT_DIR$/composeApp"],
+            "initScripts": {
+                "flmapper": "ext.mapPath = { path -> path }"
+            }
+        },
+        {
+            "name": "android",
+            "type": "android-app",
+            "workingDir": "$PROJECT_DIR$",
+            "allowParallelRun": true,
+            "module": "Quiz.composeApp.main"
+        },
+        {
+            "name": "Desktop",
+            "type": "gradle",
+            "workingDir": "$PROJECT_DIR$",
+            "tasks": ["desktopRun"],
+            "args": ["-DmainClass=com.worldline.quiz.MainKt", "--quiet", "-p", "$PROJECT_DIR$/composeApp"],
+            "initScripts": {
+                "flmapper": "ext.mapPath = { path -> path }"
+            }
+        }
+    ]
+}
+:::
 
-Nothing to do, your running configuration is already set  
-You can select the config and click on play button to start the app on the device
-
-#### Running configuration for Desktop 
-
-For the desktop app you need to create a new configuration ( ``Edit Configurations...`` button)
-
-* Then you can click on the top left ``+``button of the opened window 
-* select ``gradle`` on the list
-* on ``Run`` input field, set 
+Instead, if you want to use gradle tasks , here are some examples :
 ```bash
-desktopApp:run
+./gradlew desktopRun #Desktop
+./gradlew wasmJsBrowserDevelopmentRun #Web
 ```
-* click on ``ok``
-* Try to build your application.
+
+#### Running configuration
+
+![run](../assets/images/run.png)
 
 ![hello desktop](../assets/images/hello_desktop.png)
 
@@ -246,7 +322,6 @@ A logger is provided by [`Ktor client library`] (https://ktor.io/docs/logging.ht
 Use can have more advanced logging and debugging thanks to third party libs such as [`NSExceptionKT`](https://github.com/rickclephas/NSExceptionKt) or [`CrachKiOS`](https://github.com/touchlab/CrashKiOS) or [`Kermit`](https://github.com/touchlab/Kermit) or [`Napier`](https://github.com/AAkira/Napier)
 
 :::
-
 
 **✅ If everything is fine, go to the next chapter →**
 

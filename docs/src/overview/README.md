@@ -13,7 +13,6 @@ For more information about your DEV environment and installs please have a look 
 Consider also installing [Jetbrain ToolBox](https://www.jetbrains.com/toolbox-app/) for managing multiple versions ( Beta , Alpha , stable) of Android Studio or Fleet
 :::
 
-
 ### Apps using KMP 
 
 ![capture](../assets/images/apps.png)
