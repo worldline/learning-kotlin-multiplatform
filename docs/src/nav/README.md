@@ -1,4 +1,4 @@
-# Navigation & Ressources
+# Navigation & more
 
 ##  🧪 Create Navigation between composable screens 
 

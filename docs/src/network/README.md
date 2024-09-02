@@ -5,7 +5,7 @@ Let's connect our Quiz app to internet.
 ## 📚 Architecture  
 
 :::tip Architecture basics
-**Everything You NEED to Know About Client Architecture Patterns**
+**Everything You NEED to Know About MVVM Architecture Patterns**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/I5c7fBgvkNY" title="Everything You NEED to Know About Client Architecture Patterns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 :::
 
@@ -39,11 +39,6 @@ A state flow is a hot flow because its active instance exists independently of t
 
 * Create a mock datasource, that generate a list of question
 * Use it with a repository on your QuizScreen
-
-::: warning 
-Domain layer framework such as [`ViewModels`](https://developer.android.com/topic/libraries/architecture/viewmodel) are not available by default on KMP. You can use a third party library such as [`Moko-MVVM`](https://github.com/icerockdev/moko-mvvm) or [`KMM-ViewModel`](https://github.com/rickclephas/KMM-ViewModel) or  [`precompose`]('https://tlaster.github.io/PreCompose/')
-
-:::
 
  ### 🎯 Solutions
 
@@ -314,7 +309,12 @@ class QuizRepository()  {
 }
 ```
 ::: 
-#### Use the repository 
+#### Use the repository in the ViewModel
+
+::: tip 
+Domain layer framework such as [`ViewModels`](https://developer.android.com/topic/libraries/architecture/viewmodel) are just available on KMP. But you can also use a third party library such as [`Moko-MVVM`](https://github.com/icerockdev/moko-mvvm) or [`KMM-ViewModel`](https://github.com/rickclephas/KMM-ViewModel) or  [`precompose`]('https://tlaster.github.io/PreCompose/')
+
+:::
 
 Replace mocked data for questions by the repository flow.
 
@@ -348,17 +348,69 @@ The full sources can be retrieved [here](https://github.com/worldline/learning-k
 
  ###  🧪 Create a Ktor server module inside your actual project
 
-Limitation : You need to create the module from IntelliJ community or ultimate , not on Android Studio
+::: warning
+You can create the server module from IntelliJ community or ultimate thanks to a template.
+:::
+
+The module tree is as follow 
+
+![server tree](../assets/images/server_tree.png)
 
  ### 🎯 Solutions
 
- ::: details main.kt
+
+  ::: details build.gradle.kts
 
 ``` kotlin 
-fun main() {
-    embeddedServer(Netty, port = 9080, host = "localhost", module = Application::module)
-        .start(wait = true)
+plugins {
+    alias(libs.plugins.kotlinJvm)
+    alias(libs.plugins.ktor)
+    alias(libs.plugins.kotlinSerialization)
+    application
 }
+
+group = "com.worldline.quiz"
+version = "1.0.0"
+
+application {
+    mainClass.set("com.worldline.quiz.ApplicationKt")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
+}
+
+dependencies {
+    implementation(libs.logback)
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.cio)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.server.cors)
+    implementation(libs.ktor.server.config.yaml)
+}
+
+ktor {
+    fatJar {
+        archiveFileName.set("fat.jar")
+    }
+    docker {
+        externalRegistry.set(
+            io.ktor.plugin.features.DockerImageRegistry.dockerHub(
+                appName = provider { "ktor-quiz" },
+                username = providers.environmentVariable("KTOR_IMAGE_REGISTRY_USERNAME"),
+                password = providers.environmentVariable("KTOR_IMAGE_REGISTRY_PASSWORD")
+            )
+        )
+    }
+}
+```
+:::
+
+ ::: details Application.kt
+
+``` kotlin 
+ffun main(args: Array<String>) {
+    io.ktor.server.cio.EngineMain.main(args)
+}
+
 
 fun Application.module() {
 
@@ -380,33 +432,16 @@ fun Application.module() {
 :::
 
 
-::: details routing.kt
+::: details Routing.kt
 
 ```kotlin
-package com.example.plugins
-
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlin.random.Random
-
-@Serializable
-data class Quiz(var questions: List<Question>)
-
-@Serializable
-data class Answer(val id: Long, val label: String )
-
-@Serializable
-data class Question(val id:Long, val label:String, @SerialName("correct_answer_id") val correctAnswerId:Int, val answers:List<Answer>)
-
 fun Application.configureRouting() {
 
     routing {
         get("/quiz") {
             call.respond(generateQuiz())
         }
+        staticResources("/", "static")
     }
 }
 
@@ -418,12 +453,12 @@ fun generateQuiz(): Quiz {
         "How does Kotlin Multiplatform facilitate code sharing between platforms?",
         "Which platforms does Kotlin Multiplatform support?",
         "What is a common use case for Kotlin Multiplatform?",
-        "What is a shared code module in Kotlin Multiplatform called?",
+        "Which naming of KMP is deprecated?",
         "How does Kotlin Multiplatform handle platform-specific implementations?",
-        "What languages can be interoperable with Kotlin Multiplatform?",
-        "What tooling supports Kotlin Multiplatform development?",
-        "What is the benefit of using Kotlin Multiplatform for mobile development?",
-        "How does Kotlin Multiplatform differ from Kotlin Native and Kotlin/JS?"
+        "At which Google I/O, Google announced first-class support for Kotlin on Android?",
+        "What is the name of the Kotlin mascot?",
+        "The international yearly Kotlin conference is called...",
+        "Where will be located the next international yearly Kotlin conference?"
     )
 
     val answers = listOf(
@@ -440,7 +475,7 @@ fun generateQuiz(): Quiz {
             "By using code translation tools"
         ),
         listOf(
-            "Android, iOS, and web",
+            "Android, iOS, desktop and web",
             "Only Android",
             "Only iOS",
             "Only web applications"
@@ -452,10 +487,10 @@ fun generateQuiz(): Quiz {
             "Writing a standalone mobile app"
         ),
         listOf(
-            "Shared module",
-            "Kotlin file",
-            "Code package",
-            "Platform code"
+            "Kotlin Multiplatform Mobile (KMM)",
+            "Hadi Multiplatform",
+            "Jetpack multiplatform",
+            "Kodee multiplatform"
         ),
         listOf(
             "Through expect and actual declarations",
@@ -464,42 +499,44 @@ fun generateQuiz(): Quiz {
             "By excluding platform-specific features"
         ),
         listOf(
-            "Java, JavaScript, Swift",
-            "C++, C#, Python",
-            "HTML, CSS, Ruby",
-            "Rust, TypeScript, Perl"
+            "2017",
+            "2016",
+            "2014",
+            "2020"
         ),
         listOf(
-            "IntelliJ IDEA, Android Studio",
-            "Eclipse, NetBeans",
-            "Visual Studio Code",
-            "Xcode"
+            "Kodee",
+            "Hadee",
+            "Kotlinee",
+            "Kotee"
         ),
         listOf(
-            "Code reuse and sharing",
-            "Improved performance",
-            "Simplified UI development",
-            "Enhanced debugging tools"
+            "KotlinConf",
+            "KodeeConf",
+            "KConf",
+            "KotlinKonf"
         ),
         listOf(
-            "Kotlin Multiplatform allows sharing code between different platforms using common modules.",
-            "Kotlin Native is exclusively for iOS development.",
-            "Kotlin/JS is only for web development.",
-            "Kotlin Multiplatform is entirely distinct from other Kotlin flavors."
+            "Copenhagen, Denmark",
+            "Amsterdam, Netherlands",
+            "Tokyo, Japan",
+            "Lille, France"
         )
     )
 
     for (i in questions.indices) {
-        val shuffledAnswers = answers[i].shuffled(Random(i))
+        val shuffledAnswers = answers[i].shuffled(Random.Default)
         val correctAnswerId = shuffledAnswers.indexOfFirst { it == answers[i][0] } + 1
-        val question = Question(i + 1L, questions[i], correctAnswerId, shuffledAnswers.mapIndexed { index, answer ->
-            Answer(index + 1L, answer)
-        })
+        val question =
+            Question(i + 1L, questions[i], correctAnswerId.toLong(), shuffledAnswers.mapIndexed { index, answer ->
+                Answer(index + 1L, answer)
+            })
         quizQuestions.add(question)
     }
 
     return Quiz(quizQuestions)
 }
+
 ```
 :::
 

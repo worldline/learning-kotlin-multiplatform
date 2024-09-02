@@ -1,4 +1,12 @@
-# Local  Database 
+# (Local  Database)
+
+::: warning Deprecated section
+`SQL delight` is for now no more compatible with the new default **WASM** template for WebApp application.
+
+If you still want to use it you can revert to the old **Js(IR)** template.
+
+Notice that for now this is the **only** Web target compatible database library for KMP
+:::
 
 SQLDelight generates typesafe Kotlin APIs from your SQL statements. It verifies your schema, statements, and migrations at compile-time and provides IDE features like autocomplete and refactoring which make writing and maintaining SQL simple.
 

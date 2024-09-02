@@ -27,10 +27,12 @@ export default defineUserConfig({
           "/overview/",
           "/configure/",
           "/ui/",
+          "/nav/",
           "/network/",
+          "/preferences/",
           "/database/",
-          "/more/",
-          "/js/",
+
+
         ], 
   }),
 
