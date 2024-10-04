@@ -1,6 +1,6 @@
 #  Preferences
 
-`[Kstore](https://github.com/xxfast/KStore)` is a tiny Kotlin multiplatform library that assists in saving and restoring objects to and from disk using kotlinx.coroutines, kotlinx.serialization and kotlinx.io. Inspired by RxStore
+[Kstore](https://github.com/xxfast/KStore) is a tiny Kotlin multiplatform library that assists in saving and restoring objects to and from disk using kotlinx.coroutines, kotlinx.serialization and kotlinx.io. Inspired by RxStore
 
  ::: tip More settings options
  if you want alternate library to store simple key-value data, you can use [`Multiplatform-Settings`](https://github.com/russhwolf/multiplatform-settings) or [`DataStore multiplatform`]('https://developer.android.com/reference/kotlin/androidx/datastore/package-summary.html').
