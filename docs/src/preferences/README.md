@@ -54,6 +54,23 @@ Define each platform call to get the kstore instance for Android, iOS, Web, Desk
 ````
 :::
 
+Also Android needs context to instanciate the kstore. Without injection library, you can use an App context singleton.
+
+ ::: details QuizApp.kt (androidMain) 
+``` kotlin
+class QuizApp : Application() {
+    init {
+        app = this
+    }
+
+    companion object {
+        private lateinit var app: QuizApp
+        fun context(): Context = app.applicationContext
+    }
+} 
+````
+:::
+
  ::: details platform.kt (iosMain) 
 ``` kotlin
     @OptIn(ExperimentalKStoreApi::class)
@@ -84,6 +101,47 @@ Define each platform call to get the kstore instance for Android, iOS, Web, Desk
 
 ````
 :::
+
+Upgrade the Quiz object with an update timestamp
+::: details Quiz.kt (commonMain) 
+```kotlin
+@Serializable
+data class Quiz(var questions: List<Question>,  val updateTime:Long=0L)
+```
+:::
+
+Create a QuizKStoreDataSource class to store the kstore data
+
+ ::: details QuizKStoreDataSource.kts (commonMain)
+ ```kotlin
+ class QuizKStoreDataSource {
+    private val kStoreQuiz: KStore<Quiz>? = getKStore()
+    suspend fun getUpdateTimeStamp(): Long = kStoreQuiz?.get()?.updateTime ?: 0L
+
+    suspend fun setUpdateTimeStamp(timeStamp: Long) {
+        kStoreQuiz?.update { quiz: Quiz? ->
+            quiz?.copy(updateTime = timeStamp)
+        }
+    }
+
+    suspend fun getAllQuestions(): List<Question> {
+        return kStoreQuiz?.get()?.questions ?: emptyList()
+    }
+
+    suspend fun insertQuestions(newQuestions: List<Question>) {
+        kStoreQuiz?.update { quiz: Quiz? ->
+            quiz?.copy(questions = newQuestions)
+        }
+    }
+
+    suspend fun resetQuizKstore() {
+        kStoreQuiz?.delete()
+        kStoreQuiz?.set(Quiz(emptyList(), 0L))
+    }
+}
+ ```
+ :::
+
 
 Update the QuizRepository class to use the kstore
 
