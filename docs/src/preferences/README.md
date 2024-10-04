@@ -1,5 +1,6 @@
 #  Preferences
 
+
 [Kstore](https://github.com/xxfast/KStore) is a tiny Kotlin multiplatform library that assists in saving and restoring objects to and from disk using kotlinx.coroutines, kotlinx.serialization and kotlinx.io. Inspired by RxStore
 
  ::: tip More settings options
@@ -32,7 +33,7 @@ Add kstore dependency to your project for each target platform
             implementation(libs.kstore.storage)
         }
     ...
-````
+```
 :::
 
 
@@ -51,7 +52,7 @@ Define each platform call to get the kstore instance for Android, iOS, Web, Desk
     actual fun getKStore(): KStore<Quiz>? {
         return storeOf(QuizApp.context().dataDir.path.plus("/quiz.json").toPath())
     }
-````
+```
 :::
 
 Also Android needs context to instanciate the kstore. Without injection library, you can use an App context singleton.
@@ -68,7 +69,7 @@ class QuizApp : Application() {
         fun context(): Context = app.applicationContext
     }
 } 
-````
+```
 :::
 
 Add the QuizApp to the AndroidManifest.xml
@@ -92,7 +93,7 @@ Add the QuizApp to the AndroidManifest.xml
         )
         }
     }
-````
+```
 :::
 
  ::: details platform.kt (wasmJsMain) 
@@ -101,7 +102,7 @@ Add the QuizApp to the AndroidManifest.xml
         return storeOf(key = "kstore_quiz")
      }
 
-````
+```
 :::
 
  ::: details platform.kt (desktopMain) 
@@ -110,7 +111,7 @@ Add the QuizApp to the AndroidManifest.xml
         return storeOf("quiz.json".toPath())
     }
 
-````
+```
 :::
 
 Upgrade the Quiz object with an update timestamp
@@ -159,9 +160,7 @@ Update the QuizRepository class to use the kstore
  ::: details QuizRepository.kts (commonMain) 
 
 ``` kotlin
-
 class QuizRepository {
-
     private val mockDataSource = MockDataSource()
     private val quizApiDatasource = QuizApiDatasource()
     private var quizKStoreDataSource = QuizKStoreDataSource()
@@ -193,14 +192,14 @@ class QuizRepository {
     }
 
 }
-````
+```
 :::
 
 ::: tip Sources
 The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/6.preferences.zip) 
 :::
 
-::: tip 🎬 Summary video of the course
+
+##  🎬 Summary video of the course
 
 <iframe width="560" height="315" src="https://youtube.com/embed/r-wUqYZgbOo" title="KMP Quiz App overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-:::
