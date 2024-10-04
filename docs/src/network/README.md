@@ -114,7 +114,7 @@ You need to enable internet on Android otherwise you will not be able to use kto
 ::: 
 #### Create the API client in `commonApp`
 
-::: details network.QuizApiDataSource.kt  (SourceSet : commonMain)
+::: details QuizApiDataSource.kt  (SourceSet : commonMain)
 ``` kotlin
 import com.worldline.quiz.data.dataclass.Quiz
 
