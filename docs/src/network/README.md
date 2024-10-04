@@ -62,55 +62,53 @@ Ktor includes a multiplatform asynchronous HTTP client, which allows you to make
 
 Shared sources need it to use ktor library on your code
 
-::: details build.gradle.kts (module : shared) 
+::: details build.gradle.kts (composeApp) 
 
 ``` kotlin
 plugins {
 ...
-    kotlin("plugin.serialization") version "1.9.10" 
+    alias(libs.plugins.kotlinSerialization)
 }
+
 ...
-val commonMain by getting {
-                implementation("io.ktor:ktor-client-core:2.3.4") // core source of ktor
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3") // For making asynchronous calls
-                implementation("io.ktor:ktor-client-content-negotiation:2.3.4") // Simplify handling of content type based deserialization
-                implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.4") // make your dataclasses serializable
-  ...
+ sourceSets {
+        val desktopMain by getting
+        commonMain.dependencies {
+            ...
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+
+        }
+        androidMain.dependencies {
+            ...
+            implementation(libs.ktor.client.okhttp)
+        }
+        desktopMain.dependencies {
+            ...
+            implementation(libs.ktor.client.apache)
+
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin) //for iOS
+        }
+        wasmJsMain.dependencies {
+            implementation(libs.kstore.storage)
+        }
+    }
+...
+
 ```
 ::: 
 
-Then on the same file for each platform (android,iOS,desktop), the specific client version needs to be added :
 
-::: details build.gradle.kts (module : shared) 
-```kotlin
-val androidMain by getting {
-            dependencies {
-                implementation("io.ktor:ktor-client-android:2.3.4") // for Android
-            }
-        }
-...
-val iosMain by creating {
-            ...
-            dependencies {
-                implementation("io.ktor:ktor-client-darwin:2.3.4") //for iOS
-            }
-
-        }
-...
-val desktopMain by getting {
-            dependencies {
-               ...
-                implementation("io.ktor:ktor-client-apache:2.3.4") // for Desktop
-            }
-        }
-```
-:::
 
 #### Enable Internet permissions ( Android Only)
 
 You need to enable internet on Android otherwise you will not be able to use ktor client
 
-::: details AndroidManifest.xml(module : androidApp)
+::: details AndroidManifest.xml( androidMain)
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -118,46 +116,44 @@ You need to enable internet on Android otherwise you will not be able to use kto
 ::: 
 #### Create the API client in `commonApp`
 
-::: details network.Quiz.kt  (SourceSet : commonMain)
+::: details network.QuizApiDataSource.kt  (SourceSet : commonMain)
 ``` kotlin
-package network
+import com.worldline.quiz.data.dataclass.Quiz
 
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.get
-import io.ktor.http.ContentType
-import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
-import network.data.Quiz
+val globalHttpClient = HttpClient {
+    engine {
 
-class QuizAPI {
-    private val httpClient = HttpClient {
-        install(ContentNegotiation) {
-            json(
-                contentType = ContentType.Text.Plain, // because Github is not returning an 'application/json' header
-                json = Json {
+    }
+
+    install(ContentNegotiation) {
+        json(
+            contentType = ContentType.Text.Plain, // because Github is not returning an 'application/json' header
+            json = Json {
                 ignoreUnknownKeys = true
                 useAlternativeNames = false
             })
-        }
-    }
-    suspend fun getAllQuestions(): Quiz {
-        return httpClient.get("https://awl.li/devoxxkmm2023").body()
     }
 }
+
+class QuizApiDatasource {
+    private val httpClient = globalHttpClient
+    suspend fun getAllQuestions(): Quiz {
+        return httpClient.get("https://raw.githubusercontent.com/worldline/learning-kotlin-multiplatform/main/quiz.json").body()
+    }
+}
+
 ```
 ::: 
 #### Make all your dataclass become serializable
 
 Ktor need it to transform the json string into your dataclasses
 
-::: details Quiz.kt  (SourceSet : commonMain)
-``` kotlin
+::: details Answer.kt  (module : commonMain)
+```kotlin
 @kotlinx.serialization.Serializable
-data class Quiz(var questions: List<Question>)
+data class Answer(val id: Int, val label: String )
 ```
-::: 
+:::
 
 ::: details Question.kt  (SourceSet : commonMain)
 ```kotlin
@@ -169,72 +165,40 @@ data class Question(val id:Int, val label:String, @SerialName("correct_answer_id
 ```
 ::: 
 
-::: details Answer.kt  (module : commonMain)
-```kotlin
+::: details Quiz.kt  (SourceSet : commonMain)
+``` kotlin
 @kotlinx.serialization.Serializable
-data class Answer(val id: Int, val label: String )
+data class Quiz(var questions: List<Question>)
 ```
-:::
+::: 
 
  #### Create your Repository class in `commonApp`
 
 ::: details QuizRepository.kt  (module : commonMain)
 ```kotlin
-class QuizRepository()  {
+class QuizRepository {
 
-    private val quizAPI = QuizAPI()
-    private val coroutineScope = CoroutineScope(Dispatchers.Default)
+    private val mockDataSource = MockDataSource()
+    private val quizApiDatasource = QuizApiDatasource()
 
-    private var _questionState=  MutableStateFlow(listOf<Question>())
-    var questionState = _questionState
+    private suspend fun fetchQuiz(): List<Question> = quizApiDatasource.getAllQuestions().questions
 
-    init {
-        updateQuiz()
-    }
-
-    private suspend fun fetchQuiz(): List<Question> = quizAPI.getAllQuestions().questions
-
-    private fun updateQuiz(){
-
-        coroutineScope.launch {
-            _questionState.update { fetchQuiz() }
+    suspend fun updateQuiz(): List<Question> {
+        try {
+            return fetchQuiz()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return mockDataSource.generateDummyQuestionsList()
         }
     }
 }
 ```
 ::: 
-#### Use the repository in the ViewModel
-
-::: tip Third party Architecture libraries
-Domain layer framework such as [`ViewModels`](https://developer.android.com/topic/libraries/architecture/viewmodel) are just available on KMP. But you can also use a third party library such as [`Moko-MVVM`](https://github.com/icerockdev/moko-mvvm) or [`KMM-ViewModel`](https://github.com/rickclephas/KMM-ViewModel) or  [`precompose`]('https://tlaster.github.io/PreCompose/')
-
-:::
-
-Replace mocked data for questions by the repository flow.
-
-::: details App.kt (SourceSet : commonMain)
-```kotlin
-...
-private val repository = QuizRepository()
-...
-
-@Composable
-fun App() {
-    MaterialTheme {
-        val questions = repository.questionState.collectAsState()
-
-        if(questions.value.isNotEmpty()) {
-            questionScreen(questions.value)
-        }
-    }
-}
-```
-:::
 
 ### 🎯 Solutions
 
 ::: tip Sources
-The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/3.network.zip) 
+The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/5.network.zip) 
 :::
 
 

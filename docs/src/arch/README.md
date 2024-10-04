@@ -173,6 +173,22 @@ The full solution for this section is availabe [here](https://github.com/worldli
 * Upgrade the repository that is no more storing the flow and move it to the ViewModel
 * Upgrade the App to use the ViewModel instead of the Repository
 
+::: tip Third party Architecture libraries
+Domain layer framework such as [`ViewModels`](https://developer.android.com/topic/libraries/architecture/viewmodel) are just available on KMP. But you can also use a third party library such as [`Moko-MVVM`](https://github.com/icerockdev/moko-mvvm) or [`KMM-ViewModel`](https://github.com/rickclephas/KMM-ViewModel) or  [`precompose`]('https://tlaster.github.io/PreCompose/')
+
+:::
+
+
+::: details gradle.build.kts (module : composeApp)
+```kotlin
+...
+ commonMain.dependencies {
+            ...
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
+...
+```
+::: 
+
 ::: details  QuizViewModel.kt
 ``` kotlin
 package com.worldline.quiz
@@ -231,9 +247,7 @@ composable(route = "/quiz") {
 The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/4.viewmodel.zip) 
 :::
 
-
 **✅ If everything is fine, go to the next chapter →**
-
 
 ## 📖 Further reading
 
