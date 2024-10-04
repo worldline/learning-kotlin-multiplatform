@@ -54,6 +54,10 @@ to transform and compose data in a clear and concise way.
 ![capture](../assets/images/apps.png)
 
 
+* [You can find more case studies here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
+* [An also samples here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html)
+
+
 ### KMP roadmap 
 
 [See the roadmap 2024 on official Jetbrain blog](https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-development-roadmap-for-2024/)
