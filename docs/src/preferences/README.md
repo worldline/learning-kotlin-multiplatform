@@ -201,5 +201,5 @@ The full sources can be retrieved [here](https://github.com/worldline/learning-k
 :::
 
 ::: tip 🎬 Summary video of the course
-<iframe width="560" height="315" src="https://youtu.be/r-wUqYZgbOo" title="KMP Quiz App overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://youtube.com/embed/r-wUqYZgbOo" title="KMP Quiz App overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 :::
