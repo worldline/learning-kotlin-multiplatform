@@ -83,6 +83,9 @@ Define each platform call to get the kstore instance for Android, iOS, Web, Desk
         return storeOf("quiz.json".toPath())
     }
 
+````
+:::
+
 Update the QuizRepository class to use the kstore
 
  ::: details QuizRepository.kts (commonMain) 
