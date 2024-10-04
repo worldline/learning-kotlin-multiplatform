@@ -71,6 +71,17 @@ class QuizApp : Application() {
 ````
 :::
 
+Add the QuizApp to the AndroidManifest.xml
+
+::: details AndroidManifest.xml (androidMain)
+```xml
+...
+    <application
+        android:name=".QuizApp"
+...
+```
+:::
+
  ::: details platform.kt (iosMain) 
 ``` kotlin
     @OptIn(ExperimentalKStoreApi::class)
