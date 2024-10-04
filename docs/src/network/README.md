@@ -93,9 +93,7 @@ plugins {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin) //for iOS
         }
-        wasmJsMain.dependencies {
-            implementation(libs.kstore.storage)
-        }
+
     }
 ...
 
