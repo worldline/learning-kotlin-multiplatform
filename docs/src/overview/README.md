@@ -13,6 +13,42 @@ For more information about your DEV environment and installs please have a look 
 Consider also installing [Jetbrain ToolBox](https://www.jetbrains.com/toolbox-app/) for managing multiple versions ( Beta , Alpha , stable) of Android Studio or Fleet
 :::
 
+
+### What is Functional Programming?
+
+
+Definition:
+- FP uses an approach to software development that uses pure functions to create maintainable software
+- It uses immutable functions and avoids shared states.
+- It is in contrast to object-oriented programming languages which uses mutable states
+-  It focuses on results and not process, while the iterations like for loops are not allowed
+
+Advantages:
+Problems are easy Keeps concurrency safe
+
+ ```swift
+ let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+ // Step 1: Filter out even numbers
+ let oddNumbers = numbers. filter { $0 % 2 != 0 }
+
+ // Step 2: Square each of the remaining numbers
+let squaredNumbers = oddNumbers.map { $0 * $0 }
+
+ // Step 3: Sum up all the squared numbers
+let sumOfSquares =squaredNumbers.reduce(0, +)
+
+print("The sum of squares of odd numbers is \(sumOfSquares)")
+//output: The sum of squares of odd numbers is 165
+```
+
+**Filter**: filters array to include only odd numbers
+**Map**: squares the numbers
+**Reduce**: sums up the squared numbers
+
+This example demonstrates the core principles of functional programming: using functions as first-class citizens 
+to transform and compose data in a clear and concise way.
+
 ### Apps using KMP 
 
 ![capture](../assets/images/apps.png)

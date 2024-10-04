@@ -1,4 +1,4 @@
-# Navigation & more
+# Navigation
 
 ##  🧪 Create Navigation between composable screens 
 
@@ -34,9 +34,23 @@ For this Hands-on Lab we need 3 routes for :
 
 ::: details App.kt (SourceSet: commonMain)
 ```kotlin
+
+val questions = listOf(
+    Question(
+        1,
+        "Android is a great platform ?",
+        1,
+        listOf(Answer(1, "YES"), Answer(2, "NO"))
+    ),
+    Question(
+        1,
+        "Android is a bad platform ?",
+        2,
+        listOf(Answer(1, "YES"), Answer(2, "NO"))
+    )
+)
 @Composable
 fun App(
-    viewModel: QuizViewModel = viewModel { QuizViewModel() },
     navController: NavHostController = rememberNavController()
 ) {
 
@@ -53,31 +67,18 @@ fun App(
                 )
             }
             composable(route = "/quiz") {
-
-                val questions by viewModel.questionState.collectAsState()
-
-                if (questions.isNotEmpty()) {
                     questionScreen(
                         questions = questions,
-                        onFinishButtonPushed = { score: Int, questionSize: Int ->
-
-                            /* FOR SPEAKER TALK DEMO ON WEB APP */ if (getPlatform().name == "WASM") viewModel.postStats(
-                            score,
-                            "user-${(0..1000).random()}"
-                        )
-                            navController.navigate(route = "/score/$score/$questionSize")
-                        },
                         /* FOR SPEAKER TALK DEMO ON WEB APP */
-                        onSaveStatQuestion = { id: Long, question: String, answerId: Long, correctAnswerId: Long, answer: String ->
-                            viewModel.addStats(id, question, answerId, correctAnswerId, answer)
+                        onFinishButtonPushed = {
+                            score: Int, questionSize: Int -> navController.navigate(route = "/score/$score/$questionSize")
                         }
                     )
-                }
             }
             composable(route = "/score/{score}/{total}") {
                 scoreScreen(
-                    score = it.arguments?.getString("score").toString(),
-                    total = it.arguments?.getString("total").toString(),
+                    score = it.arguments?.getString("score")?.toInt() ?:-1,
+                    total = it.arguments?.getString("total")?.toInt() ?:-1,
                     onResetButtonPushed = {
                         navController.navigate(route = "/quiz")
                     }
@@ -99,7 +100,7 @@ for example, the `WelcomeScreen` composable is now declared as follows :
 
 ```kotlin
 @Composable()
-internal fun welcomeScreen(navigator: Navigator){
+fun welcomeScreen(navigator: Navigator){
     ...
 
 ```
@@ -113,7 +114,9 @@ Use `onStartButtonPushed` declared on screen instantiation in the `NavHost` on w
 
 ::: details WelcomeScreen.kt (SourceSet: commonMain)
 ```kotlin
+fun welcomeScreen(onStartButtonPushed: () -> Unit) {
 ...
+
     Button(
         modifier = Modifier.padding(all = 10.dp),
         onClick = { onStartButtonPushed() }
@@ -125,7 +128,8 @@ The same can be done for other screens
 
 *QuestionScreen.kt* (commonMain)
 ```kotlin
-...
+fun questionScreen(questions: List<Question>, onFinishButtonPushed: (Int,Int) -> Unit) {
+..
 Button(
                 modifier = Modifier.padding(bottom = 20.dp),
                 onClick = {
@@ -157,6 +161,8 @@ Button(
 
 ::: details ScoreScreen.kt (SourceSet : commonMain)
 ```kotlin
+
+fun scoreScreen(score: Int,total:Int,onResetButtonPushed: () -> Unit){
 ...
  Button(
      modifier = Modifier.padding(all = 20.dp),
@@ -172,84 +178,8 @@ Button(
 ## 🎯 Solutions
 
 ::: tip
-The full sources can be retrieved [here](#) 
+The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/2.navigation.zip) 
 :::
-
-## 👷‍♂️ Manage  ressources
-
-- For common code, store your resource files in the resources directory of the commonMain source set.
-- For platform-specific code, store your resource files in the resources directory of the corresponding source set.
-
- Jetbrain release his experimental API `painterResource` from `org.jetbrains.compose.resource` package
-```kotlin
-@ExperimentalResourceApi
-@Composable
-public fun painterResource(
-    res: String
-): Painter
-```
-
-- **Return** a Painter from the given resource path. Can load either a BitmapPainter for rasterized images (.png, .jpg) or a VectorPainter for XML Vector Drawables (.xml).
-- **XML Vector Drawables** have the same format as for Android (https://developer.android.com/reference/android/graphics/drawable/VectorDrawable) except that external references to Android resources are not supported. 
-- Note that XML Vector Drawables are not supported for Web target currently.
-  
-### Android
-To make your resources accessible from the resource library, use the following configuration in your build.gradle.kts file:
-
-```kotlin
-android {
-    // …
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-}
-```
-
-For iOS, the Compose Multiplatform Gradle plugin handles resource deployment. The plugin stores resource files in the compose-resources directory of the resulting application bundle.
-
-```kotlin
-val commonMain by getting {
-    dependencies {
-        // Your dependencies
-        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-        implementation(compose.components.resources)
-    }
-}
-```
-
-Nothing to do for desktop App 
-
-### Usage on the app
-
-```kotlin
-Image(
-    painterResource("compose-multiplatform.xml"),
-    null // description
-)
-```
-
-### Access fonts and string resources
-
-For more ressource management possibilities for font and String management, you can use a third party lib :
--  [Moko]('https://github.com/icerockdev/moko-resources') 
-- [Libres](https://github.com/Skeptick/libres)
-
-
-### Usage of other custom  ressources types 
-
-```kotlin
-@OptIn(ExperimentalResourceApi::class)
-@Composable
-fun App() {
-    var text: String? by remember { mutableStateOf(null) }
-
-    LaunchedEffect(Unit) {
-        text = String(resource("welcome.txt").readBytes())
-    }
-
-    text?.let {
-        Text(it)
-    }
-}
-```
 
 **✅ If everything is fine,  congrats, you've just finish this codelab. You can now experiment your kotlin skills eveywhere !**
 

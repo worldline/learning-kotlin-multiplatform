@@ -21,7 +21,7 @@ Example: 2 texts vertically aligned that fit all the width of the screen.
 
 ```kotlin
 @Composable
-internal fun App() {
+fun App() {
     MaterialTheme {
         Column(Modifier.fillMaxWidth()) {
             Text( "My Text1", color = Color.Blue)
@@ -54,7 +54,7 @@ It is simply compose of the following composables :
 
 ```kotlin
 @Composable
-internal fun App() {
+fun App() {
     MaterialTheme {
         welcomeScreen()
     }
@@ -67,6 +67,8 @@ internal fun App() {
 
 ::: details WelcomeScreen.kt (SourseSet : commonMain)
 ```kotlin
+package com.worldline.quiz
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -82,8 +84,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@Composable()
-internal fun welcomeScreen(){
+@Composable
+fun welcomeScreen(){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -134,7 +136,7 @@ The second view will be quite similar but able de show final scores
 
 ```kotlin
 @Composable
-internal fun App() {
+fun App() {
     MaterialTheme {
         scoreScreen("10/20")
     }
@@ -148,6 +150,8 @@ internal fun App() {
 ::: details ScoreScreen.kt (SourseSet : commonMain)
 
 ```kotlin
+package com.worldline.quiz
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -167,9 +171,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
-@Composable()
-internal fun scoreScreen(score: String){
+@Composable
+fun scoreScreen(score: String){
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxWidth().fillMaxHeight()
@@ -178,13 +181,9 @@ internal fun scoreScreen(score: String){
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.padding(10.dp),
             backgroundColor = Color.Green
-
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
-
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
                         Text(
                             fontSize = 15.sp,
                             text = "score",
@@ -199,8 +198,7 @@ internal fun scoreScreen(score: String){
                             }
                         ) {
                             Icon(Icons.Filled.Refresh, contentDescription = "Localized description")
-                            Text(text = "Retake the Quiz",)
-
+                            Text(text = "Retake the Quiz")
                         }
                     }
             }
@@ -231,8 +229,7 @@ data class Question(val id:Int, val label:String, val correctAnswerId:Int, val a
 ```
 :::
 
-
-::: details Quiz.kt.kt (commonMain)
+::: details Quiz.kt (commonMain)
 ```kotlin
 data class Quiz(var questions: List<Question>)
 ```
@@ -277,6 +274,7 @@ incrementing so the question and his answers can change on the view.
 
 ::: details QuestionScreen.kt (SourceSet : commonMain)
 ```` kotlin 
+package com.worldline.quiz
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -294,7 +292,7 @@ import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -309,8 +307,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import network.data.Question
 
-@Composable()
-internal fun questionScreen(questions: List<Question>) {
+@Composable
+fun questionScreen(questions: List<Question>) {
 
     var questionProgress by remember { mutableStateOf(0) }
     var selectedAnswer by remember { mutableStateOf(1) }
@@ -367,7 +365,7 @@ internal fun questionScreen(questions: List<Question>) {
                     }
                 }
             ) {
-                if(questionProgress < questions.size - 1) nextOrDoneButton(Icons.Filled.ArrowForward,"Next")
+                if(questionProgress < questions.size - 1) nextOrDoneButton(Icons.AutoMirrored.Filled.ArrowForward,"Next")
                 else nextOrDoneButton(Icons.Filled.Done,"Done")
             }
             LinearProgressIndicator(modifier = Modifier.fillMaxWidth().height(20.dp), progress = questionProgress.div(questions.size.toFloat()).plus(1.div(questions.size.toFloat())))
@@ -376,7 +374,7 @@ internal fun questionScreen(questions: List<Question>) {
 }
 
 @Composable
-internal fun nextOrDoneButton(iv: ImageVector, label:String){
+fun nextOrDoneButton(iv: ImageVector, label:String){
     Icon(
         iv,
         contentDescription = "Localized description",
@@ -390,9 +388,9 @@ internal fun nextOrDoneButton(iv: ImageVector, label:String){
 ::: details App.kt (SourceSet : commonMain)
 ```` kotlin 
 @Composable
-internal fun App() {
+fun App() {
     MaterialTheme {
-        var questions = listOf(
+        val questions = listOf(
             Question(
                 1,
                 "Android is a great platform ?",
@@ -417,9 +415,8 @@ Your Quiz have now all his composable screens made. Let's connect it to the Inte
 **✅ If everything is fine, go to the next chapter →**
 
 ::: tip
-The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/2.ui.zip) 
+The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/1.ui.zip) 
 :::
-
 
 ## 📖 Further reading
 - [Jetpack Compose for iOS](https://betterprogramming.pub/jetpack-compose-for-ios-getting-started-step-by-step-e7be6f52edd4)

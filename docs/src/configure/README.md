@@ -29,7 +29,7 @@ kdoctor
 
 ![Initial project sources](../assets/images/kmp_sample_src.png)
 
-For your hand-on lab today, you can download the initial project by downloading KMP official sample for Android, iOS and Desktop & Web [here: kmp.jetbrains.com](https://kmp.jetbrains.com/)
+For your hand-on lab today, you can download the initial project by downloading KMP official sample for Android, iOS and Desktop & Web here:  [kmp.jetbrains.com](https://kmp.jetbrains.com/)
 * Select :  ☑️ Android ☑️ iOS ☑️ Desktop ☑️ Web 
 * `Download` the zip project 
 * Open it with `Fleet`
@@ -280,7 +280,7 @@ To defines gradle configuration for deploying your development apps, you need to
             "type": "android-app",
             "workingDir": "$PROJECT_DIR$",
             "allowParallelRun": true,
-            "module": "Quiz.composeApp.main"
+            "module": "quiz.composeApp.main"
         },
         {
             "name": "Desktop",
@@ -321,31 +321,37 @@ For the Web App, you can bypass CORS issue if you don't have a remote server wit
 A `version catalog` is a list of dependencies, represented as dependency coordinates, that a user can pick from when declaring dependencies in a build script.
 
 ::: details gradle/libs.versions.toml
-```
+``` toml
+
 [versions]
+# KMP AGP/GRADLE compatibility guide
+# https://wrl.li/guideagp
 kotlin = "2.0.20"
-agp = "8.5.2"
+agp = "8.5.0"
+compose-plugin = "1.7.0-rc01"
+
+androidx-activityCompose = "1.9.2"
+navigation = "2.8.0-alpha10"
+androidx-lifecycle = "2.8.0"
+
+kotlinx-coroutines = "1.8.1"
+kotlinxDatetime = "0.6.1"
+ktorVersion = "3.0.0-rc-1"
+kstore = "0.8.0"
+logback = "1.5.8"
+
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
-androidx-activityCompose = "1.9.0"
-
-logback = "1.5.6"
-navigation = "2.7.0-alpha07"
-androidx-viewmodel = "2.8.0-rc03"
-
-compose-plugin = "1.6.11"
-
-kotlinxCoroutinesCore = "1.8.1"
-kotlinxDatetime = "0.6.0"
-ktorVersion = "3.0.0-beta-2"
-kstore = "0.8.0"
-appdirs = "1.2.2"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
-androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-viewmodel" }
-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+
+androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+
+kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+
 kotlin-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 
@@ -356,11 +362,14 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktorVersion" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktorVersion" }
 
+
 #kstore
 kstore = { module = "io.github.xxfast:kstore", version.ref = "kstore" }
 kstore-file = { module = "io.github.xxfast:kstore-file", version.ref = "kstore" }
 kstore-storage = { module = "io.github.xxfast:kstore-storage", version.ref = "kstore" }
-harawata-appdirs = { module = "net.harawata:appdirs", version.ref = "appdirs" }
+
+# Web
+#ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktorVersion" }
 
 # Server
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktorVersion" }
@@ -377,8 +386,9 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ktor = { id = "io.ktor.plugin", version.ref = "ktorVersion" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+ktor = { id = "io.ktor.plugin", version.ref = "ktorVersion" }
+
 ```
 :::
 
@@ -391,12 +401,6 @@ A logger is provided by [`Ktor client library`] (https://ktor.io/docs/logging.ht
 Use can have more advanced logging and debugging thanks to third party libs such as [`NSExceptionKT`](https://github.com/rickclephas/NSExceptionKt) or [`CrachKiOS`](https://github.com/touchlab/CrashKiOS) or [`Kermit`](https://github.com/touchlab/Kermit) or [`Napier`](https://github.com/AAkira/Napier)
 
 :::
-
-## 🎯 Solutions
-::: tip
-Before going to the next step, you that can get the project configured at this step [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/1.initial.zip)
-:::
-
 
 **✅ If everything is fine, go to the next chapter →**
 
