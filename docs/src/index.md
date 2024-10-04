@@ -1,8 +1,8 @@
 ---
 home: true
 heroImage: ./logo.png
-heroText:  Hands-on Lab - Kotlin multiplatform with compose  (Android, iOS, Desktop & web)
-tagline: Discover kotlin multiplatform features in practice.
+heroText:  KMP with compose 
+tagline: Discover Kotlin multiplatform features in practice (Android, iOS, Desktop & web)
 actions:
   - text: Start the Hands-on Lab →
     link: /overview/
