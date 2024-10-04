@@ -8,14 +8,22 @@ actions:
     link: /overview/
     type: primary
 features:
-  - title: 1. Configure a multiplatform project 
-    details: Shared library principles for Android,iOS and Desktop jvm (~10min)
-  - title: 2. Create a common UI for all your platforms 
-    details: Kotlin compose & declarative UI, state management (~30min)
-  - title: 3. Manage network connectivity 
-    details: Ktor client configuration, repository creation with flow (~10min)
-  - title: 4. Let's go further
-    details: Ressource management (image & strings), paging with compose (~10min)
+  - title: 1. Configure KMP
+    details: Shared library principles for Android,iOS and Desktop jvm 
+  - title: 2. Composables
+    details: Kotlin compose & declarative UI, state management
+  - title: 3. Navigation
+    details: Compose navigation, navigation hist
+  - title: 4. Ressources
+    details: Compose image, string , fonts, raw resources
+  - title: 5. Architecture
+    details: ViewModel, repository, coroutines
+  - title: 6.  Network connectivity 
+    details: Ktor client/server configuration, repository creation with flow 
+  - title: 7. Preferences
+    details: Shared preferences, file storage
+  - title: 8. Database
+    details: SQLite with SQLDelight
 footer: Worldline © 2023 | tech at Worldline
 ---
 
