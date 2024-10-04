@@ -288,11 +288,9 @@ class QuizRepository(sqlDriver: SqlDriver)  {
 ```
 :::
 
-::: tip
-if you want to store  simple key-value data, you can use [`Multiplatform-Settings`](https://github.com/russhwolf/multiplatform-settings) or [`DataStore multiplatform`]('https://developer.android.com/reference/kotlin/androidx/datastore/package-summary.html')
-:::
 
-:::tip
+
+::: tip More databases options
 For not using SQLight ORM, you can use [`Realm kotlin`](https://github.com/realm/realm-kotlin) or [KStore](https://github.com/xxfast/KStore)
 :::
 

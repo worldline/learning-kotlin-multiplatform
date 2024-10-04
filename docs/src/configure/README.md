@@ -5,7 +5,7 @@
 Simply download it thanks to [Jetbrain ToolBox App](https://www.jetbrains.com/toolbox-app/)
 ![toolbox](../assets/images/toolbox.png)
 
-::: tip
+::: tip Use Android Studio
 
 It is also possible to use [Android Studio IDE](https://developer.android.com/studio) with latest stable version **koala** version or above. You can do the following to prepare it to support KMP
 
@@ -38,10 +38,6 @@ For your hand-on lab today, you can download the initial project by downloading 
 
 
 ## 📚  A Guided tour of the sample project
-
-::: tip
-If you already understand KMP project structure, you can skip this session
-:::
 
 #### Project Structure
 
@@ -97,10 +93,6 @@ When you need a specific implementation for Android and iOS of getPlatform() to 
 * ```expect``` keyword on the KMP shared library (commonMain) before functions indicating that we need a specific implementation of this function
 * ```actual``` keywords on the KMP shared library specific modules (iosMain, androidMain) before functions to indicate the implementation.
 
-::: tip
-More information about platform specific functions in KMP [here](https://kotlinlang.org/docs/multiplatform-connect-to-apis.html))
-::: 
-
 For exemple on this specific template, a ```getPlatformName``` fuction is referenced on the common code and implemented specificly on each sourceset with the right platform name
 
 ::: details platform.kt (SourceSet : commonMain)
@@ -127,15 +119,16 @@ actual fun getPlatformName(): String = "iOS"
 ```
 :::
 
-::: tip
+::: tip More Information
 
-On each platform sourceSet (`androidMain`, `desktopMain`, `iosMain`, `wasmJsMain`) , you can can native SDK function wrapped in Kotlin.
+On each platform sourceSet (`androidMain`, `desktopMain`, `iosMain`, `wasmJsMain`) , you can call native SDK function wrapped in Kotlin.
 
 Ex: on Platform.ios.kt a UIDevice function is called :
 ```kotlin
 UIDevice.currentDevice.systemName()
 ```
 
+More information about platform specific functions in KMP [here](https://kotlinlang.org/docs/multiplatform-connect-to-apis.html))
 :::
 
 
@@ -302,7 +295,7 @@ Instead, if you want to use gradle tasks , here are some examples :
 ./gradlew wasmJsBrowserDevelopmentRun #Web
 ```
 
-::: tip 
+::: tip  CORS issue for Web target
 For the Web App, you can bypass CORS issue if you don't have a remote server with Chrome as below:
 ``` bash
 <google chrome path> --disable-web-security --user-data-dir=/Users/xxxx/Desktop/googlechrometmp http://localhost:8080/
@@ -333,6 +326,7 @@ compose-plugin = "1.7.0-rc01"
 androidx-activityCompose = "1.9.2"
 navigation = "2.8.0-alpha10"
 androidx-lifecycle = "2.8.0"
+kotlinxCoroutinesCore="1.9.0"
 
 kotlinx-coroutines = "1.8.1"
 kotlinxDatetime = "0.6.1"
@@ -351,6 +345,9 @@ androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", nam
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+
+
 
 kotlin-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
@@ -396,7 +393,7 @@ ktor = { id = "io.ktor.plugin", version.ref = "ktorVersion" }
 
 A logger is provided by [`Ktor client library`] (https://ktor.io/docs/logging.html) for basic logs.
 
-::: tip
+::: tip More advanced logging and debugging
 
 Use can have more advanced logging and debugging thanks to third party libs such as [`NSExceptionKT`](https://github.com/rickclephas/NSExceptionKt) or [`CrachKiOS`](https://github.com/touchlab/CrashKiOS) or [`Kermit`](https://github.com/touchlab/Kermit) or [`Napier`](https://github.com/AAkira/Napier)
 

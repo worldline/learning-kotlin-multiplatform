@@ -4,7 +4,7 @@ Let's connect our Quiz app to internet.
 
 ## Overview  
 
-:::tip Architecture basics
+::: tip Architecture basics
 **Everything You NEED to Know About MVVM Architecture Patterns**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/I5c7fBgvkNY" title="Everything You NEED to Know About Client Architecture Patterns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 :::
@@ -38,23 +38,29 @@ A state flow is a hot flow because its active instance exists independently of t
 ##  🧪 DataSource and Repository
 
 * Create a mock datasource, that generate a list of question
-* Use it with a repository on your QuizScreen
+* Use it with a repository 
+* Use the repository on the root of your application ( navHost in App.kt)
 
  ### 🎯 Solutions
 
+ Add coroutine dependancy to your project.
+
+::: details  build.gradle.kts  (commonMain)
+``` kotlin
+commonMain.dependencies {
+           ...
+            implementation(libs.kotlinx.coroutines.core)
+        }
+```
+:::
+
 ::: details MockDataSource.kt
 ``` kotlin 
-package network
-
-import network.data.Answer
-import network.data.Question
+package com.worldline.quiz.data.datasources
 
 class MockDataSource {
 
-    suspend fun generateDummyQuestionsList():List<Question>{
-        return generateQuestionsList()
-    }
-    fun generateQuestionsList():List<Question>{
+  fun generateDummyQuestionsList():List<Question>{
         return listOf(
             Question(
                 1,
@@ -75,7 +81,6 @@ class MockDataSource {
                 )
             )
         )
-
     }
 
 }
@@ -84,9 +89,9 @@ class MockDataSource {
 
 ::: details  QuizRepository.kt
 ``` kotlin
-package network
+package com.worldline.quiz.data
 
-class QuizRepository(sqlDriver: SqlDriver)  {
+class QuizRepository()  {
 
     private val mockDataSource = MockDataSource()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
@@ -108,8 +113,124 @@ class QuizRepository(sqlDriver: SqlDriver)  {
 ```
 :::
 
+::: details  App.kt
+``` kotlin
+@Composable
+fun App(
+    navController: NavHostController = rememberNavController(),
+    quizRepository: QuizRepository = QuizRepository()
+) {
+
+    MaterialTheme {
+        NavHost(
+            navController = navController,
+            startDestination = "/welcome",
+        ) {
+
+
+            composable(route = "/welcome") {
+                welcomeScreen(
+                    onStartButtonPushed = {
+                        navController.navigate(route = "/quiz")
+                    }
+                )
+            }
+            composable(route = "/quiz") {
+                val questions by quizRepository.questionState.collectAsState()
+                    questionScreen(
+                        questions = questions,
+                        /* FOR SPEAKER TALK DEMO ON WEB APP */
+                        onFinishButtonPushed = {
+                            score: Int, questionSize: Int -> navController.navigate(route = "/score/$score/$questionSize")
+                        }
+                    )
+            }
+            composable(route = "/score/{score}/{total}") {
+                scoreScreen(
+                    score = it.arguments?.getString("score")?.toInt() ?:-1,
+                    total = it.arguments?.getString("total")?.toInt() ?:-1,
+                    onResetButtonPushed = {
+                        navController.navigate(route = "/quiz")
+                    }
+                )
+            }
+
+        }
+    }
+}
+```
+:::
+
+
+::: tip Sources
+The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/3.repository.zip) 
+:::
+
 
 ##  🧪 ViewModel
+
+* Create a ViewModel class
+* Upgrade the repository that is no more storing the flow and move it to the ViewModel
+* Upgrade the App to use the ViewModel instead of the Repository
+
+::: details  QuizViewModel.kt
+``` kotlin
+package com.worldline.quiz
+
+class QuizViewModel : ViewModel() {
+    private var quizRepository: QuizRepository = QuizRepository()
+    private var _questionState = MutableStateFlow(listOf<Question>())
+    var questionState: StateFlow<List<Question>> = _questionState
+
+    /* Can be replaced with explicit backing fields
+    val questionState : StateFlow<List<Question>>
+       field =  MutableStateFlow(listOf<Question>())
+    -> in build.gradle.kts : sourceSets.all { languageSettings.enableLanguageFeature("ExplicitBackingFields") }
+    */
+
+    init {
+        getQuestionQuiz()
+    }
+
+    private fun getQuestionQuiz() {
+        viewModelScope.launch(Dispatchers.Default) {
+            _questionState.update {
+                quizRepository.updateQuiz()
+            }
+        }
+    }
+}
+```
+:::
+
+::: details  QuizRepository.kt
+``` kotlin
+class QuizRepository  {
+    private val mockDataSource = MockDataSource()
+    fun updateQuiz():List<Question>{
+            return mockDataSource.generateDummyQuestionsList()
+    }
+}
+```
+:::
+
+
+::: details  App.kt
+``` kotlin
+fun App(
+    navController: NavHostController = rememberNavController(),
+    quizViewModel: QuizViewModel = QuizViewModel()
+) {
+...
+composable(route = "/quiz") {
+                val questions by quizViewModel.questionState.collectAsState()
+```
+:::
+
+::: tip Sources
+The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/4.viewmodel.zip) 
+:::
+
 
 **✅ If everything is fine, go to the next chapter →**
 

@@ -205,7 +205,7 @@ class QuizRepository()  {
 ::: 
 #### Use the repository in the ViewModel
 
-::: tip 
+::: tip Third party Architecture libraries
 Domain layer framework such as [`ViewModels`](https://developer.android.com/topic/libraries/architecture/viewmodel) are just available on KMP. But you can also use a third party library such as [`Moko-MVVM`](https://github.com/icerockdev/moko-mvvm) or [`KMM-ViewModel`](https://github.com/rickclephas/KMM-ViewModel) or  [`precompose`]('https://tlaster.github.io/PreCompose/')
 
 :::
@@ -233,7 +233,7 @@ fun App() {
 
 ### 🎯 Solutions
 
-::: tip
+::: tip Sources
 The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/3.network.zip) 
 :::
 
@@ -441,7 +441,7 @@ To load an image from the internet, you can use the following third-party Compos
 - [Kamel](https://github.com/Kamel-Media/Kamel)
 
 
-::: tip
+::: tip Other libs
 If you want well-known retrofit style lib, you can use [KtorFit](https://github.com/Foso/Ktorfit) to separate endpoint declaration from httpclient configuration 
 :::
 

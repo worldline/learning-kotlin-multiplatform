@@ -31,7 +31,7 @@ fun App() {
 }
 ```
 
-::: tip
+::: tip Find composables available
 For more information, you can have a look to [Android Jetpack Compose documentation]('https://developer.android.com/jetpack/compose/layouts/material')
 :::
 
@@ -414,7 +414,7 @@ Your Quiz have now all his composable screens made. Let's connect it to the Inte
 
 **✅ If everything is fine, go to the next chapter →**
 
-::: tip
+::: tip Sources
 The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/1.ui.zip) 
 :::
 

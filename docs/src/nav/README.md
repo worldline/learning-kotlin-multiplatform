@@ -177,7 +177,7 @@ fun scoreScreen(score: Int,total:Int,onResetButtonPushed: () -> Unit){
 
 ## 🎯 Solutions
 
-::: tip
+::: tip Sources
 The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/2.navigation.zip) 
 :::
 

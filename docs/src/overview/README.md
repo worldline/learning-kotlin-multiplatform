@@ -6,7 +6,7 @@
 - [Fleet IDE](https://www.jetbrains.com/fleet/) is the dedicated IDE to consider for KMP developpement with exclusive features such as better preview management
 - A good connectivity
 
-::: tip
+::: tip Advanced installation
  
 For more information about your DEV environment and installs please have a look to jetbrain related [docs](https://kotlinlang.org/docs/multiplatform-mobile-setup.html#next-step)
 
@@ -82,7 +82,7 @@ Here are expected screens at the end of this Hands-on Lab.
 
 ![screens](../assets/images/screens.png)
 
-::: tip
+::: tip Generate composables based on designs
 You can generate composables based on designs on Figma thanks to the plugin [Google Relay](https://www.figma.com/community/plugin/1041056822461507786/Relay-for-Figma). A dedicated section on android developer documentation describe all the steps [here](https://developer.android.com/jetpack/compose/tooling/relay?hl=fr)
 :::
 
