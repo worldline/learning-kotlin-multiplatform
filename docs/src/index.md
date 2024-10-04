@@ -2,7 +2,7 @@
 home: true
 heroImage: ./logo.png
 heroText:  KMP with compose 
-tagline: Discover Kotlin multiplatform features in practice (Android, iOS, Desktop & web). You like the course ? → [Give us a star on Github ⭐](https://github.com/worldline/learning-kotlin-multiplatform)
+tagline: Discover Kotlin multiplatform features in practice (Android, iOS, Desktop & web). 
 actions:
   - text: Start the Hands-on Lab →
     link: /overview/
@@ -20,6 +20,9 @@ footer: Worldline © 2023 | tech at Worldline
 ---
 
 # KMP | Tech at Worldline
+
+You like the course ? [Give us a star on Github ⭐](https://github.com/worldline/learning-kotlin-multiplatform)
+
 ## Who we are 
 
 ![avatar](./assets/images/logo_worldline.png)  
