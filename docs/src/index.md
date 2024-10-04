@@ -2,7 +2,7 @@
 home: true
 heroImage: ./logo.png
 heroText:  KMP with compose 
-tagline: Discover Kotlin multiplatform features in practice (Android, iOS, Desktop & web)
+tagline: Discover Kotlin multiplatform features in practice (Android, iOS, Desktop & web). You like the course ? → [Give us a star on Github ⭐](https://github.com/worldline/learning-kotlin-multiplatform)
 actions:
   - text: Start the Hands-on Lab →
     link: /overview/
