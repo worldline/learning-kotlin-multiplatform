@@ -21,7 +21,7 @@ footer: Worldline © 2023 | tech at Worldline
 
 # KMP | Tech at Worldline
 
-You like the course ? [Give us a star on Github ⭐](https://github.com/worldline/learning-kotlin-multiplatform)
+👍 You like the course ? [Give us a star on Github ⭐](https://github.com/worldline/learning-kotlin-multiplatform)
 
 ## Who we are 
 
