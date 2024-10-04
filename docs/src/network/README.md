@@ -396,21 +396,16 @@ fun generateQuiz(): Quiz {
 ```
 :::
 
-## Image loading from internet 
-
-To load an image from the internet, you can use the following third-party Compose Multiplatform libraries
-- [Compose Image Loader ](https://github.com/qdsfdhvh/compose-imageloader)
-- [Kamel](https://github.com/Kamel-Media/Kamel)
-
 
 ::: tip Other libs
 If you want well-known retrofit style lib, you can use [KtorFit](https://github.com/Foso/Ktorfit) to separate endpoint declaration from httpclient configuration 
+
+Also for better image loading from the internet with cache, you can use the following third-party Compose Multiplatform libraries
+- [Compose Image Loader ](https://github.com/qdsfdhvh/compose-imageloader)
+- [Kamel](https://github.com/Kamel-Media/Kamel)
 :::
 
-
 An that's it, you quiz have now a remote list of questions.
-If you want to get navigation between your WelcomeScreen, QuizScreen and ScoreScreen,
-go to the next section →
 
 **✅ If everything is fine, go to the next chapter →**
 
