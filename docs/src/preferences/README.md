@@ -9,6 +9,8 @@
  :::
 
 
+Add kstore dependency to your project for each target platform
+
  ::: details build.gradle.kts (composeMain) 
 
 ``` kotlin
@@ -34,11 +36,16 @@
 ````
 :::
 
+
+Define the native call to get the kstore instance
+
  ::: details platform.kt (commonMain) 
 ``` kotlin
     expect fun getKStore(): KStore<Quiz>?
 ````
 :::
+
+Define each platform call to get the kstore instance for Android, iOS, Web, Desktop
 
  ::: details platform.kt (androidMain) 
 ``` kotlin
@@ -76,6 +83,7 @@
         return storeOf("quiz.json".toPath())
     }
 
+Update the QuizRepository class to use the kstore
 
  ::: details QuizRepository.kts (commonMain) 
 
