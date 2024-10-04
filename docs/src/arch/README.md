@@ -1,4 +1,4 @@
-#  📚 Architecture  
+#  Architecture  
 
 Let's connect our Quiz app to internet. 
 
