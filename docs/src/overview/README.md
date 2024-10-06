@@ -53,7 +53,6 @@ to transform and compose data in a clear and concise way.
 
 ![capture](../assets/images/apps.png)
 
-
 * [You can find more case studies here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/case-studies.html)
 * [And also samples here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html)
 
@@ -92,6 +91,7 @@ You can generate composables based on designs on Figma thanks to the plugin [Goo
 
 # See also
 
+- [Official KMP template](https://github.com/Kotlin/KMP-App-Template)
 - [Github repository for this training](https://github.com/worldline/learning-kotlin-multiplatform)
 - [Official Kotlin multiplatform documentation](https://kotlinlang.org/docs/home.html)
 - [People in space sample app](https://github.com/joreilly/PeopleInSpace)
