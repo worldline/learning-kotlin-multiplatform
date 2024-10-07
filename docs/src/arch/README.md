@@ -115,6 +115,7 @@ class QuizRepository()  {
 
 ::: details  App.kt
 ``` kotlin
+...
 @Composable
 fun App(
     navController: NavHostController = rememberNavController(),
@@ -124,37 +125,37 @@ fun App(
     MaterialTheme {
         NavHost(
             navController = navController,
-            startDestination = "/welcome",
+            startDestination = WelcomeRoute,
         ) {
 
 
-            composable(route = "/welcome") {
+            composable<WelcomeRoute>() {
                 welcomeScreen(
                     onStartButtonPushed = {
-                        navController.navigate(route = "/quiz")
+                        navController.navigate(route = QuizRoute)
                     }
                 )
             }
-            composable(route = "/quiz") {
+            composable<QuizRoute>() {
                 val questions by quizRepository.questionState.collectAsState()
                     questionScreen(
                         questions = questions,
                         /* FOR SPEAKER TALK DEMO ON WEB APP */
                         onFinishButtonPushed = {
-                            score: Int, questionSize: Int -> navController.navigate(route = "/score/$score/$questionSize")
+                            score: Int, questionSize: Int -> navController.navigate(route = ScoreRoute(score, questionSize))
                         }
                     )
             }
-            composable(route = "/score/{score}/{total}") {
+            composable<ScoreRoute> { backStackEntry ->
+                val scoreRoute: ScoreRoute = backStackEntry.toRoute<ScoreRoute>()
                 scoreScreen(
-                    score = it.arguments?.getString("score")?.toInt() ?:-1,
-                    total = it.arguments?.getString("total")?.toInt() ?:-1,
+                    score = scoreRoute.score,
+                    total = scoreRoute.questionSize,
                     onResetButtonPushed = {
-                        navController.navigate(route = "/quiz")
+                        navController.navigate(route = QuizRoute)
                     }
                 )
             }
-
         }
     }
 }
@@ -238,7 +239,7 @@ fun App(
     quizViewModel: QuizViewModel = QuizViewModel()
 ) {
 ...
-composable(route = "/quiz") {
+composable(route = QuizRoute) {
                 val questions by quizViewModel.questionState.collectAsState()
 ```
 :::
