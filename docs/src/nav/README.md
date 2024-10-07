@@ -50,6 +50,16 @@ val questions = listOf(
         listOf(Answer(1, "YES"), Answer(2, "NO"))
     )
 )
+
+@Serializable
+object WelcomeRoute
+
+@Serializable
+object QuizRoute
+
+@Serializable
+data class ScoreRoute(val score: Int, val questionSize: Int)
+
 @Composable
 fun App(
     navController: NavHostController = rememberNavController()
@@ -58,34 +68,34 @@ fun App(
     MaterialTheme {
         NavHost(
             navController = navController,
-            startDestination = "/welcome",
+            startDestination = WelcomeRoute,
         ) {
-            composable(route = "/welcome") {
+            composable<WelcomeRoute>() {
                 welcomeScreen(
                     onStartButtonPushed = {
-                        navController.navigate(route = "/quiz")
+                        navController.navigate(route = QuizRoute)
                     }
                 )
             }
-            composable(route = "/quiz") {
+             composable<QuizRoute>() {
                     questionScreen(
                         questions = questions,
                         /* FOR SPEAKER TALK DEMO ON WEB APP */
                         onFinishButtonPushed = {
-                            score: Int, questionSize: Int -> navController.navigate(route = "/score/$score/$questionSize")
+                            score: Int, questionSize: Int -> navController.navigate(route = ScoreRoute(score, questionSize))
                         }
                     )
             }
-            composable(route = "/score/{score}/{total}") {
+            composable<ScoreRoute> { backStackEntry ->
+                val scoreRoute: ScoreRoute = backStackEntry.toRoute<ScoreRoute>()
                 scoreScreen(
-                    score = it.arguments?.getString("score")?.toInt() ?:-1,
-                    total = it.arguments?.getString("total")?.toInt() ?:-1,
+                    score = scoreRoute.score,
+                    total = scoreRoute.questionSize,
                     onResetButtonPushed = {
-                        navController.navigate(route = "/quiz")
+                        navController.navigate(route = QuizRoute)
                     }
                 )
             }
-
         }
     }
 }
