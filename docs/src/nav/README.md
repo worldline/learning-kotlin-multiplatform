@@ -11,8 +11,16 @@ Compose multiplatform navigation library enable a navigation with `navigation ho
 ```kotlin
 ...
  commonMain.dependencies {
+
+            plugins {
+            ...
+                alias(libs.plugins.kotlinSerialization)
+            }
+            commonMain.dependencies {
             ...
             implementation(libs.kotlin.navigation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+
 ...
 ```
 ::: 
@@ -35,6 +43,9 @@ For this Hands-on Lab we need 3 routes for :
 
 ::: details App.kt (SourceSet: commonMain)
 ```kotlin
+
+...
+import kotlinx.serialization.Serializable
 
 val questions = listOf(
     Question(
@@ -70,14 +81,14 @@ fun App(
             navController = navController,
             startDestination = WelcomeRoute,
         ) {
-            composable<WelcomeRoute>() {
+            composable<WelcomeRoute> {
                 welcomeScreen(
                     onStartButtonPushed = {
                         navController.navigate(route = QuizRoute)
                     }
                 )
             }
-             composable<QuizRoute>() {
+             composable<QuizRoute> {
                     questionScreen(
                         questions = questions,
                         /* FOR SPEAKER TALK DEMO ON WEB APP */

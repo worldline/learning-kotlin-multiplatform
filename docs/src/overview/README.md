@@ -93,6 +93,7 @@ You can generate composables based on designs on Figma thanks to the plugin [Goo
 
 - [Official KMP template](https://github.com/Kotlin/KMP-App-Template)
 - [Github repository for this training](https://github.com/worldline/learning-kotlin-multiplatform)
+- [Library database](https://klibs.io/)
 - [Official Kotlin multiplatform documentation](https://kotlinlang.org/docs/home.html)
 - [People in space sample app](https://github.com/joreilly/PeopleInSpace)
 - [Compose/Gradle compatibility guide ](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html)
