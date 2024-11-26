@@ -1,13 +1,21 @@
 :root {
-    // brand colors
-    --c-brand: #920097;
-    --c-brand-light: #faaffd;
+    // accent colors
+      --vp-c-accent: #920097;
+      --vp-c-accent-bg: #920097;
+      --vp-c-accent-hover: #faaffd;
+      --vp-c-accent-text: var(--vp-c-white);
+      --vp-c-accent-soft: rgba(168, 55, 183, 0.14);
 }
 
 html.dark {
-    --c-brand: #920097;
-    --c-brand-light: #faaffd;
+    // accent colors
+      --vp-c-accent: #920097;
+      --vp-c-accent-bg: #920097;
+      --vp-c-accent-hover: #faaffd;
+      --vp-c-accent-text: var(--vp-c-white);
+      --vp-c-accent-soft: rgba(168, 55, 183, 0.14);
 }
+
 
 iframe {
     width: 100%;
