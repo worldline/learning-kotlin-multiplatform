@@ -22,7 +22,7 @@ export default defineUserConfig({
 
   theme: defaultTheme({
         logo: 'logo_worldline.png',
-        repo: 'https://worldline.github.io/learning-kotlin-multiplatform/',
+        repo: 'https://github.com/worldline/learning-kotlin-multiplatform',
         repoLabel: '⭐ Contribute!',
 
         sidebar: [
