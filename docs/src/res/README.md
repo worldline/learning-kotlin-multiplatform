@@ -61,22 +61,34 @@ For more ressource management possibilities for font and String management, you 
 - [Libres](https://github.com/Skeptick/libres)
 
 
+## Strings
+
+`composeResources/values`
+```xml
+<resources>
+    <string name="app_name">Hello World App</string>
+</resources>
+```
+
+```kotlin
+Text(stringResource(Res.string.app_name))
+```
+
+## Fonts
+Put your font files in the `composeResources/font` directory.
+
+Then you can charge your your font like this :
+
+```kotlin
+val fontAwesome = FontFamily(Font(Res.font.my_font))
+```
+
 ## Other ressources
 
 ```kotlin
-@OptIn(ExperimentalResourceApi::class)
-@Composable
-fun App() {
-    var text: String? by remember { mutableStateOf(null) }
-
-    LaunchedEffect(Unit) {
-        text = String(resource("welcome.txt").readBytes())
-    }
-
-    text?.let {
-        Text(it)
-    }
-}
+  LaunchedEffect(Unit) { 
+    bytes = Res.readBytes("files/myDir/someFile.ext")
+  }
 ```
 
 **✅ If everything is fine,  congrats, you've just finish this codelab. You can now experiment your kotlin skills eveywhere !**
