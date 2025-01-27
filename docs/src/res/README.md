@@ -94,3 +94,4 @@ val fontAwesome = FontFamily(Font(Res.font.my_font))
 **✅ If everything is fine,  congrats, you've just finish this codelab. You can now experiment your kotlin skills eveywhere !**
 
 ## 📖 Further reading
+- [Access and usage of KMP ressources](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-resources-usage.html#resource-usage)
