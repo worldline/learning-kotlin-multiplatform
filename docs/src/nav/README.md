@@ -10,12 +10,11 @@ Compose multiplatform navigation library enable a navigation with `navigation ho
 ::: details gradle.build.kts (module : composeApp)
 ```kotlin
 ...
- commonMain.dependencies {
-
             plugins {
             ...
                 alias(libs.plugins.kotlinSerialization)
             }
+            ...
             commonMain.dependencies {
             ...
             implementation(libs.kotlin.navigation)
@@ -112,21 +111,6 @@ fun App(
 }
 ```
 ::: 
-
-::: warning
-
-As you can see all composables now take as parameter a navigator.
-It will be needed to navigate with routes between screens.
-
-for example, the `WelcomeScreen` composable is now declared as follows :
-
-```kotlin
-@Composable()
-fun welcomeScreen(navigator: Navigator){
-    ...
-
-```
-:::
 
 #### Use the navigation host
 

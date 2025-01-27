@@ -13,9 +13,7 @@ For more information about your DEV environment and installs please have a look 
 Consider also installing [Jetbrain ToolBox](https://www.jetbrains.com/toolbox-app/) for managing multiple versions ( Beta , Alpha , stable) of Android Studio or Fleet
 :::
 
-
 ### What is Functional Programming?
-
 
 Definition:
 - FP uses an approach to software development that uses pure functions to create maintainable software
