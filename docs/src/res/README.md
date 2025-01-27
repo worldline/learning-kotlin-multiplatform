@@ -49,6 +49,7 @@ Nothing to do for desktop App
 ```kotlin
 Image(
     painterResource("compose-multiplatform.xml"),
+   //Alternative painter = painterResource(resource = Res.drawable.composeimg)
     null // description
 )
 ```
