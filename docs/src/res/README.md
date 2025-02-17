@@ -20,7 +20,7 @@ public fun painterResource(
 
  ## Images 
 
- #### CommonMain
+ #### Declare you ressource management library
 
 *build.gradle*
 ```kotlin
@@ -31,6 +31,10 @@ public fun painterResource(
             ...
         }
 ```
+
+#### Add your image files 
+
+You can add it in the `composeResources/drawable` directory.
 
 #### Usage
 
