@@ -1,6 +1,6 @@
 #  Architecture  
 
-Let's connect our Quiz app to internet. 
+Let's Architecture our Quiz app with the MVVM pattern.
 
 ## Overview  
 
