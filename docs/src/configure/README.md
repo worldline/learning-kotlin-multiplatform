@@ -1,20 +1,21 @@
 # Configure KMP 
 
-[Fleet IDE](https://www.jetbrains.com/fleet/) is the dedicated IDE to consider for KMP developpement with exclusive features such as better preview management
+[Android studio IDE](https://developer.android.com/studio) is the dedicated IDE to consider for KMP developpement 
 
 Simply download it thanks to [Jetbrain ToolBox App](https://www.jetbrains.com/toolbox-app/)
 ![toolbox](../assets/images/toolbox.png)
 
-::: tip Use Android Studio
+And install the latest stable version of [Android Studio IDE](https://developer.android.com/studio). You can do the following to prepare it to support KMP
 
-It is also possible to use [Android Studio IDE](https://developer.android.com/studio) with latest stable version **koala** version or above. You can do the following to prepare it to support KMP
-
-* Open Android Studio Iguana or above
+* Open Android Studio 
 * Select ``Plugins`` tab  
 * search for [``Kotlin Multiplatform``](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) and click on install button
-* search for [``Compose Multiplatform``](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support) and click on install button  
 ![plugins installation](../assets/images/plugins_install.png)
+* search for [``Compose Multiplatform``](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support) and click on install button  
 * restart your IDE
+
+
+::: tip configuration helper
 
 For macOS devs only,[``kdoctor``](https://github.com/Kotlin/kdoctor) command line interface (CLI) is available.
 It will help you to ensure that your computer is correctly configured for KMP development.

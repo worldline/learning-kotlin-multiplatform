@@ -7,6 +7,8 @@ import { defineUserConfig } from "vuepress";
 import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
+
+
   
   base: "/learning-kotlin-multiplatform/",
   port: 3000,
@@ -24,6 +26,7 @@ export default defineUserConfig({
         logo: 'logo_worldline.png',
         repo: 'https://github.com/worldline/learning-kotlin-multiplatform',
         repoLabel: '⭐ Contribute!',
+   
 
         sidebar: [
           { text: 'Home', link: '/' },

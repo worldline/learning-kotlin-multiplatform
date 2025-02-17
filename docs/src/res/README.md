@@ -19,39 +19,42 @@ public fun painterResource(
   
 
  ## Images 
+
+ #### CommonMain
+
+*build.gradle*
+```kotlin
+        commonMain.dependencies {
+            ...
+            // enable resources multiplatform dependancy
+            implementation(compose.components.resources)
+            ...
+        }
+```
+
 #### Android
-To make your resources accessible from the resource library, use the following configuration in your build.gradle.kts file:
+To make your resources linking in the android App from your KMP library, have a look to the following configuration in your build.gradle.kts file:
 
 ```kotlin
+...
 android {
     // …
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 }
 ```
 
-#### iOS,
- The Compose Multiplatform Gradle plugin handles resource deployment. The plugin stores resource files in the compose-resources directory of the resulting application bundle.
-
-```kotlin
-val commonMain by getting {
-    dependencies {
-        // Your dependencies
-        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-        implementation(compose.components.resources)
-    }
-}
-```
-
-Nothing to do for desktop App 
-
 #### Usage
 
-```kotlin
+*WelcomeScreen.kt*
+``` kotlin
+import quiz.composeapp.generated.resources.Res
+...
+
 Image(
-    painterResource("compose-multiplatform.xml"),
-   //Alternative painter = painterResource(resource = Res.drawable.composeimg)
-    null // description
-)
+                    modifier = Modifier.size(70.dp),
+                    painter = painterResource(Res.drawable.question),
+                    contentDescription = null
+                )
 ```
 
 ## Fonts and String

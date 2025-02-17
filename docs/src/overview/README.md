@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Basic knowledge of kotlin development (nullability,inline & lambda functions mainly). For more information, please refer to the [Worldline kotlin training](https://worldline.github.io/learning-kotlin/)
-- [Fleet IDE](https://www.jetbrains.com/fleet/) is the dedicated IDE to consider for KMP developpement with exclusive features such as better preview management
+- [Android Studio IDE](https://developer.android.com/studio) is the dedicated IDE to consider for KMP developpement.
 - A good connectivity
 
 ::: tip Advanced installation
@@ -12,6 +12,10 @@ For more information about your DEV environment and installs please have a look 
 
 Consider also installing [Jetbrain ToolBox](https://www.jetbrains.com/toolbox-app/) for managing multiple versions ( Beta , Alpha , stable) of Android Studio or Fleet
 :::
+
+<!---
+@[code{3-5} kotlin{2}](../assets/solutions/helloworld.kt))
+-->
 
 ### What is Functional Programming?
 
