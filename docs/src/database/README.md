@@ -248,7 +248,7 @@ class QuizRepository(sqlDriver: SqlDriver)  {
     private var quizDB = QuizDbDataSource(sqlDriver,coroutineScope)
 
     private var _questionState=  MutableStateFlow(listOf<Question>())
-    var questionState = _questionState
+    val questionState get() = _questionState
 
     init {
         updateQuiz()

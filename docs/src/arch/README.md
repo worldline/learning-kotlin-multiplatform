@@ -96,7 +96,7 @@ class QuizRepository()  {
     private val mockDataSource = MockDataSource()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private var _questionState=  MutableStateFlow(listOf<Question>())
-    var questionState = _questionState
+    val questionState get() = _questionState
 
     init {
         updateQuiz()
@@ -196,8 +196,8 @@ package com.worldline.quiz
 
 class QuizViewModel : ViewModel() {
     private var quizRepository: QuizRepository = QuizRepository()
-    private var _questionState = MutableStateFlow(listOf<Question>())
-    var questionState: StateFlow<List<Question>> = _questionState
+    private var _questionState=  MutableStateFlow(listOf<Question>())
+    val questionState get() = _questionState
 
     /* Can be replaced with explicit backing fields
     val questionState : StateFlow<List<Question>>
