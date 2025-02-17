@@ -6,7 +6,6 @@
 
  Jetbrain release his experimental API `painterResource` from `org.jetbrains.compose.resource` package
 ```kotlin
-@ExperimentalResourceApi
 @Composable
 public fun painterResource(
     res: String

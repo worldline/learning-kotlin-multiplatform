@@ -237,7 +237,7 @@ For the Web App, you can bypass CORS issue if you don't have a remote server wit
 
 #### Running configuration
 
-![run](../assets/images/run.png)
+![run](../assets/images/all_configurations.png)
 
 ![hello desktop](../assets/images/hello_desktop.png)
 
