@@ -193,6 +193,13 @@ class QuizRepository {
 ```
 ::: 
 
+::: tip  CORS issue for Web target
+For the Web App, you can bypass CORS issue if you don't have a remote server with Chrome as below:
+``` bash
+<google chrome path> --disable-web-security --user-data-dir=/Users/xxxx/Desktop/googlechrometmp http://localhost:8080/
+```
+:::
+
 ### 🎯 Solutions
 
 ::: tip Sources
