@@ -221,78 +221,10 @@ With those configuration you can now develop your composable  in the ```commonMa
 
 
 ## 🧪 Deploy your apps 
+You can declare in android studio `gradle` run configurations 
 
-To defines gradle configuration for deploying your development apps, you need to create a running configuration for fleet by creating a `run.json`file in `.fleet`folder. 
-
-::: details .fleet/run.json 
-```json
-{
-    "configurations": [
-
-        {
-            "name": "composeApp",
-            "type": "gradle",
-            "workingDir": "$PROJECT_DIR$",
-            "tasks": [":server:classes"],
-            "initScripts": {
-                "flmapper": "ext.mapPath = { path -> path }",
-                "Build learning-kotlin-multiplatform-src": "System.setProperty('org.gradle.java.compile-classpath-packaging', 'true')"
-            }
-        },
-        {
-            "name": "server",
-            "type": "jps-run",
-            "workingDir": "$PROJECT_DIR$",
-            "dependsOn": ["composeApp"],
-            "mainClass": "com.worldline.quiz.ApplicationKt",
-            "module": "Quiz.server.main",
-            "options": ["-Dfile.encoding=UTF-8"]
-        },
-        {
-            "name": "iOS",
-            "type": "xcode-app",
-            "workingDir": "$PROJECT_DIR$",
-            "allowParallelRun": true,
-            "buildTarget": {
-                "project": "iosApp",
-                "target": "iosApp"
-            },
-            "configuration": "Debug"
-        },
-        {
-            "name": "wasmJs",
-            "type": "gradle",
-            "workingDir": "$PROJECT_DIR$",
-            "tasks": ["wasmJsBrowserDevelopmentRun"],
-            "args": ["-p", "$PROJECT_DIR$/composeApp"],
-            "initScripts": {
-                "flmapper": "ext.mapPath = { path -> path }"
-            }
-        },
-        {
-            "name": "android",
-            "type": "android-app",
-            "workingDir": "$PROJECT_DIR$",
-            "allowParallelRun": true,
-            "module": "quiz.composeApp.main"
-        },
-        {
-            "name": "Desktop",
-            "type": "gradle",
-            "workingDir": "$PROJECT_DIR$",
-            "tasks": ["desktopRun"],
-            "args": ["-DmainClass=com.worldline.quiz.MainKt", "--quiet", "-p", "$PROJECT_DIR$/composeApp"],
-            "initScripts": {
-                "flmapper": "ext.mapPath = { path -> path }"
-            }
-        }
-    ]
-}
-:::
-
-Instead, if you want to use gradle tasks , here are some examples :
 ```bash
-./gradlew desktopRun #Desktop
+./gradlew composeApp:desktopRun -DmainClass=com.worldline.quiz.MainKt
 ./gradlew wasmJsBrowserDevelopmentRun #Web
 ```
 

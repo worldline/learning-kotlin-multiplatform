@@ -32,17 +32,6 @@ public fun painterResource(
         }
 ```
 
-#### Android
-To make your resources linking in the android App from your KMP library, have a look to the following configuration in your build.gradle.kts file:
-
-```kotlin
-...
-android {
-    // …
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-}
-```
-
 #### Usage
 
 *WelcomeScreen.kt*
@@ -93,6 +82,7 @@ val fontAwesome = FontFamily(Font(Res.font.my_font))
     bytes = Res.readBytes("files/myDir/someFile.ext")
   }
 ```
+
 
 **✅ If everything is fine,  congrats, you've just finish this codelab. You can now experiment your kotlin skills eveywhere !**
 
