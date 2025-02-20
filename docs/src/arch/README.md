@@ -239,7 +239,7 @@ fun App(
     quizViewModel: QuizViewModel = QuizViewModel()
 ) {
 ...
-composable(route = QuizRoute) {
+composable<QuizRoute> {
                 val questions by quizViewModel.questionState.collectAsState()
 ```
 :::

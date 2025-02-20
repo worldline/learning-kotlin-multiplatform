@@ -231,9 +231,7 @@ You can declare in android studio `gradle` run configurations
 #### Running configuration
 
 ![run](../assets/images/all_configurations.png)
-
 ![hello desktop](../assets/images/hello_desktop.png)
-
 
 ## Version Catalog 
 
