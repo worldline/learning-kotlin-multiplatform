@@ -32,7 +32,7 @@ fun App() {
 ```
 
 ::: tip Find composables available
-For more information, you can have a look to [Android Jetpack Compose documentation]('https://developer.android.com/jetpack/compose/layouts/material')
+For more information, you can have a look to [Android Jetpack Compose documentation](https://developer.android.com/jetpack/compose/layouts/material)
 :::
 
 ## Create composable for the Quiz
