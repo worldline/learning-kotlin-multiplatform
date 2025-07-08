@@ -139,16 +139,7 @@ fun questionScreen(questions: List<Question>, onFinishButtonPushed: (Int,Int) ->
 Button(
                 modifier = Modifier.padding(bottom = 20.dp),
                 onClick = {
-                    /* FOR SPEAKER TALK DEMO ON WEB APP */
-                    if (getPlatform().name == "WASM") {
-                        onSaveStatQuestion(
-                            questions[questionProgress].id,
-                            questions[questionProgress].label,
-                            selectedAnswer,
-                            questions[questionProgress].correctAnswerId,
-                            questions[questionProgress].answers[selectedAnswer.toInt() - 1].label
-                        )
-                    }
+                   
 
                     if (selectedAnswer == questions[questionProgress].correctAnswerId) {
                         score++
