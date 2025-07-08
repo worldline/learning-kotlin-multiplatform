@@ -160,32 +160,55 @@ For now, no navigation is implemented, so you can only display the screens one a
 <!--  
 ### 🎯 Solutions
 
+::: details WelcomeScreen.kt (SourseSet : commonMain)
+```kotlin
+
+@Composable
+fun WelcomeScreen(){
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth().fillMaxHeight()
+    ) {
+        Card(
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier.padding(10.dp),
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "Quiz",
+                        fontSize = 30.sp,
+                        modifier = Modifier.padding(all = 10.dp)
+                    )
+                    Text(
+                        modifier = Modifier.padding(all = 10.dp),
+                        text = "A simple Quiz to discovers KMP and compose.",
+                    )
+                    Button(
+                        modifier = Modifier.padding(all = 10.dp),
+                        onClick = {  }
+
+                    ) {
+                        Text("Start the Quiz")
+                    }
+                }
+            }
+        }
+    }
+}
+```
+:::
+
+
 ::: details ScoreScreen.kt (SourseSet : commonMain)
 
 ```kotlin
-package com.worldline.quiz
-
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
-fun scoreScreen(score: String){
+fun ScoreScreen(score: String){
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxWidth().fillMaxHeight()
@@ -193,130 +216,45 @@ fun scoreScreen(score: String){
         Card(
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.padding(10.dp),
-            backgroundColor = Color.Green
+            colors = androidx.compose.material3.CardDefaults.cardColors(
+                containerColor = Color.Green
+            )
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            fontSize = 15.sp,
-                            text = "score",
-                        )
-                        Text(
-                            fontSize = 30.sp,
-                            text = score,
-                        )
-                        Button(
-                            modifier = Modifier.padding(all = 20.dp),
-                            onClick = {
-                            }
-                        ) {
-                            Icon(Icons.Filled.Refresh, contentDescription = "Localized description")
-                            Text(text = "Retake the Quiz")
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        fontSize = 15.sp,
+                        text = "score",
+                    )
+                    Text(
+                        fontSize = 30.sp,
+                        text = score,
+                    )
+                    Button(
+                        modifier = Modifier.padding(all = 20.dp),
+                        onClick = {
                         }
+                    ) {
+                        Text(text = "Retake the great Quiz")
                     }
+                }
             }
         }
     }
 }
-```
-:::
 
 
-::: details WelcomeScreen.kt (SourseSet : commonMain)
-```kotlin
-package com.worldline.quiz
-
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-
+@Preview
 @Composable
-fun welcomeScreen(){
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxWidth().fillMaxHeight()
-    ) {
-        Card(
-            shape = RoundedCornerShape(8.dp),
-            modifier = Modifier.padding(10.dp),
-        ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
-
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = "Quiz",
-                            fontSize = 30.sp,
-                            modifier = Modifier.padding(all = 10.dp)
-                        )
-                        Text(
-                            modifier = Modifier.padding(all = 10.dp),
-                            text = "A simple Quiz to discovers KMP and compose.",
-                        )
-                        Button(
-                            modifier = Modifier.padding(all = 10.dp),
-                            onClick = {  }
-
-                        ) {
-                            Text("Start the Quiz")
-                        }
-                    }
-            }
-        }
-    }
+fun ScoreScreenAndroidPreview(){
+    ScoreScreen("10/10")
 }
 ```
 :::
-
-
 
 
 ::: details QuestionScreen.kt (SourceSet : commonMain)
 ```` kotlin 
-package com.worldline.quiz
-
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import network.data.Question
 
 @Composable
 fun questionScreen(questions: List<Question>) {
