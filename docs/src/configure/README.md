@@ -7,12 +7,26 @@ Simply download it thanks to [Jetbrain ToolBox App](https://www.jetbrains.com/to
 
 And install the latest stable version of [Android Studio IDE](https://developer.android.com/studio). You can do the following to prepare it to support KMP
 
+
+
+
+## For macOS : 
+The latest plugin kotlin multiplatform is available [here](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform). It enables templates for kickstarting KMP projects, helps for global project configuration, compose previews, and more.
+
+  ![plugins installation](../assets/images/plugins_install.png)
+
 * Open Android Studio
 * Select ``Plugins`` tab
 * search for [``Kotlin Multiplatform``](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) and click on install button
-  ![plugins installation](../assets/images/plugins_install.png)
-* search for [``Compose Multiplatform``](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support) and click on install button
 * restart your IDE
+
+## For Windows/Linux :
+There is still a support for Compose Multiplatform plugin for Android Studio, the support will be removed once KMP plugin will be available for all platforms. You can install it [here](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-for-desktop-ide-support)
+
+
+* search for [``Compose Multiplatform``](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-for-desktop-ide-support) and click on install button
+* restart your IDE
+
 
 ::: tip configuration helper
 
@@ -326,8 +340,8 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -339,7 +353,7 @@ ktor = { id = "io.ktor.plugin", version.ref = "ktorVersion" }
 
 ## Basic logging
 
-A logger is provided by [`Ktor client library`] (https://ktor.io/docs/logging.html) for basic logs.
+A logger is provided by [`Ktor client library`](https://ktor.io/docs/logging.html) for basic logs.
 
 ::: tip More advanced logging and debugging
 

@@ -63,66 +63,6 @@ fun App() {
 
 * Run you first view on all platforms , it should work. 
 
-### 🎯 Solutions
-
-::: details WelcomeScreen.kt (SourseSet : commonMain)
-```kotlin
-package com.worldline.quiz
-
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-
-@Composable
-fun welcomeScreen(){
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxWidth().fillMaxHeight()
-    ) {
-        Card(
-            shape = RoundedCornerShape(8.dp),
-            modifier = Modifier.padding(10.dp),
-        ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
-
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = "Quiz",
-                            fontSize = 30.sp,
-                            modifier = Modifier.padding(all = 10.dp)
-                        )
-                        Text(
-                            modifier = Modifier.padding(all = 10.dp),
-                            text = "A simple Quiz to discovers KMP and compose.",
-                        )
-                        Button(
-                            modifier = Modifier.padding(all = 10.dp),
-                            onClick = {  }
-
-                        ) {
-                            Text("Start the Quiz")
-                        }
-                    }
-            }
-        }
-    }
-}
-```
-:::
-
 ### 🧪 ScoreScreen
 
 ![Score Screen preview](../assets/images/scorescreen.png)
@@ -145,6 +85,79 @@ fun App() {
 
 * Run you first view on all platforms , it should work. 
 
+
+### 🧪 QuestionScreen
+
+#### Data classes for Quiz modeling
+
+![class_diagram](../assets/images/uml.png)  
+
+We can create classes on the package `network.data`
+
+::: details Answer.kt (commonMain)
+```kotlin
+data class Answer(val id: Int, val label: String )
+```
+:::
+
+::: details Question.kt (commonMain)
+```kotlin
+data class Question(val id:Int, val label:String, val correctAnswerId:Int, val answers:List<Answer>)
+```
+:::
+
+::: details Quiz.kt (commonMain)
+```kotlin
+data class Quiz(var questions: List<Question>)
+```
+:::
+
+#### Make the composable
+
+Now we can make a composable with interactions.
+
+![class_diagram](../assets/images/quizscreen.png)  
+
+The screen is composed of  : 
+* The question label in a `Card`
+* Single choice answer component with `RadioButton`
+* A `Button` to submit the answer
+* A `LinearProgressIndicator` indicating the quiz progress
+
+After creating the UI view, we can pass to this composable the list of questions.
+When the `App`composable will create `questionScreen()` composable we will generate mock questions data for now to generate the list of questions.
+
+##### State management
+
+All views of question  will be one unique composable that updates with the correct question/answers data each time we are 
+clicking on the `next` button.
+
+We use `MutableState` value for that. It permit to keep data value and recompose the view when the data is changed.
+It's exactly what we need for our quiz page :
+* Keep the value of the question position on the list 
+* Keep the value of the answer selected by the user each time he switch between RadioButtons
+* Keep the score to get the final one at the end of the list.
+
+Here is an example of `MutableState` value declaration
+
+```kotlin
+    var questionProgress by remember { mutableStateOf(0) }
+    ...
+```
+You can declare the 2 other MutableState values and after use it on your composable ensuring that on the button click `questionProgress`is
+incrementing so the question and his answers can change on the view.
+
+
+## 🧪 Exercise
+
+Create the composable screens WelcomeScreen.kt and ScoreScreen.kt and then the QuestionScreen.kt.
+Try to be accurate regarding the screenshots and the described features. provided.
+
+::: warning
+For now, no navigation is implemented, so you can only display the screens one after another by changing the `App()` composable content.
+:::
+
+<!--  
 ### 🎯 Solutions
 
 ::: details ScoreScreen.kt (SourseSet : commonMain)
@@ -209,68 +222,66 @@ fun scoreScreen(score: String){
 :::
 
 
-### 🧪 QuestionScreen
-
-#### Data classes for Quiz modeling
-
-![class_diagram](../assets/images/uml.png)  
-
-We can create classes on the package `network.data`
-
-::: details Answer.kt (commonMain)
+::: details WelcomeScreen.kt (SourseSet : commonMain)
 ```kotlin
-data class Answer(val id: Int, val label: String )
+package com.worldline.quiz
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.Card
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+@Composable
+fun welcomeScreen(){
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth().fillMaxHeight()
+    ) {
+        Card(
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier.padding(10.dp),
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = "Quiz",
+                            fontSize = 30.sp,
+                            modifier = Modifier.padding(all = 10.dp)
+                        )
+                        Text(
+                            modifier = Modifier.padding(all = 10.dp),
+                            text = "A simple Quiz to discovers KMP and compose.",
+                        )
+                        Button(
+                            modifier = Modifier.padding(all = 10.dp),
+                            onClick = {  }
+
+                        ) {
+                            Text("Start the Quiz")
+                        }
+                    }
+            }
+        }
+    }
+}
 ```
 :::
 
-::: details Question.kt (commonMain)
-```kotlin
-data class Question(val id:Int, val label:String, val correctAnswerId:Int, val answers:List<Answer>)
-```
-:::
 
-::: details Quiz.kt (commonMain)
-```kotlin
-data class Quiz(var questions: List<Question>)
-```
-:::
 
-#### Make the composable
-
-Now we can make a composable with interactions.
-
-![class_diagram](../assets/images/quizscreen.png)  
-
-The screen is composed of  : 
-* The question label in a `Card`
-* Single choice answer component with `RadioButton`
-* A `Button` to submit the answer
-* A `LinearProgressIndicator` indicating the quiz progress
-
-After creating the UI view, we can pass to this composable the list of questions.
-When the `App`composable will create `questionScreen()` composable we will generate mock questions data for now to generate the list of questions.
-
-##### State management
-
-All views of question  will be one unique composable that updates with the correct question/answers data each time we are 
-clicking on the `next` button.
-
-We use `MutableState` value for that. It permit to keep data value and recompose the view when the data is changed.
-It's exactly what we need for our quiz page :
-* Keep the value of the question position on the list 
-* Keep the value of the answer selected by the user each time he switch between RadioButtons
-* Keep the score to get the final one at the end of the list.
-
-Here is an example of `MutableState` value declaration
-
-```kotlin
-    var questionProgress by remember { mutableStateOf(0) }
-    ...
-```
-You can declare the 2 other MutableState values and after use it on your composable ensuring that on the button click `questionProgress`is
-incrementing so the question and his answers can change on the view.
-
-### 🎯 Solutions
 
 ::: details QuestionScreen.kt (SourceSet : commonMain)
 ```` kotlin 
@@ -410,6 +421,7 @@ fun App() {
 ````
 :::
 
+
 Your Quiz have now all his composable screens made. Let's connect it to the Internet
 
 **✅ If everything is fine, go to the next chapter →**
@@ -417,6 +429,8 @@ Your Quiz have now all his composable screens made. Let's connect it to the Inte
 ::: tip Sources
 The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/1.ui.zip) 
 :::
+
+-->
 
 ## 📖 Further reading
 - [Jetpack Compose for iOS](https://betterprogramming.pub/jetpack-compose-for-ios-getting-started-step-by-step-e7be6f52edd4)
