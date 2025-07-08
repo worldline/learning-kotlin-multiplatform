@@ -157,7 +157,6 @@ Try to be accurate regarding the screenshots and the described features. provide
 For now, no navigation is implemented, so you can only display the screens one after another by changing the `App()` composable content.
 :::
 
-<!--  
 ### 🎯 Solutions
 
 ::: details WelcomeScreen.kt (SourseSet : commonMain)
@@ -368,7 +367,6 @@ Your Quiz have now all his composable screens made. Let's connect it to the Inte
 The full solution for this section is availabe [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/1.ui.zip) 
 :::
 
--->
 
 ## 📖 Further reading
 - [Jetpack Compose for iOS](https://betterprogramming.pub/jetpack-compose-for-ios-getting-started-step-by-step-e7be6f52edd4)
