@@ -8,8 +8,6 @@ Simply download it thanks to [Jetbrain ToolBox App](https://www.jetbrains.com/to
 And install the latest stable version of [Android Studio IDE](https://developer.android.com/studio). You can do the following to prepare it to support KMP
 
 
-
-
 ## For macOS : 
 The latest plugin kotlin multiplatform is available [here](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform). It enables templates for kickstarting KMP projects, helps for global project configuration, compose previews, and more.
 
@@ -29,6 +27,8 @@ There is still a support for Compose Multiplatform plugin for Android Studio, th
 
 
 ::: tip configuration helper
+
+For more info you can refer to the [KMP official kickstart guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/quickstart.html)
 
 For macOS devs only,[``kdoctor``](https://github.com/Kotlin/kdoctor) command line interface (CLI) is available.
 It will help you to ensure that your computer is correctly configured for KMP development.
