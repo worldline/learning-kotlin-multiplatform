@@ -370,7 +370,7 @@ The full solution for this section is availabe [here](https://github.com/worldli
 
 ## 📖 Further reading
 - [Jetpack Compose for iOS](https://betterprogramming.pub/jetpack-compose-for-ios-getting-started-step-by-step-e7be6f52edd4)
-- [Android Jetpack Compose documentation]('https://developer.android.com/jetpack/compose/layouts/material')
+- [Android Jetpack Compose component list](https://developer.android.com/jetpack/compose/layouts/material)
 - [Android Jetpack Compose](https://developer.android.com/jetpack/compose) 
 - [Kotlin Compose Multiplatform](https://www.jetbrains.com/lp/compose-mpp/)
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
