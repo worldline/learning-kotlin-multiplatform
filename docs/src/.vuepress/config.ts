@@ -1,15 +1,18 @@
+import { viteBundler } from '@vuepress/bundler-vite'
 import { defaultTheme } from "@vuepress/theme-default";
-import { searchPlugin } from "@vuepress/plugin-search";
-import { nprogressPlugin } from "@vuepress/plugin-nprogress";
+import { defineUserConfig } from "vuepress";
 import { pwaPlugin } from "@vuepress/plugin-pwa";
 import { seoPlugin } from "@vuepress/plugin-seo";
-import { defineUserConfig } from "vuepress";
-import { viteBundler } from '@vuepress/bundler-vite'
+import { searchPlugin } from "@vuepress/plugin-search";
+import { nprogressPlugin } from "@vuepress/plugin-nprogress";
+import { mediumZoomPlugin } from "@vuepress/plugin-medium-zoom";
+import { kotlinPlayground, mdEnhancePlugin } from "vuepress-plugin-md-enhance";
+
 
 export default defineUserConfig({
 
 
-  
+  shouldPrefetch: false,
   base: "/learning-kotlin-multiplatform/",
   port: 3000,
 
@@ -53,5 +56,34 @@ export default defineUserConfig({
     seoPlugin({
       hostname: "https://worldline.github.io/learning-kotlin-multiplatform",
     }),
-  ],
-});
+    searchPlugin({
+      locales: {
+        "/": {
+          placeholder: "Search...",
+        },
+      },
+    }),
+    pwaPlugin({
+      update: "hint",
+      cacheHTML: true,
+      manifest: {
+        icons: [
+          {
+            src: "/learning-kotlin-multiplatform/logo.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "/learning-kotlin-multiplatform/logo.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      },
+    }),
+    mdEnhancePlugin({
+      kotlinPlayground : true,
+    }),
+
+  ]
+  });
