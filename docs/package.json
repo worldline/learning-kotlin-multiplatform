@@ -14,7 +14,8 @@
     "build": "vuepress build src"
   },
   "license": "MIT",
-  "devDependencies": {
+
+  "dependencies": {
     "@types/node": "^24.0.14",
     "@vuepress/bundler-vite": "^2.0.0-rc.18",
     "@vuepress/client": "^2.0.0-rc.18",
