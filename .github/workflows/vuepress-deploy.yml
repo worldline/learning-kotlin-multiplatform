@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           # choose node.js version to use
-          node-version: 18
+          node-version: 22
 
       # run build script
       - name: Build VuePress site
