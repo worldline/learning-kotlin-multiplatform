@@ -33,17 +33,16 @@ export default defineUserConfig({
 
         sidebar: [
           { text: 'Home', link: '/' },
-          "/overview/",
-          "/configure/",
-          "/ui/",
-          "/nav/",
-          "/res/",
-          "/arch/",
-          "/network/",
-          "/preferences/",
-          "/database/",
-
-
+          "/0.language/",
+          "/1.overview/",
+          "/2.configure/",
+          "/3.ui/",
+          "/4.nav/",
+          "/5.res/",
+          "/6.arch/",
+          "/7.connect/",
+          "/8.preferences/",
+          "/9.database/",
         ], 
   }),
 

@@ -5,7 +5,7 @@ heroText:  Hands-on Lab | KMP with compose
 tagline: Discover Kotlin multiplatform features in practice (Android, iOS, desktop & web). 
 actions:
   - text: Start  →
-    link: /overview/
+    link: /0.language/
     type: primary
 features:
   - title: 1. Configure KMP
