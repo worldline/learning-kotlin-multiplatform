@@ -1,6 +1,4 @@
-# Language Kotlin
-
-
+# About Kotlin
 
 ## Table of Contents
 
@@ -9,8 +7,6 @@
 3. [Lesson 3: Classes and Objects](#lesson-3-classes-and-objects)
 4. [Lesson 4: Concurrent Programming](#lesson-4-concurrent-programming)
 5. [Lesson 5: Evolution of Kotlin](#lesson-5-evolution-of-kotlin)
-
----
 
 ## Lesson 1: Kotlin Basics
 

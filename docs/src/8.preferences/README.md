@@ -125,7 +125,7 @@ Add a RequestTime object with an updatable timestamp
 ::: details Quiz.kt (commonMain) 
 ```kotlin
 @Serializable
-data class RequestTime(val updateTime: Long = 0L )
+data class RequestTime(val updateTime: Long = 0L)
 ```
 :::
 
@@ -167,19 +167,19 @@ class QuizRepository {
     private suspend fun fetchQuiz(): List<Question> = quizApiDatasource.getAllQuestions().questions
 
     private suspend fun fetchAndStoreQuiz(): List<Question> {
-        quizKStoreDataSource.resetQuizKstore()
         val questions = fetchQuiz()
         //Later on we will store the question in a database SQLite
         return questions
     }
 
+    @OptIn(ExperimentalTime::class)
     suspend fun updateQuiz(): List<Question> {
         try {
             val lastRequest = quizKStoreDataSource.getUpdateTimeStamp()
             return if (lastRequest == 0L || lastRequest - Clock.System.now().epochSeconds > 300000) {
                 fetchAndStoreQuiz()
             } else {
-                quizKStoreDataSource.getAllQuestions()
+                fetchQuiz() //later on we will fetch from the database
             }
         } catch (e: NullPointerException) {
             return fetchAndStoreQuiz()
@@ -188,7 +188,6 @@ class QuizRepository {
             return mockDataSource.generateDummyQuestionsList()
         }
     }
-
 }
 ```
 :::

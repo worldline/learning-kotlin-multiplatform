@@ -30,9 +30,6 @@ to `app.cash.sqldelight.*`
 Pay attention also with beta, alpha version of Android studio that could produce bugs on gradle task management for code generation of SQL Delight databases.
 :::
 
-
-
-
 ## 🧪 Add sqldelight db to your quizz 
 
 > Refer to the multiplatform implementation of SQLDelight in official Github pages
@@ -43,41 +40,54 @@ Pay attention also with beta, alpha version of Android studio that could produce
 ``` kotlin
 plugins {
 ...
-    id("app.cash.sqldelight") version "2.0.0"
+    alias(libs.plugins.sqldelight)
 }
 ...
  sourceSets {
-        val commonMain by getting {
-            dependencies {
+         commonMain.dependencies {
               ...
-                implementation("app.cash.sqldelight:runtime:2.0.0")
-                implementation("app.cash.sqldelight:coroutines-extensions:2.0.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
-
+            implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines.extensions)
             }
-        }
-        val androidMain by getting {
-            dependencies {
+        
+         androidMain.dependencies {
                ...
-                implementation("app.cash.sqldelight:android-driver:2.0.0")
+                 implementation(libs.sqldelight.android.driver)
 
             }
-        }
     ...
-        val iosMain by creating {
-         ...
-            dependencies {
+        iosMain.dependencies {
                 ...
-                implementation("app.cash.sqldelight:native-driver:2.0.0")
+                 implementation(libs.sqldelight.ios.driver)
             }
-        }
-        val desktopMain by getting {
-            dependencies {
+        
+         desktopMain.dependencies {
                ...
-                implementation("app.cash.sqldelight:sqlite-driver:2.0.0")
+                 implementation(libs.sqldelight.jvm.driver)
             }
+
+        wasmJsMain.dependencies {
+            ...
+            implementation(libs.sqldelight.webworker.driver)
+            implementation(npm("sql.js", libs.versions.sqlJs.get()))
+            implementation(devNpm("copy-webpack-plugin", libs.versions.webPackPlugin.get()))
+
+        }
+
         }
         ...
+
+        sqldelight {
+            databases {
+                create("Database") {
+                    packageName = "com.myapplication.common.cache"
+                    generateAsync = true
+                    verifyMigrations = false
+                }
+            }
+            linkSqlite = true
+      }
+
 ```
 #### Create the native SQL driver factory and use it for creating the DB with `actual`/`expect` kotlin keywords
 
