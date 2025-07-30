@@ -2336,9 +2336,5 @@ fun main() {
 
 | Resource | Purpose |
 |----------|---------|
-| [x.com/kotlin](https://x.com/kotlin) | Official Kotlin Twitter/X account - announcements, updates, and community news |
 | [github.com/Kotlin/KEEP](https://github.com/Kotlin/KEEP) | Official Kotlin Enhancement Proposals - track feature development and proposals |
 | [x.com/kotlin](https://x.com/kotlin) | Official Kotlin Twitter/X account - announcements, updates, and community news |
-
-:::
-
