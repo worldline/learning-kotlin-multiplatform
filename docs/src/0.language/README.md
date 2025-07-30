@@ -2155,8 +2155,8 @@ fun main() = runBlocking {
 
 ## Lesson 5 : Evolution of Kotlin
 
-::: warning Kotlin playground not available for those new features
-
+::: warning 
+Kotlin playground not available for those new features
 :::
 
 ### Explicit Backing Fields ([Issue 278](https://github.com/Kotlin/KEEP/issues/278))
