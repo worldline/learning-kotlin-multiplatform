@@ -455,11 +455,11 @@ fun main() {
 ```
 :::
 
-### Error Handling with Result<T>
+### Error Handling with Result
 
 Managing errors in Kotlin can be done using the `Result<T>` class, which allows you to handle success and failure cases without throwing exceptions.
 
-::: kotlin-playground Result<T> 
+::: kotlin-playground Result
 
 @file main.kt
 
@@ -488,8 +488,6 @@ fun main() {
 }
 ```
 :::
-
----
 
 ## Lesson 2: Functions
 
@@ -848,8 +846,6 @@ fun main() {
 }
 ```
 :::
-
----
 
 ## Lesson 3: Classes and Objects
 
