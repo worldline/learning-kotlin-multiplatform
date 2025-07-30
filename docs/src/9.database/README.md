@@ -1,4 +1,4 @@
-# (Local  Database)
+# Local  Database
 
 ::: warning Deprecated section
 `SQL delight` is for now no more compatible with the new default **WASM** template for WebApp application.
@@ -294,9 +294,7 @@ class QuizRepository(sqlDriver: SqlDriver)  {
 For not using SQLight ORM, you can use [`Realm kotlin`](https://github.com/realm/realm-kotlin) or [KStore](https://github.com/xxfast/KStore)
 :::
 
-
 **✅ If everything is fine, go to the next chapter →**
-
 
 ## 📖 Further reading 
 - [SQL Delight tutorial (obsolete)](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html)

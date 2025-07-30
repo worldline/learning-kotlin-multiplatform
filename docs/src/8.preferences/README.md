@@ -1,5 +1,6 @@
 #  Preferences
 
+Let's use preferences to store the last time the quiz was updated. We will use a multiplatform library called Kstore
 
 [Kstore](https://github.com/xxfast/KStore) is a tiny Kotlin multiplatform library that assists in saving and restoring objects to and from disk using kotlinx.coroutines, kotlinx.serialization and kotlinx.io. Inspired by RxStore
 
@@ -49,7 +50,7 @@ Define each platform call to get the kstore instance for Android, iOS, Web, Desk
 
  ::: details platform.kt (androidMain) 
 ``` kotlin
-    actual fun getKStore(): KStore<Quiz>? {
+    actual fun getKStore(): KStore<RequestTime>? {
         return storeOf(QuizApp.context().dataDir.path.plus("/quiz.json").toPath())
     }
 ```
@@ -85,20 +86,26 @@ Add the QuizApp to the AndroidManifest.xml
 
  ::: details platform.kt (iosMain) 
 ``` kotlin
-    @OptIn(ExperimentalKStoreApi::class)
-    actual fun getKStore(): KStore<Quiz>? {
-        return NSFileManager.defaultManager.DocumentDirectory?.relativePath?.plus("/quiz.json")?.toPath()?.let {
-            storeOf(
-            file= it
-        )
-        }
+@OptIn(ExperimentalKStoreApi::class, ExperimentalForeignApi::class)
+actual fun getKStore(): KStore<RequestTime>? {
+    return NSFileManager.defaultManager.URLForDirectory(
+        directory = NSDocumentDirectory,
+        appropriateForURL = null,
+        create = false,
+        inDomain = NSUserDomainMask,
+        error = null
+    )!!.path?.let {
+        storeOf(
+        file= Path(it)
+    )
     }
+}
 ```
 :::
 
  ::: details platform.kt (wasmJsMain) 
 ``` kotlin
-    actual fun getKStore(): KStore<Quiz>? {
+    actual fun getKStore(): KStore<RequestTime>? {
         return storeOf(key = "kstore_quiz")
      }
 
@@ -107,50 +114,42 @@ Add the QuizApp to the AndroidManifest.xml
 
  ::: details platform.kt (desktopMain) 
 ``` kotlin
-    actual fun getKStore(): KStore<Quiz>? {
-        return storeOf("quiz.json".toPath())
-    }
+actual fun getKStore(): KStore<RequestTime>? {
+    return storeOf(Path("quiz.json"))
+}
 
 ```
 :::
 
-Upgrade the Quiz object with an update timestamp
+Add a RequestTime object with an updatable timestamp
 ::: details Quiz.kt (commonMain) 
 ```kotlin
 @Serializable
-data class Quiz(var questions: List<Question>,  val updateTime:Long=0L)
+data class RequestTime(val updateTime: Long = 0L )
 ```
 :::
 
-Create a QuizKStoreDataSource class to store the kstore data
+Create a KStoreDataSource class to store the kstore data
 
- ::: details QuizKStoreDataSource.kts (commonMain)
+ ::: details KStoreDataSource.kts (commonMain)
  ```kotlin
- class QuizKStoreDataSource {
-    private val kStoreQuiz: KStore<Quiz>? = getKStore()
-    suspend fun getUpdateTimeStamp(): Long = kStoreQuiz?.get()?.updateTime ?: 0L
+class KStoreDataSource() {
+
+    private val kStoreQuiz: KStore<RequestTime>? = getKStore()
+    
+    suspend fun getUpdateTimeStamp(): Long {
+        return kStoreQuiz?.get()?.updateTime ?: kStoreQuiz?.set(RequestTime(0L)).let {
+            0L
+        }
+    }
 
     suspend fun setUpdateTimeStamp(timeStamp: Long) {
-        kStoreQuiz?.update { quiz: Quiz? ->
-            quiz?.copy(updateTime = timeStamp)
+        kStoreQuiz?.update { requestTime: RequestTime? ->
+            requestTime?.copy(updateTime = timeStamp)
         }
-    }
-
-    suspend fun getAllQuestions(): List<Question> {
-        return kStoreQuiz?.get()?.questions ?: emptyList()
-    }
-
-    suspend fun insertQuestions(newQuestions: List<Question>) {
-        kStoreQuiz?.update { quiz: Quiz? ->
-            quiz?.copy(questions = newQuestions)
-        }
-    }
-
-    suspend fun resetQuizKstore() {
-        kStoreQuiz?.delete()
-        kStoreQuiz?.set(Quiz(emptyList(), 0L))
     }
 }
+
  ```
  :::
 
@@ -163,15 +162,14 @@ Update the QuizRepository class to use the kstore
 class QuizRepository {
     private val mockDataSource = MockDataSource()
     private val quizApiDatasource = QuizApiDatasource()
-    private var quizKStoreDataSource = QuizKStoreDataSource()
+    private var quizKStoreDataSource = KStoreDataSource()
 
     private suspend fun fetchQuiz(): List<Question> = quizApiDatasource.getAllQuestions().questions
 
     private suspend fun fetchAndStoreQuiz(): List<Question> {
         quizKStoreDataSource.resetQuizKstore()
         val questions = fetchQuiz()
-        quizKStoreDataSource.insertQuestions(questions)
-        quizKStoreDataSource.setUpdateTimeStamp(Clock.System.now().epochSeconds)
+        //Later on we will store the question in a database SQLite
         return questions
     }
 
@@ -198,7 +196,6 @@ class QuizRepository {
 ::: tip Sources
 The full sources can be retrieved [here](https://github.com/worldline/learning-kotlin-multiplatform/raw/main/docs/src/assets/solutions/6.preferences.zip) 
 :::
-
 
 ##  🎬 Summary video of the course
 

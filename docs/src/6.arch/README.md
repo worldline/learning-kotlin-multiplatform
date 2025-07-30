@@ -43,16 +43,7 @@ A state flow is a hot flow because its active instance exists independently of t
 
  ### 🎯 Solutions
 
- Add coroutine dependancy to your project.
 
-::: details  build.gradle.kts  (commonMain)
-``` kotlin
-commonMain.dependencies {
-           ...
-            implementation(libs.kotlinx.coroutines.core)
-        }
-```
-:::
 
 ::: details MockDataSource.kt
 ``` kotlin 
@@ -130,7 +121,7 @@ fun App(
 
 
             composable<WelcomeRoute>() {
-                welcomeScreen(
+                WelcomeScreen(
                     onStartButtonPushed = {
                         navController.navigate(route = QuizRoute)
                     }
@@ -138,9 +129,9 @@ fun App(
             }
             composable<QuizRoute>() {
                 val questions by quizRepository.questionState.collectAsState()
-                    questionScreen(
+                    QuestionScreen(
                         questions = questions,
-                        /* FOR SPEAKER TALK DEMO ON WEB APP */
+        
                         onFinishButtonPushed = {
                             score: Int, questionSize: Int -> navController.navigate(route = ScoreRoute(score, questionSize))
                         }
@@ -148,7 +139,7 @@ fun App(
             }
             composable<ScoreRoute> { backStackEntry ->
                 val scoreRoute: ScoreRoute = backStackEntry.toRoute<ScoreRoute>()
-                scoreScreen(
+                ScoreScreen(
                     score = scoreRoute.score,
                     total = scoreRoute.questionSize,
                     onResetButtonPushed = {

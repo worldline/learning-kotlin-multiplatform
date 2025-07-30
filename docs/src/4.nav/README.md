@@ -81,16 +81,15 @@ fun App(
             startDestination = WelcomeRoute,
         ) {
             composable<WelcomeRoute> {
-                welcomeScreen(
+                WelcomeScreen(
                     onStartButtonPushed = {
                         navController.navigate(route = QuizRoute)
                     }
                 )
             }
              composable<QuizRoute> {
-                    questionScreen(
+                    QuestionScreen(
                         questions = questions,
-                        /* FOR SPEAKER TALK DEMO ON WEB APP */
                         onFinishButtonPushed = {
                             score: Int, questionSize: Int -> navController.navigate(route = ScoreRoute(score, questionSize))
                         }
@@ -98,7 +97,7 @@ fun App(
             }
             composable<ScoreRoute> { backStackEntry ->
                 val scoreRoute: ScoreRoute = backStackEntry.toRoute<ScoreRoute>()
-                scoreScreen(
+                ScoreScreen(
                     score = scoreRoute.score,
                     total = scoreRoute.questionSize,
                     onResetButtonPushed = {
@@ -120,7 +119,7 @@ Use `onStartButtonPushed` declared on screen instantiation in the `NavHost` on w
 
 ::: details WelcomeScreen.kt (SourceSet: commonMain)
 ```kotlin
-fun welcomeScreen(onStartButtonPushed: () -> Unit) {
+fun WelcomeScreen(onStartButtonPushed: () -> Unit) {
 ...
 
     Button(
@@ -134,13 +133,11 @@ The same can be done for other screens
 
 *QuestionScreen.kt* (commonMain)
 ```kotlin
-fun questionScreen(questions: List<Question>, onFinishButtonPushed: (Int,Int) -> Unit) {
+fun QuestionScreen(questions: List<Question>, onFinishButtonPushed: (Int,Int) -> Unit) {
 ..
 Button(
                 modifier = Modifier.padding(bottom = 20.dp),
                 onClick = {
-                   
-
                     if (selectedAnswer == questions[questionProgress].correctAnswerId) {
                         score++
                     }
@@ -159,7 +156,12 @@ Button(
 ::: details ScoreScreen.kt (SourceSet : commonMain)
 ```kotlin
 
-fun scoreScreen(score: Int,total:Int,onResetButtonPushed: () -> Unit){
+fun ScoreScreen(score: Int,total:Int,onResetButtonPushed: () -> Unit){
+...
+Text(
+                        fontSize = 30.sp,
+                        text = "$score/$total",
+                    )
 ...
  Button(
      modifier = Modifier.padding(all = 20.dp),

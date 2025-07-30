@@ -92,7 +92,7 @@ fun App() {
 
 ![class_diagram](../assets/images/uml.png)  
 
-We can create classes on the package `network.data`
+We can create classes on the package `data.dataclasses`
 
 ::: details Answer.kt (commonMain)
 ```kotlin
@@ -158,6 +158,7 @@ For now, no navigation is implemented, so you can only display the screens one a
 :::
 
 ### 🎯 Solutions
+
 
 ::: details WelcomeScreen.kt (SourseSet : commonMain)
 ```kotlin
@@ -252,11 +253,22 @@ fun ScoreScreenAndroidPreview(){
 :::
 
 
+To use default icons please add the following dependency to your `build.gradle.kts` commonMain sourceSet
+
+```kotlin
+commonMain.dependencies {
+        implementation(compose.materialIconsExtended)
+}
+```
+
+package `screens` contains all the composables for the Quiz app.
+
+
 ::: details QuestionScreen.kt (SourceSet : commonMain)
 ```` kotlin 
 
 @Composable
-fun questionScreen(questions: List<Question>) {
+fun QuestionScreen(questions: List<Question>) {
 
     var questionProgress by remember { mutableStateOf(0) }
     var selectedAnswer by remember { mutableStateOf(1) }
@@ -313,16 +325,22 @@ fun questionScreen(questions: List<Question>) {
                     }
                 }
             ) {
-                if(questionProgress < questions.size - 1) nextOrDoneButton(Icons.AutoMirrored.Filled.ArrowForward,"Next")
-                else nextOrDoneButton(Icons.Filled.Done,"Done")
+                if(questionProgress < questions.size - 1) NextOrDoneButton(Icons.AutoMirrored.Filled.ArrowForward,"Next")
+                else NextOrDoneButton(Icons.Filled.Done,"Done")
             }
-            LinearProgressIndicator(modifier = Modifier.fillMaxWidth().height(20.dp), progress = questionProgress.div(questions.size.toFloat()).plus(1.div(questions.size.toFloat())))
+           LinearProgressIndicator(
+            progress = { questionProgress.div(questions.size.toFloat()).plus(1.div(questions.size.toFloat())) },
+            modifier = Modifier.fillMaxWidth().height(20.dp),
+            color = ProgressIndicatorDefaults.linearColor,
+            trackColor = ProgressIndicatorDefaults.linearTrackColor,
+            strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
+            )
         }
     }
 }
 
 @Composable
-fun nextOrDoneButton(iv: ImageVector, label:String){
+fun NextOrDoneButton(iv: ImageVector, label:String){
     Icon(
         iv,
         contentDescription = "Localized description",
@@ -352,7 +370,7 @@ fun App() {
                 listOf(Answer(1, "YES"), Answer(2, "NO"))
             )
         )
-        questionScreen(questions)
+        QuestionScreen(questions)
     }
 }
 ````

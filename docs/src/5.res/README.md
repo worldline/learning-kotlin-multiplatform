@@ -19,7 +19,7 @@ public fun painterResource(
 
  ## Images 
 
- #### Declare you ressource management library
+ #### Declare you ressource management library (if not yet)
 
 *build.gradle*
 ```kotlin

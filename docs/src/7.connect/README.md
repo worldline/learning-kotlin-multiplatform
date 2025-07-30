@@ -218,9 +218,11 @@ The module tree is as follow
 
 ![server tree](../assets/images/server_tree.png)
 
+### Add a database H2 with Exposed framework to store the questions
+
+### Add an MCP server with Kotlin mcp server sdk
+
  ### 🎯 Solutions
-
-
   ::: details build.gradle.kts
 
 ``` kotlin 

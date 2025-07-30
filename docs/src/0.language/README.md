@@ -455,6 +455,40 @@ fun main() {
 ```
 :::
 
+### Error Handling with Result<T>
+
+Managing errors in Kotlin can be done using the `Result<T>` class, which allows you to handle success and failure cases without throwing exceptions.
+
+::: kotlin-playground Result<T> 
+
+@file main.kt
+
+```kotlin
+fun divide(a: Int, b: Int): Result<Double> {
+    return if (b == 0) {
+        Result.failure(Exception("Division par zéro"))
+    } else {
+        Result.success(a.toDouble() / b)
+    }
+}
+
+fun main() {
+    val result = divide(10, 2)
+    
+    result.fold(
+        onSuccess = { value -> println("✅ Résultat: $value") },
+        onFailure = { error -> println("❌ Erreur: ${error.message}") }
+    )
+    
+    // Avec erreur
+    divide(10, 0).fold(
+        onSuccess = { value -> println("✅ Résultat: $value") },
+        onFailure = { error -> println("❌ Erreur: ${error.message}") }
+    )
+}
+```
+:::
+
 ---
 
 ## Lesson 2: Functions
@@ -1457,7 +1491,7 @@ fun main() {
 
 **Kotlin coroutines are a powerful tool for managing background tasks, making asynchronous programming easier and more efficient**. This comprehensive guide covers all aspects of concurrent programming in Kotlin.
 
-### 4.1. Introduction to Coroutines
+### Introduction to Coroutines
 
 #### What are Coroutines?
 
@@ -1471,9 +1505,9 @@ fun main() {
 - **Built-in cancellation support**: **Cancellation is propagated automatically through the running coroutine hierarchy** 
 - **Fewer memory leaks**: **Use structured concurrency to run operations within a scope** 
 
-### 4.2. Coroutine Builders
+### Coroutine Builders
 
-#### 4.2.1 Launch - Fire and Forget
+#### Launch - Fire and Forget
 
 ::: kotlin-playground Launch Example
 
@@ -1498,7 +1532,7 @@ fun main() = runBlocking {
 - Used for tasks that don't return a result
 - Fire-and-forget operations
 
-#### 4.2.2 Async - Result-Oriented
+#### Async - Result-Oriented
 
 **Launches a coroutine that returns a result asynchronously. Returns a `Deferred<T>`, which is like a Future in Java** :
 
@@ -1524,7 +1558,7 @@ fun main() = runBlocking {
 ```
 :::
 
-#### 4.2.3 RunBlocking - Bridging Blocking and Non-blocking
+#### RunBlocking - Bridging Blocking and Non-blocking
 
 ::: kotlin-playground RunBlocking Example
 
@@ -1547,11 +1581,11 @@ fun main() = runBlocking {
 ```
 :::
 
-### 4.3. Dispatchers - Thread Management
+### Dispatchers - Thread Management
 
 **Dispatchers control where and how your coroutines run, like assigning them to specific threads or pools** .
 
-#### 4.3.1 Types of Dispatchers
+#### Types of Dispatchers
 
 ::: kotlin-playground Dispatchers Example
 
@@ -1583,7 +1617,7 @@ fun main() = runBlocking {
 ```
 :::
 
-#### 4.3.2 WithContext - Switching Context
+#### WithContext - Switching Context
 
 **withContext() calls the given code with the specified coroutine context, is suspended until it completes, and returns the result** :
 
@@ -1621,11 +1655,11 @@ fun main() = runBlocking {
 ```
 :::
 
-### 4.4. Structured Concurrency
+### Structured Concurrency
 
 **The CoroutineScope is the foundation of structured concurrency. It serves as a container for coroutines, defining the scope within which coroutines are launched** .
 
-#### 4.4.1 CoroutineScope
+#### CoroutineScope
 ::: kotlin-playground CoroutineScope Example
 
 @file main.kt
@@ -1653,7 +1687,7 @@ fun main() = runBlocking {
 ```
 :::
 
-#### 4.4.2 Structured Hierarchy
+#### Structured Hierarchy
 
 **With structured concurrency, you can specify the major context elements (like dispatcher) once, when creating the top-level coroutine. All the nested coroutines then inherit the context and modify it only if needed** :
 
@@ -1694,7 +1728,7 @@ fun main() = runBlocking {
 ```
 :::
 
-#### 4.4.3 Supervision
+#### Supervision
 
 ::: kotlin-playground Supervision Example
 
@@ -1731,11 +1765,11 @@ fun main() = runBlocking {
 ```
 :::
 
-### 4.5. Channels - Communication Between Coroutines
+### Channels - Communication Between Coroutines
 
 **Channels provide a way to share information between different coroutines** .
 
-#### 4.5.1 Basic Channel Usage
+#### Basic Channel Usage
 
 ::: kotlin-playground Basic Channel Example
 
@@ -1768,7 +1802,7 @@ fun main() = runBlocking {
 :::
 
 
-#### 4.5.2 Channel Types
+#### Channel Types
 
 **By default, a "Rendezvous" channel is created** :
 
@@ -1815,7 +1849,7 @@ fun main() {
 }
 ```
 :::
-#### 4.5.3 Producer Pattern
+#### Producer Pattern
 
 ::: kotlin-playground Producer Pattern Example
 
@@ -1848,11 +1882,11 @@ fun main() {
 ```
 :::
 
-### 4.6. Flow - Reactive Streams
+### Flow - Reactive Streams
 
 **Think of Flows as streams of data flowing through your server-side code, like the continuous stream of orders coming from the tables** .
 
-#### 4.6.1 Basic Flow
+#### Basic Flow
 
 ::: kotlin-playground Basic Flow Example
 
@@ -1877,7 +1911,7 @@ fun main() = runBlocking {
 ```
 :::
 
-#### 4.6.2 Flow Operators
+#### Flow Operators
 
 ::: kotlin-playground Flow Operators Example
 
@@ -1896,7 +1930,7 @@ fun main() = runBlocking {
 ```
 :::
 
-#### 4.6.3 Cold vs Hot Flows
+#### Cold vs Hot Flows
 
 ::: kotlin-playground Cold vs Hot Flows Example
 
@@ -1945,11 +1979,11 @@ fun main() {
 :::
 
 
-### 4.7. Exception Handling
+### Exception Handling
 
 **Structured concurrency enhances error handling by propagating exceptions up to the nearest exception handler in the coroutine hierarchy** .
 
-#### 4.7.1 Try-Catch in Coroutines
+#### Try-Catch in Coroutines
 
 ::: kotlin-playground Try-Catch Example
 
@@ -1976,7 +2010,7 @@ fun main() = runBlocking {
 ```
 :::
 
-#### 4.7.2 CoroutineExceptionHandler
+#### CoroutineExceptionHandler
 
 ::: kotlin-playground Exception Handler Example
 
@@ -2001,9 +2035,9 @@ fun main() = runBlocking {
 ```
 :::
 
-### 4.8. Cancellation and Timeout
+### Cancellation and Timeout
 
-#### 4.8.1 Cooperative Cancellation
+#### Cooperative Cancellation
 
 ::: kotlin-playground Cancellation Example
 
@@ -2034,7 +2068,7 @@ fun main() = runBlocking {
 ```
 :::
 
-#### 4.8.2 Timeout
+#### Timeout
 
 ::: kotlin-playground Timeout Example
 
@@ -2058,11 +2092,11 @@ fun main() = runBlocking {
 ```
 :::
 
-### 4.9. Thread Safety and Synchronization
+### Thread Safety and Synchronization
 
 **One approach to addressing shared mutable state is by using thread-safe data structures provided by the Kotlin standard library, such as Atomic types** .
 
-#### 4.9.1 Atomic Operations
+#### Atomic Operations
 
 ::: kotlin-playground Atomic Operations Example
 
@@ -2089,7 +2123,7 @@ fun main() = runBlocking {
 ```
 :::
 
-#### 4.9.2 Mutex
+#### Mutex
 
 ::: kotlin-playground Mutex Example
 
@@ -2125,7 +2159,7 @@ fun main() = runBlocking {
 
 :::
 
-### 5.1 Explicit Backing Fields ([Issue 278](https://github.com/Kotlin/KEEP/issues/278))
+### Explicit Backing Fields ([Issue 278](https://github.com/Kotlin/KEEP/issues/278))
 
 
 
@@ -2154,7 +2188,7 @@ fun main() {
 }
 ```
 
-### 5.2 Collection Literals ([KT-43871](https://youtrack.jetbrains.com/issue/KT-43871))
+### Collection Literals ([KT-43871](https://youtrack.jetbrains.com/issue/KT-43871))
 
 ```kotlin
 // Proposed collection literals syntax (not yet implemented)
@@ -2185,7 +2219,7 @@ fun main() {
 }
 ```
 
-### 5.3 Name based destructuring ([Kotlin 2.4](https://kotlinlang.org/docs/destructuring-declarations.html))
+### Name based destructuring ([Kotlin 2.4](https://kotlinlang.org/docs/destructuring-declarations.html))
 
 
 ```kotlin
@@ -2209,7 +2243,7 @@ fun main() {
 }
 ```
 
-### 5.4 Rich Errors ([KT-68296](https://youtrack.jetbrains.com/issue/KT-68296))
+### Rich Errors ([KT-68296](https://youtrack.jetbrains.com/issue/KT-68296))
 
 ```kotlin
 // Rich errors with union types (proposed syntax)
@@ -2249,7 +2283,7 @@ fun main() {
 }
 ```
 
-### 5.5 Must return values
+### Must return values
 
 ```kotlin
 // Must-use return values (proposed syntax)
@@ -2288,7 +2322,7 @@ fun main() {
 ```
 :::
 
-### 5.6 - Additional Kotlin Language Features
+### Additional Kotlin Language Features
 
 | Feature | Description | Status | Example Use Case |
 |---------|-------------|--------|------------------|
@@ -2304,7 +2338,5 @@ fun main() {
 |----------|---------|
 | [github.com/Kotlin/KEEP](https://github.com/Kotlin/KEEP) | Official Kotlin Enhancement Proposals - track feature development and proposals |
 | [x.com/kotlin](https://x.com/kotlin) | Official Kotlin Twitter/X account - announcements, updates, and community news |
-
 ---
-
 :::
