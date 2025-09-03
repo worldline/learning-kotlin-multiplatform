@@ -91,6 +91,86 @@ plugins {
 ```
 #### Create the native SQL driver factory and use it for creating the DB with `actual`/`expect` kotlin keywords
 
+``` kotlin Platform.jvm.kt (desktopMain)
+actual suspend fun provideDbDriver(
+    schema: SqlSchema<QueryResult.AsyncValue<Unit>>
+): SqlDriver {
+    return JdbcSqliteDriver("jdbc:sqlite:quiz.db", Properties())
+        .also { schema.create(it).await() }
+
+}
+```
+
+
+``` kotlin Platform.ios.kt (iosMain)
+actual suspend fun provideDbDriver(
+    schema: SqlSchema<QueryResult.AsyncValue<Unit>>
+): SqlDriver {
+    return NativeSqliteDriver(schema.synchronous(), "quiz.db")
+}
+```
+
+``` kotlin Platform.android.kt (androidMain)
+actual suspend fun provideDbDriver(
+    schema: SqlSchema<QueryResult.AsyncValue<Unit>>
+): SqlDriver {
+    return AndroidSqliteDriver(schema.synchronous(), QuizApp.context(), "quiz.db")
+}
+```
+
+
+``` kotlin Platform.js.kt (wasmjsMain)
+actual suspend fun provideDbDriver(schema: SqlSchema<QueryResult.AsyncValue<Unit>>): SqlDriver {
+    return WebWorkerDriver(
+        jsWorker()
+    )
+}
+fun jsWorker(): Worker =
+    js("""new Worker(new URL("./sqljs.worker.js", import.meta.url))""")
+```
+
+for the WebWorker you need to create a webpack.config.d/config.js file in the root of your project and a webpack.config.d/sqljs-config.js for the web worker  to be able to use the sql wasm library.
+
+``` js webpack.config.d/config.js
+const TerserPlugin = require("terser-webpack-plugin");
+
+config.optimization = config.optimization || {};
+config.optimization.minimize = true;
+config.optimization.minimizer = [
+    new TerserPlugin({
+        terserOptions: {
+            mangle: true,    // Note: By default, mangle is set to true.
+            compress: false, // Disable the transformations that reduce the code size.
+            output: {
+                beautify: false,
+            },
+        },
+    }),
+];
+```
+
+``` js webpack.config.d/sqljs-config.js
+// {project}/webpack.config.d/sqljs.js
+config.resolve = {
+    fallback: {
+        fs: false,
+        path: false,
+        crypto: false,
+    }
+};
+
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+config.plugins.push(
+    new CopyWebpackPlugin({
+        patterns: [
+            '../../node_modules/sql.js/dist/sql-wasm.wasm'
+        ]
+    })
+);
+
+```
+
+
 #### Read carefully the modelisation UML below 
 
 ![diagram SQL ](../assets/images/diagramme_sql.png)
@@ -106,7 +186,6 @@ Your repository handle the following cases :
 * if there is no network and you have db datas : return on the flow the db data
 * if there is network and db data are younger than 5 min : return on the flow the db data
 * if there is network and db data are older than 5 min : retourn on the flow the network data and reset db data
-
 
 ## 🎯 Solutions
 
@@ -125,7 +204,6 @@ CREATE TABLE questions (
     correctAnswerId INTEGER  NOT NULL
  );
 
-
  CREATE TABLE answers (
     id INTEGER NOT NULL,
     label TEXT NOT NULL,
@@ -136,8 +214,6 @@ CREATE TABLE questions (
           ON UPDATE CASCADE
           ON DELETE CASCADE
  );
-
-
 
  selectUpdateTimestamp:
  SELECT *
@@ -173,64 +249,48 @@ CREATE TABLE questions (
 ```
 :::
 
-::: details network/QuizDB.kt (commonMain)
+::: details data/datasources (commonMain)
 ``` kotlin
-package network
+class SqlDelightDataSource(private val database: Database) {
 
 
-import app.cash.sqldelight.async.coroutines.awaitAsList
-import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
-import app.cash.sqldelight.db.SqlDriver
-import com.myapplication.common.cache.Database
-import kotlinx.coroutines.CoroutineScope
-import network.data.Answer
-import network.data.Question
+    private var quizQueries = database.quizQuestionQueries
 
-class QuizDbDataSource(private val sqlDriver: SqlDriver, private val coroutineScope: CoroutineScope) {
+    suspend fun getAllQuestions(): List<Question> {
+        return quizQueries.selectAllQuestionsWithAnswers().awaitAsList()
 
-    private  var database=Database(sqlDriver)
-    private  var quizQueries=database.quizDatabaseQueries
+            .groupBy { it.question_id }
+            .map { (questionId, rowList) ->
 
-
-    suspend fun getUpdateTimeStamp():Long = quizQueries.selectUpdateTimestamp().awaitAsOneOrNull()?.timestamprequest ?: 0L
-
-
-    suspend fun setUpdateTimeStamp(timeStamp:Long)  {
-        quizQueries.deleteTimeStamp()
-        quizQueries.insertTimeStamp(timeStamp)
+                Question(
+                    id = questionId,
+                    label = rowList.first().label,
+                    correctAnswerId = rowList.first().correctAnswerId,
+                    answers = rowList.map { answer ->
+                        Answer(
+                            id = answer.id_,
+                            label = answer.label_
+                        )
+                    }
+                )
+            }
     }
 
-     suspend fun getAllQuestions(): List<Question> {
-         return quizQueries.selectAllQuestionsWithAnswers().awaitAsList()
 
-             .groupBy {it.question_id }
-             .map { (questionId, rowList) ->
-
-             Question(
-                 id = questionId,
-                 label = rowList.first().label,
-                 correctAnswerId = rowList.first().correctAnswerId,
-                 answers = rowList.map { answer ->
-                     Answer(
-                         id = answer.id_,
-                         label = answer.label_
-                     )
-                 }
-             )
-         }
-     }
-
-
-
-    suspend fun insertQuestions(questions:List<Question>) {
+    suspend fun insertQuestions(questions: List<Question>) {
         quizQueries.deleteQuestions();
         quizQueries.deleteAnswers()
-        questions.forEach {question ->
+        questions.forEach { question ->
             quizQueries.insertQuestion(question.id, question.label, question.correctAnswerId)
-            question.answers.forEach {answer ->
-                quizQueries.insertAnswer(answer.id,answer.label,question.id)
+            question.answers.forEach { answer ->
+                quizQueries.insertAnswer(answer.id, answer.label, question.id)
             }
         }
+    }
+
+    suspend fun resetQuestions() {
+        quizQueries.deleteQuestions()
+        quizQueries.deleteAnswers()
     }
 }
 ```
@@ -238,67 +298,45 @@ class QuizDbDataSource(private val sqlDriver: SqlDriver, private val coroutineSc
 
 ::: details QuizRepository.kt
 ```kotlin
-package network
-
-import app.cash.sqldelight.db.SqlDriver
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
-import network.data.Question
-
-
-class QuizRepository(sqlDriver: SqlDriver)  {
-
+class QuizRepository {
     private val mockDataSource = MockDataSource()
-    private val quizAPI = QuizApiDatasource()
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
-    private var quizDB = QuizDbDataSource(sqlDriver,coroutineScope)
+    private val quizApiDatasource = QuizApiDatasource()
+    private var quizKStoreDataSource = KStoreDataSource(AppInitializer.getKStoreInstance())
+    private var sqlDelightDataSource = SqlDelightDataSource(AppInitializer.getDatabase()!!)
 
-    private var _questionState=  MutableStateFlow(listOf<Question>())
-    val questionState get() = _questionState
+    private suspend fun fetchQuiz(): List<Question> = quizApiDatasource.getAllQuestions().questions
 
-    init {
-        updateQuiz()
-    }
+    @OptIn(ExperimentalTime::class)
+    private suspend fun fetchAndStoreQuiz(): List<Question> {
+        sqlDelightDataSource.resetQuestions()
 
-    private suspend fun fetchQuiz(): List<Question> = quizAPI.getAllQuestions().questions
-
-    private suspend fun fetchAndStoreQuiz(): List<Question>{
-        val questions  = fetchQuiz()
-        quizDB.insertQuestions(questions)
-        quizDB.setUpdateTimeStamp(Clock.System.now().epochSeconds)
+        val questions = fetchQuiz()
+        sqlDelightDataSource.insertQuestions(questions)
+        quizKStoreDataSource.setUpdateTimeStamp(Clock.System.now().epochSeconds)
         return questions
     }
-    private fun updateQuiz(){
 
-
-        coroutineScope.launch {
-            _questionState.update {
-                try {
-                    val lastRequest = quizDB.getUpdateTimeStamp()
-                    if(lastRequest == 0L || lastRequest - Clock.System.now().epochSeconds > 300000){
-                        fetchAndStoreQuiz()
-                    }else{
-                        quizDB.getAllQuestions()
-                    }
-                } catch (e: NullPointerException) {
-                    fetchAndStoreQuiz()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    mockDataSource.generateDummyQuestionsList()
-                }
-
+    @OptIn(ExperimentalTime::class)
+    suspend fun updateQuiz(): List<Question> {
+        try {
+            val lastRequest = quizKStoreDataSource.getUpdateTimeStamp()
+            return if (lastRequest == 0L || lastRequest - Clock.System.now().epochSeconds > 300000) {
+                fetchAndStoreQuiz()
+            } else {
+                //quizKStoreDataSource.getAllQuestions()
+                sqlDelightDataSource.getAllQuestions()
             }
+        } catch (e: NullPointerException) {
+            return fetchAndStoreQuiz()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return mockDataSource.generateDummyQuestionsList()
         }
     }
+
 }
 ```
 :::
-
-
 
 ::: tip More databases options
 For not using SQLight ORM, you can use [`Realm kotlin`](https://github.com/realm/realm-kotlin) or [KStore](https://github.com/xxfast/KStore)

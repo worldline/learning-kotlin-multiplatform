@@ -33,8 +33,8 @@ export default defineUserConfig({
 
         sidebar: [
           { text: 'Home', link: '/' },
-          "/0.language/",
           "/1.overview/",
+          "/0.language/",
           "/2.configure/",
           "/3.ui/",
           "/4.nav/",
