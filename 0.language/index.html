@@ -1,0 +1,1614 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.24" />
+    <style>
+      :root {
+        --vp-c-bg: #fff;
+      }
+
+      [data-theme='dark'] {
+        --vp-c-bg: #1b1b1f;
+      }
+
+      html,
+      body {
+        background-color: var(--vp-c-bg);
+      }
+    </style>
+    <script>
+      const useChoice = localStorage.getItem('vuepress-color-scheme')
+      const systemStatus =
+        'matchMedia' in window
+          ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          : false
+
+      if (useChoice === 'light') {
+        document.documentElement.dataset.theme = 'light'
+      } else if (useChoice === 'dark' || systemStatus) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"About Kotlin","image":[""],"dateModified":"2025-07-30T13:37:20.000Z","author":[]}</script><meta property="og:url" content="https://worldline.github.io/learning-kotlin-multiplatform/learning-kotlin-multiplatform/0.language/"><meta property="og:title" content="About Kotlin"><meta property="og:description" content="About Kotlin Lesson 1: Kotlin Basics Lesson 2: Functions Lesson 3: Classes and Objects Lesson 4: Concurrent Programming Lesson 5: Evolution of Kotlin Lesson 1: Kotlin Basics Ove..."><meta property="og:type" content="article"><meta property="og:locale" content="en-US"><meta property="og:updated_time" content="2025-07-30T13:37:20.000Z"><meta property="article:modified_time" content="2025-07-30T13:37:20.000Z"><link rel="icon" href="/learning-kotlin-multiplatform/favicon.ico"><link rel="manifest" href="/learning-kotlin-multiplatform/manifest.webmanifest"><meta name="theme-color" content="#bf4092"><meta name="mobile-web-app-capable" content="yes"><link rel="apple-touch-icon" href="/learning-kotlin-multiplatform/logo.png"><title>About Kotlin</title><meta name="description" content="About Kotlin Lesson 1: Kotlin Basics Lesson 2: Functions Lesson 3: Classes and Objects Lesson 4: Concurrent Programming Lesson 5: Evolution of Kotlin Lesson 1: Kotlin Basics Ove...">
+    <link rel="preload" href="/learning-kotlin-multiplatform/assets/style-D_ZGXx4T.css" as="style"><link rel="stylesheet" href="/learning-kotlin-multiplatform/assets/style-D_ZGXx4T.css">
+    <link rel="modulepreload" href="/learning-kotlin-multiplatform/assets/app-CarcV5a4.js"><link rel="modulepreload" href="/learning-kotlin-multiplatform/assets/index.html-CsKxM5KA.js">
+    
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="vp-theme-container external-link-icon" vp-container><!--[--><header class="vp-navbar" vp-navbar><div class="vp-toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a class="route-link" href="/learning-kotlin-multiplatform/"><img class="vp-site-logo" src="/learning-kotlin-multiplatform/logo_worldline.png" alt><!----></a></span><div class="vp-navbar-items-wrapper" style=""><!--[--><!--]--><nav class="vp-navbar-items vp-hide-mobile" aria-label="site navigation"><!--[--><div class="vp-navbar-item"><a class="auto-link external-link" href="https://github.com/worldline/learning-kotlin-multiplatform" aria-label="⭐ Contribute!" rel="noopener noreferrer" target="_blank"><!--[--><!--[--><!--]--><!--]-->⭐ Contribute!<!--[--><!--[--><!--]--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button type="button" class="vp-toggle-color-mode-button" title="toggle color mode"><svg class="light-icon" viewbox="0 0 32 32" style=""><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg class="dark-icon" viewbox="0 0 32 32" style="display:none;"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><form class="search-box" role="search"><input type="search" placeholder="Search..." autocomplete="off" spellcheck="false" value><!----></form></div></header><!--]--><div class="vp-sidebar-mask"></div><!--[--><aside class="vp-sidebar" vp-sidebar><nav class="vp-navbar-items" aria-label="site navigation"><!--[--><div class="vp-navbar-item"><a class="auto-link external-link" href="https://github.com/worldline/learning-kotlin-multiplatform" aria-label="⭐ Contribute!" rel="noopener noreferrer" target="_blank"><!--[--><!--[--><!--]--><!--]-->⭐ Contribute!<!--[--><!--[--><!--]--><!--]--></a></div><!--]--></nav><!--[--><!--]--><ul class="vp-sidebar-items"><!--[--><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/learning-kotlin-multiplatform/" aria-label="Home"><!--[--><!--[--><!--]--><!--]-->Home<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/learning-kotlin-multiplatform/1.overview/" aria-label="🚀 Let&#39;s start"><!--[--><!--[--><!--]--><!--]-->🚀 Let&#39;s start<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link route-link-active auto-link vp-sidebar-item vp-sidebar-heading active" href="/learning-kotlin-multiplatform/0.language/" aria-label="About Kotlin"><!--[--><!--[--><!--]--><!--]-->About Kotlin<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/learning-kotlin-multiplatform/2.configure/" aria-label="Configure KMP"><!--[--><!--[--><!--]--><!--]-->Configure KMP<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/learning-kotlin-multiplatform/3.ui/" aria-label="User interface"><!--[--><!--[--><!--]--><!--]-->User interface<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/learning-kotlin-multiplatform/4.nav/" aria-label="Navigation"><!--[--><!--[--><!--]--><!--]-->Navigation<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/learning-kotlin-multiplatform/5.res/" aria-label="Ressources"><!--[--><!--[--><!--]--><!--]-->Ressources<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/learning-kotlin-multiplatform/6.arch/" aria-label="Architecture"><!--[--><!--[--><!--]--><!--]-->Architecture<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/learning-kotlin-multiplatform/7.connect/" aria-label="Connectivity"><!--[--><!--[--><!--]--><!--]-->Connectivity<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/learning-kotlin-multiplatform/8.preferences/" aria-label="Preferences"><!--[--><!--[--><!--]--><!--]-->Preferences<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/learning-kotlin-multiplatform/9.database/" aria-label="Local  Database"><!--[--><!--[--><!--]--><!--]-->Local  Database<!--[--><!--[--><!--]--><!--]--></a><!----></li><!--]--></ul><!--[--><!--]--></aside><!--]--><!--[--><main class="vp-page"><!--[--><!--]--><div vp-content><!--[--><!--]--><div id="content"><h1 id="about-kotlin" tabindex="-1"><a class="header-anchor" href="#about-kotlin"><span>About Kotlin</span></a></h1><h2 id="table-of-contents" tabindex="-1"><a class="header-anchor" href="#table-of-contents"><span>Table of Contents</span></a></h2><ol><li><a href="#lesson-1-kotlin-basics">Lesson 1: Kotlin Basics</a></li><li><a href="#lesson-2-functions">Lesson 2: Functions</a></li><li><a href="#lesson-3-classes-and-objects">Lesson 3: Classes and Objects</a></li><li><a href="#lesson-4-concurrent-programming">Lesson 4: Concurrent Programming</a></li><li><a href="#lesson-5-evolution-of-kotlin">Lesson 5: Evolution of Kotlin</a></li></ol><h2 id="lesson-1-kotlin-basics" tabindex="-1"><a class="header-anchor" href="#lesson-1-kotlin-basics"><span>Lesson 1: Kotlin Basics</span></a></h2><h3 id="overview" tabindex="-1"><a class="header-anchor" href="#overview"><span>Overview</span></a></h3><p>In this lesson, you&#39;ll learn the fundamental concepts of Kotlin programming:</p><ul><li><strong>Get started</strong>: Setting up IntelliJ IDEA and creating your first project</li><li><strong>Operators</strong>: Mathematical, comparison, and assignment operators</li><li><strong>Data types</strong>: Integer types, floating-point numbers, and strings</li><li><strong>Variables</strong>: Mutable and immutable variables with type inference</li><li><strong>Conditionals</strong>: Control flow with if/else, when statements, and loops</li><li><strong>Lists and arrays</strong>: Working with collections</li><li><strong>Null safety</strong>: Kotlin&#39;s approach to preventing null pointer exceptions</li></ul><h3 id="getting-started" tabindex="-1"><a class="header-anchor" href="#getting-started"><span>Getting Started</span></a></h3><h4 id="your-first-kotlin-program" tabindex="-1"><a class="header-anchor" href="#your-first-kotlin-program"><span>Your First Kotlin Program</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Hello World</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    println(&quot;Hello, world!&quot;)
+}
+</pre><!----></div></div></div><h4 id="passing-arguments-to-main" tabindex="-1"><a class="header-anchor" href="#passing-arguments-to-main"><span>Passing Arguments to main()</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Arguments Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main(args: Array&lt;String&gt;) {
+    val name = args.getOrNull(0)?.takeIf { it.isNotBlank() } ?: &quot;Kotlin&quot;
+    println(&quot;Hello, $name!&quot;)
+}
+</pre><!----></div></div></div><h3 id="operators" tabindex="-1"><a class="header-anchor" href="#operators"><span>Operators</span></a></h3><h4 id="mathematical-operators" tabindex="-1"><a class="header-anchor" href="#mathematical-operators"><span>Mathematical Operators</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Math Operators</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Math operators with integers
+    println(&quot;1 + 1 = ${1 + 1}&quot;)
+    println(&quot;53 - 3 = ${53 - 3}&quot;)
+    println(&quot;50 / 10 = ${50 / 10}&quot;)
+    println(&quot;9 % 3 = ${9 % 3}&quot;)
+    // Math operators with doubles
+    println(&quot;1.0 / 2.0 = ${1.0 / 2.0}&quot;)
+    println(&quot;2.0 * 3.5 = ${2.0 * 3.5}&quot;)
+}
+</pre><!----></div></div></div><h4 id="numeric-operator-methods" tabindex="-1"><a class="header-anchor" href="#numeric-operator-methods"><span>Numeric Operator Methods</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Operator Methods</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Kotlin lets you call methods on numbers
+    println(&quot;2.times(3) = ${2.times(3)}&quot;)
+    println(&quot;3.5.plus(4) = ${3.5.plus(4)}&quot;)
+    println(&quot;2.4.div(2) = ${2.4.div(2)}&quot;)
+}
+</pre><!----></div></div></div><h3 id="data-types" tabindex="-1"><a class="header-anchor" href="#data-types"><span>Data Types</span></a></h3><h4 id="working-with-different-types" tabindex="-1"><a class="header-anchor" href="#working-with-different-types"><span>Working with Different Types</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Data Types</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Integer types
+    val byteValue: Byte = 127
+    val shortValue: Short = 32767
+    val intValue: Int = 2147483647
+    val longValue: Long = 9223372036854775807L
+    
+    // Floating-point types
+    val floatValue: Float = 3.14f
+    val doubleValue: Double = 3.141592653589793
+    
+    // Other types
+    val charValue: Char = &#39;K&#39;
+    val booleanValue: Boolean = true
+    
+    println(&quot;Byte: $byteValue&quot;)
+    println(&quot;Short: $shortValue&quot;)
+    println(&quot;Int: $intValue&quot;)
+    println(&quot;Long: $longValue&quot;)
+    println(&quot;Float: $floatValue&quot;)
+    println(&quot;Double: $doubleValue&quot;)
+    println(&quot;Char: $charValue&quot;)
+    println(&quot;Boolean: $booleanValue&quot;)
+}
+</pre><!----></div></div></div><h4 id="type-casting" tabindex="-1"><a class="header-anchor" href="#type-casting"><span>Type Casting</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Type Casting</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    val i: Int = 6
+    println(&quot;Int to Byte: ${i.toByte()}&quot;)
+    println(&quot;Int to Float: ${i.toFloat()}&quot;)
+    println(&quot;Int to Double: ${i.toDouble()}&quot;)
+    
+    // Using underscores for long numbers
+    val oneMillion = 1_000_000
+    val hexBytes = 0xFF_EC_DE_5E
+    println(&quot;One million: $oneMillion&quot;)
+    println(&quot;Hex bytes: $hexBytes&quot;)
+}
+</pre><!----></div></div></div><h3 id="strings" tabindex="-1"><a class="header-anchor" href="#strings"><span>Strings</span></a></h3><h4 id="string-basics-and-templates" tabindex="-1"><a class="header-anchor" href="#string-basics-and-templates"><span>String Basics and Templates</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Strings</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Basic strings
+    val s1 = &quot;Hello world!&quot;
+    val s2 = &quot;Hello world!\n&quot;
+    
+    // Multi-line strings with triple quotes
+    val text = &quot;&quot;&quot;
+        This is a
+        multi-line
+        string
+    &quot;&quot;&quot;.trimIndent()
+    
+    // String concatenation
+    val numberOfDogs = 3
+    val numberOfCats = 2
+    val message = &quot;I have $numberOfDogs dogs&quot; + &quot; and $numberOfCats cats&quot;
+    
+    // String templates
+    val i = 10
+    val s = &quot;abc&quot;
+    val length = &quot;$s.length is ${s.length}&quot;
+    
+    // Expression in templates
+    val numberOfShirts = 10
+    val numberOfPants = 5
+    val total = &quot;I have ${numberOfShirts + numberOfPants} items of clothing&quot;
+    
+    println(s1)
+    println(text)
+    println(message)
+    println(&quot;i = $i&quot;)
+    println(length)
+    println(total)
+}
+</pre><!----></div></div></div><h3 id="variables" tabindex="-1"><a class="header-anchor" href="#variables"><span>Variables</span></a></h3><h4 id="mutable-and-immutable-variables" tabindex="-1"><a class="header-anchor" href="#mutable-and-immutable-variables"><span>Mutable and Immutable Variables</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Variables</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Immutable variable (val)
+    val name = &quot;Jennifer&quot;
+    println(&quot;Name: $name&quot;)
+    
+    // Mutable variable (var)
+    var score = 10
+    println(&quot;Initial score: $score&quot;)
+    score = 20
+    println(&quot;Updated score: $score&quot;)
+    
+    // Explicit type declaration
+    var width: Int = 12
+    var length: Double = 2.5
+    println(&quot;Width: $width, Length: $length&quot;)
+    
+    // Type inference
+    val inferredInt = 42        // Int
+    val inferredDouble = 3.14   // Double
+    val inferredString = &quot;Hello&quot; // String
+    
+    println(&quot;Inferred types:&quot;)
+    println(&quot;$inferredInt is ${inferredInt::class.simpleName}&quot;)
+    println(&quot;$inferredDouble is ${inferredDouble::class.simpleName}&quot;)
+    println(&quot;$inferredString is ${inferredString::class.simpleName}&quot;)
+}
+</pre><!----></div></div></div><h3 id="conditionals" tabindex="-1"><a class="header-anchor" href="#conditionals"><span>Conditionals</span></a></h3><h4 id="if-else-statements" tabindex="-1"><a class="header-anchor" href="#if-else-statements"><span>If/Else Statements</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">If-Else</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    val numberOfCups = 30
+    val numberOfPlates = 50
+    
+    if (numberOfCups &gt; numberOfPlates) {
+        println(&quot;Too many cups!&quot;)
+    } else {
+        println(&quot;Not enough cups!&quot;)
+    }
+    
+    // Multiple conditions
+    val guests = 30
+    if (guests == 0) {
+        println(&quot;No guests&quot;)
+    } else if (guests &lt; 20) {
+        println(&quot;Small group of people&quot;)
+    } else {
+        println(&quot;Large group of people!&quot;)
+    }
+    
+    // If as expression
+    val temperature = 20
+    val isHot = if (temperature &gt; 40) true else false
+    println(&quot;Is it hot? $isHot&quot;)
+}
+</pre><!----></div></div></div><h4 id="ranges-and-when-statements" tabindex="-1"><a class="header-anchor" href="#ranges-and-when-statements"><span>Ranges and When Statements</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Ranges and When</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Ranges
+    val numberOfStudents = 50
+    if (numberOfStudents in 1..100) {
+        println(&quot;Valid number of students: $numberOfStudents&quot;)
+    }
+    
+    // When statement
+    val results = 45
+    when (results) {
+        0 -&gt; println(&quot;No results&quot;)
+        in 1..39 -&gt; println(&quot;Got results!&quot;)
+        else -&gt; println(&quot;That&#39;s a lot of results!&quot;)
+    }
+    
+    // When as expression
+    val grade = when (results) {
+        in 90..100 -&gt; &quot;A&quot;
+        in 80..89 -&gt; &quot;B&quot;
+        in 70..79 -&gt; &quot;C&quot;
+        in 60..69 -&gt; &quot;D&quot;
+        else -&gt; &quot;F&quot;
+    }
+    println(&quot;Grade: $grade&quot;)
+}
+</pre><!----></div></div></div><h4 id="loops" tabindex="-1"><a class="header-anchor" href="#loops"><span>Loops</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Loops</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // For loop with array
+    val pets = arrayOf(&quot;dog&quot;, &quot;cat&quot;, &quot;canary&quot;)
+    print(&quot;Pets: &quot;)
+    for (element in pets) {
+        print(&quot;$element &quot;)
+    }
+    println()
+    
+    // For loop with index
+    println(&quot;Pets with index:&quot;)
+    for ((index, element) in pets.withIndex()) {
+        println(&quot;Item at $index is $element&quot;)
+    }
+    
+    // Range loops
+    print(&quot;Numbers 1-5: &quot;)
+    for (i in 1..5) print(i)
+    println()
+    
+    print(&quot;Countdown: &quot;)
+    for (i in 5 downTo 1) print(i)
+    println()
+    
+    print(&quot;Even numbers: &quot;)
+    for (i in 2..10 step 2) print(i)
+    println()
+    
+    // While loop
+    var bicycles = 0
+    while (bicycles &lt; 3) {
+        bicycles++
+        println(&quot;Bicycle $bicycles added&quot;)
+    }
+    
+    // Repeat loop
+    print(&quot;Repeat: &quot;)
+    repeat(3) {
+        print(&quot;Hello! &quot;)
+    }
+    println()
+}
+</pre><!----></div></div></div><h3 id="lists-and-arrays" tabindex="-1"><a class="header-anchor" href="#lists-and-arrays"><span>Lists and Arrays</span></a></h3><h4 id="working-with-lists" tabindex="-1"><a class="header-anchor" href="#working-with-lists"><span>Working with Lists</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Lists</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Immutable list
+    val instruments = listOf(&quot;trumpet&quot;, &quot;piano&quot;, &quot;violin&quot;)
+    println(&quot;Instruments: $instruments&quot;)
+    
+    // Mutable list
+    val myList = mutableListOf(&quot;trumpet&quot;, &quot;piano&quot;, &quot;violin&quot;)
+    myList.remove(&quot;violin&quot;)
+    myList.add(&quot;drums&quot;)
+    println(&quot;Modified list: $myList&quot;)
+    
+    // List operations
+    val books = listOf(&quot;nature&quot;, &quot;biology&quot;, &quot;birds&quot;)
+    val booksStartingWithB = books.filter { it[0] == &#39;b&#39; }
+    println(&quot;Books starting with &#39;b&#39;: $booksStartingWithB&quot;)
+}
+</pre><!----></div></div></div><h4 id="working-with-arrays" tabindex="-1"><a class="header-anchor" href="#working-with-arrays"><span>Working with Arrays</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Arrays</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Array of strings
+    val pets = arrayOf(&quot;dog&quot;, &quot;cat&quot;, &quot;canary&quot;)
+    println(&quot;Pets: ${pets.contentToString()}&quot;)
+    
+    // Mixed type array
+    val mix = arrayOf(&quot;hats&quot;, 2)
+    println(&quot;Mixed array: ${mix.contentToString()}&quot;)
+    
+    // Typed arrays
+    val numbers = intArrayOf(1, 2, 3)
+    println(&quot;Numbers: ${numbers.contentToString()}&quot;)
+    
+    // Combining arrays
+    val numbers2 = intArrayOf(4, 5, 6)
+    val combined = numbers + numbers2
+    println(&quot;Combined: ${combined.contentToString()}&quot;)
+}
+</pre><!----></div></div></div><h3 id="null-safety" tabindex="-1"><a class="header-anchor" href="#null-safety"><span>Null Safety</span></a></h3><h4 id="null-safety-features" tabindex="-1"><a class="header-anchor" href="#null-safety-features"><span>Null Safety Features</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Null Safety</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Variables cannot be null by default
+    var numberOfBooks: Int? = null
+    println(&quot;Books: $numberOfBooks&quot;)
+    
+    // Safe call operator
+    numberOfBooks = 6
+    numberOfBooks = numberOfBooks?.dec()
+    println(&quot;After decrement: $numberOfBooks&quot;)
+    
+    // Elvis operator
+    numberOfBooks = null
+    val finalCount = numberOfBooks?.dec() ?: 0
+    println(&quot;Final count: $finalCount&quot;)
+    
+    // Safe call with string
+    val name: String? = &quot;Kotlin&quot;
+    println(&quot;Name length: ${name?.length}&quot;)
+    
+    val nullName: String? = null
+    println(&quot;Null name length: ${nullName?.length}&quot;)
+    
+    // Not-null assertion (use carefully!)
+    val definitelyNotNull: String? = &quot;Hello&quot;
+    val length = definitelyNotNull!!.length
+    println(&quot;Definite length: $length&quot;)
+}
+</pre><!----></div></div></div><h3 id="error-handling-with-result" tabindex="-1"><a class="header-anchor" href="#error-handling-with-result"><span>Error Handling with Result</span></a></h3><p>Managing errors in Kotlin can be done using the <code>Result&lt;T&gt;</code> class, which allows you to handle success and failure cases without throwing exceptions.</p><div class="kotlin-playground-wrapper"><div class="header">Result</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun divide(a: Int, b: Int): Result&lt;Double&gt; {
+    return if (b == 0) {
+        Result.failure(Exception(&quot;Division par zéro&quot;))
+    } else {
+        Result.success(a.toDouble() / b)
+    }
+}
+
+fun main() {
+    val result = divide(10, 2)
+    
+    result.fold(
+        onSuccess = { value -&gt; println(&quot;✅ Résultat: $value&quot;) },
+        onFailure = { error -&gt; println(&quot;❌ Erreur: ${error.message}&quot;) }
+    )
+    
+    // Avec erreur
+    divide(10, 0).fold(
+        onSuccess = { value -&gt; println(&quot;✅ Résultat: $value&quot;) },
+        onFailure = { error -&gt; println(&quot;❌ Erreur: ${error.message}&quot;) }
+    )
+}
+</pre><!----></div></div></div><h2 id="lesson-2-functions" tabindex="-1"><a class="header-anchor" href="#lesson-2-functions"><span>Lesson 2: Functions</span></a></h2><h3 id="overview-1" tabindex="-1"><a class="header-anchor" href="#overview-1"><span>Overview</span></a></h3><p>In this lesson, you&#39;ll learn about:</p><ul><li><strong>Programs in Kotlin</strong>: Creating main functions and running programs</li><li><strong>Expressions</strong>: Everything has a value in Kotlin</li><li><strong>Functions</strong>: Creating and using functions with parameters</li><li><strong>Compact functions</strong>: Single-expression functions</li><li><strong>Lambdas and higher-order functions</strong>: Functional programming concepts</li><li><strong>List filters</strong>: Working with collections functionally</li></ul><h3 id="programs-in-kotlin" tabindex="-1"><a class="header-anchor" href="#programs-in-kotlin"><span>Programs in Kotlin</span></a></h3><h4 id="creating-a-main-function" tabindex="-1"><a class="header-anchor" href="#creating-a-main-function"><span>Creating a Main Function</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Main Function</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main(args: Array&lt;String&gt;) {
+    println(&quot;Hello, world!&quot;)
+    
+    // Using arguments if provided
+    if (args.isNotEmpty()) {
+        println(&quot;Hello, ${args[0]}!&quot;)
+    }
+}
+</pre><!----></div></div></div><h3 id="everything-has-a-value" tabindex="-1"><a class="header-anchor" href="#everything-has-a-value"><span>Everything Has a Value</span></a></h3><h4 id="expressions-vs-statements" tabindex="-1"><a class="header-anchor" href="#expressions-vs-statements"><span>Expressions vs Statements</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Expressions</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // If as expression
+    val temperature = 20
+    val isHot = if (temperature &gt; 40) true else false
+    println(&quot;Is hot: $isHot&quot;)
+    
+    // Even println returns a value (Unit)
+    val isUnit = println(&quot;This is an expression&quot;)
+    println(&quot;println returns: $isUnit&quot;)
+    
+    // When as expression
+    val number = 42
+    val description = when {
+        number &lt; 0 -&gt; &quot;negative&quot;
+        number == 0 -&gt; &quot;zero&quot;
+        number &gt; 0 -&gt; &quot;positive&quot;
+        else -&gt; &quot;unknown&quot;
+    }
+    println(&quot;$number is $description&quot;)
+}
+</pre><!----></div></div></div><h3 id="functions-in-kotlin" tabindex="-1"><a class="header-anchor" href="#functions-in-kotlin"><span>Functions in Kotlin</span></a></h3><h4 id="basic-functions" tabindex="-1"><a class="header-anchor" href="#basic-functions"><span>Basic Functions</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Basic Functions</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Simple function
+fun printHello() {
+    println(&quot;Hello World&quot;)
+}
+
+// Function with parameters
+fun greet(name: String) {
+    println(&quot;Hello, $name!&quot;)
+}
+
+// Function with return value
+fun add(a: Int, b: Int): Int {
+    return a + b
+}
+
+// Unit returning function (explicit)
+fun printMessage(message: String): Unit {
+    println(message)
+}
+
+// Unit returning function (implicit)
+fun printAnotherMessage(message: String) {
+    println(message)
+}
+
+fun main() {
+    printHello()
+    greet(&quot;Kotlin&quot;)
+    val sum = add(5, 3)
+    println(&quot;Sum: $sum&quot;)
+    printMessage(&quot;Explicit Unit&quot;)
+    printAnotherMessage(&quot;Implicit Unit&quot;)
+}
+</pre><!----></div></div></div><h4 id="function-parameters" tabindex="-1"><a class="header-anchor" href="#function-parameters"><span>Function Parameters</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Function Parameters</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Default parameters
+fun drive(speed: String = &quot;fast&quot;) {
+    println(&quot;driving $speed&quot;)
+}
+
+// Required parameters
+fun tempToday(day: String, temp: Int) {
+    println(&quot;Today is $day and it&#39;s $temp degrees.&quot;)
+}
+
+// Mix of default and required parameters
+fun reformat(
+    str: String,
+    divideByCamelHumps: Boolean,
+    wordSeparator: Char,
+    normalizeCase: Boolean = true
+) {
+    println(&quot;Reformatting: $str with separator &#39;$wordSeparator&#39;&quot;)
+}
+
+fun main() {
+    // Using default parameter
+    drive()
+    drive(&quot;slow&quot;)
+    drive(speed = &quot;turtle-like&quot;)
+    
+    // Required parameters
+    tempToday(&quot;Monday&quot;, 25)
+    
+    // Named arguments
+    reformat(&quot;TodayIsADayLikeNoOther&quot;, false, &#39;_&#39;)
+    reformat(&quot;TodayIsADayLikeNoOther&quot;, divideByCamelHumps = false, wordSeparator = &#39;_&#39;)
+}
+</pre><!----></div></div></div><h3 id="compact-functions" tabindex="-1"><a class="header-anchor" href="#compact-functions"><span>Compact Functions</span></a></h3><h4 id="single-expression-functions" tabindex="-1"><a class="header-anchor" href="#single-expression-functions"><span>Single-Expression Functions</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Compact Functions</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Regular function
+fun doubleRegular(x: Int): Int {
+    return x * 2
+}
+
+// Compact function
+fun double(x: Int): Int = x * 2
+
+// Compact function with type inference
+fun triple(x: Int) = x * 3
+
+// More examples
+fun square(x: Int) = x * x
+fun isEven(x: Int) = x % 2 == 0
+fun max(a: Int, b: Int) = if (a &gt; b) a else b
+
+fun main() {
+    println(&quot;Double 5: ${double(5)}&quot;)
+    println(&quot;Triple 4: ${triple(4)}&quot;)
+    println(&quot;Square 6: ${square(6)}&quot;)
+    println(&quot;Is 8 even? ${isEven(8)}&quot;)
+    println(&quot;Max of 10 and 15: ${max(10, 15)}&quot;)
+}
+</pre><!----></div></div></div><h3 id="lambdas-and-higher-order-functions" tabindex="-1"><a class="header-anchor" href="#lambdas-and-higher-order-functions"><span>Lambdas and Higher-Order Functions</span></a></h3><h4 id="lambda-functions" tabindex="-1"><a class="header-anchor" href="#lambda-functions"><span>Lambda Functions</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Lambdas</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Basic lambda
+    val waterFilter = { level: Int -&gt; level / 2 }
+    var dirtLevel = 20
+    println(&quot;Filtered water: ${waterFilter(dirtLevel)}&quot;)
+    
+    // Lambda with explicit type
+    val waterFilter2: (Int) -&gt; Int = { level -&gt; level / 2 }
+    println(&quot;Filtered water 2: ${waterFilter2(dirtLevel)}&quot;)
+    
+    // Lambda with multiple parameters
+    val multiply: (Int, Int) -&gt; Int = { a, b -&gt; a * b }
+    println(&quot;Multiply 4 and 5: ${multiply(4, 5)}&quot;)
+    
+    // Lambda with no parameters
+    val greeting: () -&gt; String = { &quot;Hello from lambda!&quot; }
+    println(greeting())
+
+    // Lambda with multiple statements
+    val multiStatement = { x: Int, y: Int -&gt;
+      println(&quot;Calculating sum of $x and $y&quot;)
+      val result = x + y
+      println(&quot;Result: $result&quot;)
+      result // Last expression is the return value
+      }
+      println(multiStatement(3, 4))
+   }
+</pre><!----></div></div></div><h4 id="higher-order-functions" tabindex="-1"><a class="header-anchor" href="#higher-order-functions"><span>Higher-Order Functions</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Higher-Order Functions</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Higher-order function that takes a function as parameter
+fun encodeMsg(msg: String, encode: (String) -&gt; String): String {
+    return encode(msg)
+}
+
+// Named function to pass as argument
+fun reverseString(input: String): String = input.reversed()
+
+fun main() {
+    // Using lambda
+    val enc1: (String) -&gt; String = { input -&gt; input.uppercase() }
+    println(&quot;Encoded with lambda: ${encodeMsg(&quot;hello&quot;, enc1)}&quot;)
+    
+    // Using function reference
+    println(&quot;Encoded with function reference: ${encodeMsg(&quot;hello&quot;, ::reverseString)}&quot;)
+    
+    // Inline lambda
+    println(&quot;Encoded inline: ${encodeMsg(&quot;hello&quot;) { it.lowercase() }}&quot;)
+    
+    // Using built-in higher-order function
+    repeat(3) {
+        println(&quot;Repeated message $it&quot;)
+    }
+}
+</pre><!----></div></div></div><h3 id="list-filters" tabindex="-1"><a class="header-anchor" href="#list-filters"><span>List Filters</span></a></h3><h4 id="basic-filtering" tabindex="-1"><a class="header-anchor" href="#basic-filtering"><span>Basic Filtering</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">List Filters</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Basic filter
+    val numbers = listOf(1, 2, 3, 4, 5, 6)
+    val evenNumbers = numbers.filter { it % 2 == 0 }
+    println(&quot;Even numbers: $evenNumbers&quot;)
+    
+    // Filter with explicit parameter
+    val positiveNumbers = numbers.filter { n: Int -&gt; n &gt; 0 }
+    println(&quot;Positive numbers: $positiveNumbers&quot;)
+    
+    // Filter strings
+    val books = listOf(&quot;nature&quot;, &quot;biology&quot;, &quot;birds&quot;)
+    val booksStartingWithB = books.filter { it[0] == &#39;b&#39; }
+    println(&quot;Books starting with &#39;b&#39;: $booksStartingWithB&quot;)
+    
+    // Using &#39;it&#39; implicitly
+    val colors = listOf(&quot;red&quot;, &quot;red-orange&quot;, &quot;dark red&quot;, &quot;orange&quot;, &quot;bright orange&quot;)
+    val redColors = colors.filter { it.contains(&quot;red&quot;) }
+    println(&quot;Colors containing &#39;red&#39;: $redColors&quot;)
+}
+</pre><!----></div></div></div><h4 id="eager-vs-lazy-filters" tabindex="-1"><a class="header-anchor" href="#eager-vs-lazy-filters"><span>Eager vs Lazy Filters</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Eager vs Lazy</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    val instruments = listOf(&quot;viola&quot;, &quot;cello&quot;, &quot;violin&quot;, &quot;guitar&quot;, &quot;piano&quot;)
+    
+    // Eager filter (creates new list immediately)
+    val eager = instruments.filter { it[0] == &#39;v&#39; }
+    println(&quot;Eager filter: $eager&quot;)
+    
+    // Lazy filter using sequence
+    val lazy = instruments.asSequence().filter { it[0] == &#39;v&#39; }
+    println(&quot;Lazy filter sequence: $lazy&quot;)
+    
+    // Convert sequence back to list
+    val lazyToList = lazy.toList()
+    println(&quot;Lazy to list: $lazyToList&quot;)
+    
+    // Chaining operations with sequences
+    val result = instruments.asSequence()
+        .filter { it.length &gt; 5 }
+        .map { it.uppercase() }
+        .toList()
+    println(&quot;Chained operations: $result&quot;)
+}
+</pre><!----></div></div></div><h4 id="other-list-transformations" tabindex="-1"><a class="header-anchor" href="#other-list-transformations"><span>Other List Transformations</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">List Transformations</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>fun main() {
+    // Map transformation
+    val numbers = listOf(1, 2, 3, 4, 5)
+    val doubled = numbers.map { it * 2 }
+    println(&quot;Doubled: $doubled&quot;)
+    
+    val names = listOf(&quot;alice&quot;, &quot;bob&quot;, &quot;charlie&quot;)
+    val uppercased = names.map { it.uppercase() }
+    println(&quot;Uppercased: $uppercased&quot;)
+    
+    // Flatten nested collections
+    val numberSets = listOf(setOf(1, 2, 3), setOf(4, 5), setOf(1, 2))
+    val flattened = numberSets.flatten()
+    println(&quot;Flattened: $flattened&quot;)
+    
+    // Combining operations
+    val words = listOf(&quot;hello&quot;, &quot;world&quot;, &quot;kotlin&quot;, &quot;programming&quot;)
+    val result = words
+        .filter { it.length &gt; 5 }
+        .map { it.uppercase() }
+        .sorted()
+    println(&quot;Combined operations: $result&quot;)
+}
+</pre><!----></div></div></div><h2 id="lesson-3-classes-and-objects" tabindex="-1"><a class="header-anchor" href="#lesson-3-classes-and-objects"><span>Lesson 3: Classes and Objects</span></a></h2><h3 id="overview-2" tabindex="-1"><a class="header-anchor" href="#overview-2"><span>Overview</span></a></h3><p>In this lesson, you&#39;ll learn about:</p><ul><li><strong>Classes</strong>: Blueprints for objects with properties and methods</li><li><strong>Constructors</strong>: Creating and initializing objects</li><li><strong>Inheritance</strong>: Extending classes and implementing interfaces</li><li><strong>Extension functions</strong>: Adding functionality to existing classes</li><li><strong>Special classes</strong>: Data classes, enums, objects, and companion objects</li><li><strong>Code organization</strong>: Packages and visibility modifiers</li></ul><h3 id="classes" tabindex="-1"><a class="header-anchor" href="#classes"><span>Classes</span></a></h3><h4 id="basic-class-definition" tabindex="-1"><a class="header-anchor" href="#basic-class-definition"><span>Basic Class Definition</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Basic Classes</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Simple class
+class House {
+    val color: String = &quot;white&quot;
+    val numberOfWindows: Int = 2
+    val isForSale: Boolean = false
+    
+    fun updateColor(newColor: String) {
+        println(&quot;Updating color to $newColor&quot;)
+    }
+}
+
+// Class with constructor parameters
+class Person(val name: String, var age: Int)
+
+// Class with behavior
+class Circle(val radius: Double) {
+    fun area(): Double {
+        return Math.PI * radius * radius
+    }
+    
+    fun circumference(): Double {
+        return 2 * Math.PI * radius
+    }
+}
+
+fun main() {
+    val myHouse = House()
+    println(&quot;House color: ${myHouse.color}&quot;)
+    myHouse.updateColor(&quot;blue&quot;)
+    
+    val person = Person(&quot;Alice&quot;, 30)
+    println(&quot;Person: ${person.name}, age ${person.age}&quot;)
+    person.age = 31
+    println(&quot;Updated age: ${person.age}&quot;)
+    
+    val circle = Circle(5.0)
+    println(&quot;Circle area: ${circle.area()}&quot;)
+    println(&quot;Circle circumference: ${circle.circumference()}&quot;)
+}
+</pre><!----></div></div></div><h4 id="constructors-and-initialization" tabindex="-1"><a class="header-anchor" href="#constructors-and-initialization"><span>Constructors and Initialization</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Constructors</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Class with default parameters
+class Box(val length: Int, val width: Int = 20, val height: Int = 40) {
+    init {
+        println(&quot;Creating box: ${length}x${width}x${height}&quot;)
+    }
+    
+    fun volume() = length * width * height
+}
+
+// Class with multiple constructors
+class Rectangle(val width: Double, val height: Double) {
+    constructor(side: Double) : this(side, side) {
+        println(&quot;Creating square with side $side&quot;)
+    }
+    
+    constructor(width: Int, height: Int) : this(width.toDouble(), height.toDouble()) {
+        println(&quot;Creating rectangle from integers&quot;)
+    }
+    
+    fun area() = width * height
+    fun perimeter() = 2 * (width + height)
+}
+
+fun main() {
+    val box1 = Box(100, 20, 40)
+    val box2 = Box(length = 100)
+    println(&quot;Box1 volume: ${box1.volume()}&quot;)
+    println(&quot;Box2 volume: ${box2.volume()}&quot;)
+    
+    val rectangle1 = Rectangle(10.0, 5.0)
+    val square = Rectangle(8.0)
+    val rectangle2 = Rectangle(12, 6)
+    
+    println(&quot;Rectangle area: ${rectangle1.area()}&quot;)
+    println(&quot;Square area: ${square.area()}&quot;)
+    println(&quot;Rectangle2 perimeter: ${rectangle2.perimeter()}&quot;)
+}
+</pre><!----></div></div></div><h4 id="properties-with-custom-getters-and-setters" tabindex="-1"><a class="header-anchor" href="#properties-with-custom-getters-and-setters"><span>Properties with Custom Getters and Setters</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Custom Properties</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>class Person(var firstName: String, var lastName: String) {
+    // Custom getter
+    val fullName: String
+        get() = &quot;$firstName $lastName&quot;
+    
+    // Property with custom getter and setter
+    var displayName: String = &quot;&quot;
+        get() = if (field.isEmpty()) fullName else field
+        set(value) {
+            field = value.trim()
+        }
+    
+    // Computed property
+    val initials: String
+        get() = &quot;${firstName.first()}${lastName.first()}&quot;
+}
+
+class Temperature {
+    var celsius: Double = 0.0
+        set(value) {
+            field = value
+            println(&quot;Temperature set to $value°C&quot;)
+        }
+    
+    val fahrenheit: Double
+        get() = celsius * 9/5 + 32
+    
+    val kelvin: Double
+        get() = celsius + 273.15
+}
+
+fun main() {
+    val person = Person(&quot;John&quot;, &quot;Doe&quot;)
+    println(&quot;Full name: ${person.fullName}&quot;)
+    println(&quot;Display name: ${person.displayName}&quot;)
+    println(&quot;Initials: ${person.initials}&quot;)
+    
+    person.displayName = &quot;Johnny&quot;
+    println(&quot;Custom display name: ${person.displayName}&quot;)
+    
+    val temp = Temperature()
+    temp.celsius = 25.0
+    println(&quot;${temp.celsius}°C = ${temp.fahrenheit}°F = ${temp.kelvin}K&quot;)
+}
+</pre><!----></div></div></div><h3 id="inheritance" tabindex="-1"><a class="header-anchor" href="#inheritance"><span>Inheritance</span></a></h3><h4 id="interfaces" tabindex="-1"><a class="header-anchor" href="#interfaces"><span>Interfaces</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Interfaces</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>interface Shape {
+    fun computeArea(): Double
+    fun computePerimeter(): Double
+    
+    // Interface can have default implementation
+    fun describe(): String = &quot;This is a shape with area ${computeArea()}&quot;
+}
+
+interface Drawable {
+    fun draw(): String
+}
+
+class Circle(val radius: Double) : Shape, Drawable {
+    override fun computeArea() = Math.PI * radius * radius
+    override fun computePerimeter() = 2 * Math.PI * radius
+    override fun draw() = &quot;Drawing a circle with radius $radius&quot;
+}
+
+class Rectangle(val width: Double, val height: Double) : Shape, Drawable {
+    override fun computeArea() = width * height
+    override fun computePerimeter() = 2 * (width + height)
+    override fun draw() = &quot;Drawing a rectangle ${width}x${height}&quot;
+}
+
+fun main() {
+    val circle = Circle(3.0)
+    val rectangle = Rectangle(4.0, 5.0)
+    
+    println(&quot;Circle: ${circle.describe()}&quot;)
+    println(&quot;Rectangle: ${rectangle.describe()}&quot;)
+    println(circle.draw())
+    println(rectangle.draw())
+    
+    val shapes: List&lt;Shape&gt; = listOf(circle, rectangle)
+    shapes.forEach { shape -&gt;
+        println(&quot;Area: ${shape.computeArea()}, Perimeter: ${shape.computePerimeter()}&quot;)
+    }
+}
+</pre><!----></div></div></div><h4 id="class-inheritance" tabindex="-1"><a class="header-anchor" href="#class-inheritance"><span>Class Inheritance</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Class Inheritance</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Base class must be marked as &#39;open&#39;
+open class Vehicle(val brand: String, val model: String) {
+    open fun start() {
+        println(&quot;$brand $model is starting...&quot;)
+    }
+    
+    open fun stop() {
+        println(&quot;$brand $model is stopping...&quot;)
+    }
+    
+    fun info() = &quot;$brand $model&quot;
+}
+
+class Car(brand: String, model: String, val doors: Int) : Vehicle(brand, model) {
+    override fun start() {
+        println(&quot;Car $brand $model with $doors doors is starting with ignition...&quot;)
+    }
+}
+
+class Motorcycle(brand: String, model: String, val engineSize: Int) : Vehicle(brand, model) {
+    override fun start() {
+        println(&quot;Motorcycle $brand $model with ${engineSize}cc engine is starting...&quot;)
+    }
+    
+    fun wheelie() {
+        println(&quot;$brand $model is doing a wheelie!&quot;)
+    }
+}
+
+fun main() {
+    val car = Car(&quot;Toyota&quot;, &quot;Camry&quot;, 4)
+    val motorcycle = Motorcycle(&quot;Honda&quot;, &quot;CBR&quot;, 600)
+    
+    car.start()
+    car.stop()
+    println(&quot;Car info: ${car.info()}&quot;)
+    
+    motorcycle.start()
+    motorcycle.wheelie()
+    motorcycle.stop()
+    
+    // Polymorphism
+    val vehicles: List&lt;Vehicle&gt; = listOf(car, motorcycle)
+    vehicles.forEach { it.start() }
+}
+</pre><!----></div></div></div><h4 id="abstract-classes" tabindex="-1"><a class="header-anchor" href="#abstract-classes"><span>Abstract Classes</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Abstract Classes</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>abstract class Animal(val name: String) {
+    abstract val species: String
+    abstract fun makeSound(): String
+    
+    // Concrete method
+    fun introduce() {
+        println(&quot;Hi, I&#39;m $name, a $species&quot;)
+        println(&quot;I say: ${makeSound()}&quot;)
+    }
+    
+    open fun sleep() {
+        println(&quot;$name is sleeping...&quot;)
+    }
+}
+
+class Dog(name: String) : Animal(name) {
+    override val species = &quot;Canis lupus&quot;
+    override fun makeSound() = &quot;Woof!&quot;
+    
+    fun fetch() {
+        println(&quot;$name is fetching the ball!&quot;)
+    }
+}
+
+class Cat(name: String) : Animal(name) {
+    override val species = &quot;Felis catus&quot;
+    override fun makeSound() = &quot;Meow!&quot;
+    
+    override fun sleep() {
+        println(&quot;$name is sleeping for 16 hours...&quot;)
+    }
+}
+
+fun main() {
+    val dog = Dog(&quot;Buddy&quot;)
+    val cat = Cat(&quot;Whiskers&quot;)
+    
+    dog.introduce()
+    dog.fetch()
+    dog.sleep()
+    
+    println()
+    
+    cat.introduce()
+    cat.sleep()
+    
+    // Using as Animal type
+    val animals: List&lt;Animal&gt; = listOf(dog, cat)
+    animals.forEach { animal -&gt;
+        println(&quot;${animal.name} says ${animal.makeSound()}&quot;)
+    }
+}
+</pre><!----></div></div></div><h3 id="extension-functions" tabindex="-1"><a class="header-anchor" href="#extension-functions"><span>Extension Functions</span></a></h3><h4 id="adding-functions-to-existing-classes" tabindex="-1"><a class="header-anchor" href="#adding-functions-to-existing-classes"><span>Adding Functions to Existing Classes</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Extension Functions</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Extension function for Int
+fun Int.isOdd(): Boolean = this % 2 == 1
+fun Int.isEven(): Boolean = this % 2 == 0
+
+// Extension function for String
+fun String.removeWhitespace(): String = this.replace(&quot;\\s&quot;.toRegex(), &quot;&quot;)
+fun String.wordCount(): Int = this.trim().split(&quot;\\s+&quot;.toRegex()).size
+
+// Extension function for List
+fun &lt;T&gt; List&lt;T&gt;.secondOrNull(): T? = if (this.size &gt;= 2) this[1] else null
+
+// Extension property
+val String.lastChar: Char?
+    get() = if (isEmpty()) null else this[length - 1]
+
+fun main() {
+    // Using extension functions on Int
+    println(&quot;Is 5 odd? ${5.isOdd()}&quot;)
+    println(&quot;Is 4 even? ${4.isEven()}&quot;)
+    
+    // Using extension functions on String
+    val text = &quot;Hello World Kotlin&quot;
+    println(&quot;Original: &#39;$text&#39;&quot;)
+    println(&quot;No whitespace: &#39;${text.removeWhitespace()}&#39;&quot;)
+    println(&quot;Word count: ${text.wordCount()}&quot;)
+    println(&quot;Last character: ${text.lastChar}&quot;)
+    
+    // Using extension function on List
+    val numbers = listOf(1, 2, 3, 4, 5)
+    val emptyList = emptyList&lt;Int&gt;()
+    
+    println(&quot;Second element: ${numbers.secondOrNull()}&quot;)
+    println(&quot;Second element in empty list: ${emptyList.secondOrNull()}&quot;)
+}
+</pre><!----></div></div></div><h3 id="special-classes" tabindex="-1"><a class="header-anchor" href="#special-classes"><span>Special Classes</span></a></h3><h4 id="data-classes" tabindex="-1"><a class="header-anchor" href="#data-classes"><span>Data Classes</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Data Classes</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Data class automatically generates toString, equals, hashCode, copy
+data class Player(val name: String, val score: Int, val level: Int = 1)
+
+data class Point(val x: Int, val y: Int)
+
+fun main() {
+    val player1 = Player(&quot;Alice&quot;, 1000, 5)
+    val player2 = Player(&quot;Bob&quot;, 850)
+    val player3 = player1.copy(score = 1200)
+    
+    println(&quot;Player 1: $player1&quot;)
+    println(&quot;Player 2: $player2&quot;)
+    println(&quot;Player 3: $player3&quot;)
+    
+    // Destructuring
+    val (name, score, level) = player1
+    println(&quot;Destructured: $name has $score points at level $level&quot;)
+    
+    // Using Pair and Triple
+    val bookAuthor = Pair(&quot;1984&quot;, &quot;George Orwell&quot;)
+    val bookInfo = Triple(&quot;1984&quot;, &quot;George Orwell&quot;, 1949)
+    
+    println(&quot;Book: $bookAuthor&quot;)
+    println(&quot;Book with year: $bookInfo&quot;)
+    
+    // Using &#39;to&#39; infix function
+    val bookAuthor2 = &quot;Animal Farm&quot; to &quot;George Orwell&quot;
+    println(&quot;Book 2: $bookAuthor2&quot;)
+    
+    // Working with maps
+    val authors = mapOf(
+        &quot;1984&quot; to &quot;George Orwell&quot;,
+        &quot;Brave New World&quot; to &quot;Aldous Huxley&quot;,
+        &quot;Fahrenheit 451&quot; to &quot;Ray Bradbury&quot;
+    )
+    println(&quot;Authors: $authors&quot;)
+}
+</pre><!----></div></div></div><h4 id="enum-classes" tabindex="-1"><a class="header-anchor" href="#enum-classes"><span>Enum Classes</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Enum Classes</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>enum class Color(val r: Int, val g: Int, val b: Int) {
+    RED(255, 0, 0),
+    GREEN(0, 255, 0),
+    BLUE(0, 0, 255),
+    WHITE(255, 255, 255),
+    BLACK(0, 0, 0);
+    
+    fun toHex(): String = &quot;#%02X%02X%02X&quot;.format(r, g, b)
+}
+
+enum class Direction {
+    NORTH, SOUTH, EAST, WEST;
+    
+    fun opposite(): Direction = when (this) {
+        NORTH -&gt; SOUTH
+        SOUTH -&gt; NORTH
+        EAST -&gt; WEST
+        WEST -&gt; EAST
+    }
+}
+
+enum class Planet(val mass: Double, val radius: Double) {
+    MERCURY(3.303e+23, 2.4397e6),
+    VENUS(4.869e+24, 6.0518e6),
+    EARTH(5.976e+24, 6.37814e6),
+    MARS(6.421e+23, 3.3972e6);
+    
+    fun surfaceGravity(): Double = 6.67300E-11 * mass / (radius * radius)
+}
+
+fun main() {
+    // Using Color enum
+    println(&quot;Red RGB: ${Color.RED.r}, ${Color.RED.g}, ${Color.RED.b}&quot;)
+    println(&quot;Blue hex: ${Color.BLUE.toHex()}&quot;)
+    
+    // Using Direction enum
+    println(&quot;North opposite: ${Direction.NORTH.opposite()}&quot;)
+    
+    // Using Planet enum
+    println(&quot;Earth surface gravity: ${Planet.EARTH.surfaceGravity()}&quot;)
+    
+    // Iterating over enum values
+    println(&quot;All colors:&quot;)
+    Color.values().forEach { color -&gt;
+        println(&quot;${color.name}: ${color.toHex()}&quot;)
+    }
+    
+    // Using enum in when expression
+    val direction = Direction.NORTH
+    val movement = when (direction) {
+        Direction.NORTH -&gt; &quot;Moving up&quot;
+        Direction.SOUTH -&gt; &quot;Moving down&quot;
+        Direction.EAST -&gt; &quot;Moving right&quot;
+        Direction.WEST -&gt; &quot;Moving left&quot;
+    }
+    println(&quot;Direction: $movement&quot;)
+}
+</pre><!----></div></div></div><h4 id="object-and-companion-object" tabindex="-1"><a class="header-anchor" href="#object-and-companion-object"><span>Object and Companion Object</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Objects and Companions</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Singleton object
+object Calculator {
+    fun add(a: Int, b: Int): Int = a + b
+    fun subtract(a: Int, b: Int): Int = a - b
+    fun multiply(a: Int, b: Int): Int = a * b
+    fun divide(a: Int, b: Int): Double = a.toDouble() / b
+}
+
+// Object expression (anonymous object)
+object DatabaseConfig {
+    const val URL = &quot;jdbc:mysql://localhost:3306/mydb&quot;
+    const val USERNAME = &quot;admin&quot;
+    const val PASSWORD = &quot;secret&quot;
+    
+    fun getConnectionString(): String = &quot;$URL?user=$USERNAME&quot;
+}
+
+// Class with companion object
+class MathUtils {
+    companion object {
+        const val PI = 3.14159
+        const val E = 2.71828
+        
+        fun circleArea(radius: Double): Double = PI * radius * radius
+        fun factorial(n: Int): Long = if (n &lt;= 1) 1 else n * factorial(n - 1)
+    }
+    
+    fun instanceMethod() {
+        println(&quot;This is an instance method&quot;)
+    }
+}
+
+// Named companion object
+class PhysicsSystem {
+    companion object WorldConstants {
+        const val GRAVITY = 9.8
+        const val UNIT = &quot;metric&quot;
+        
+        fun computeForce(mass: Double, acceleration: Double): Double {
+            return mass * acceleration
+        }
+    }
+}
+
+fun main() {
+    // Using singleton object
+    println(&quot;Calculator: 5 + 3 = ${Calculator.add(5, 3)}&quot;)
+    println(&quot;Calculator: 10 / 3 = ${Calculator.divide(10, 3)}&quot;)
+    
+    // Using object configuration
+    println(&quot;Database URL: ${DatabaseConfig.URL}&quot;)
+    println(&quot;Connection string: ${DatabaseConfig.getConnectionString()}&quot;)
+    
+    // Using companion object
+    println(&quot;PI: ${MathUtils.PI}&quot;)
+    println(&quot;Circle area (r=5): ${MathUtils.circleArea(5.0)}&quot;)
+    println(&quot;5! = ${MathUtils.factorial(5)}&quot;)
+    
+    // Still can create instances
+    val mathUtils = MathUtils()
+    mathUtils.instanceMethod()
+    
+    // Using named companion object
+    println(&quot;Gravity: ${PhysicsSystem.WorldConstants.GRAVITY}&quot;)
+    println(&quot;Force: ${PhysicsSystem.WorldConstants.computeForce(10.0, 9.8)}&quot;)
+}
+</pre><!----></div></div></div><h3 id="code-organization" tabindex="-1"><a class="header-anchor" href="#code-organization"><span>Code Organization</span></a></h3><h4 id="packages-and-visibility" tabindex="-1"><a class="header-anchor" href="#packages-and-visibility"><span>Packages and Visibility</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Visibility Modifiers</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>// Public by default
+class PublicClass {
+    val publicProperty = &quot;I&#39;m public&quot;
+    
+    private val privateProperty = &quot;I&#39;m private&quot;
+    
+    protected val protectedProperty = &quot;I&#39;m protected&quot;
+    
+    internal val internalProperty = &quot;I&#39;m internal&quot;
+    
+    fun publicFunction() = &quot;Public function&quot;
+    
+    private fun privateFunction() = &quot;Private function&quot;
+    
+    protected fun protectedFunction() = &quot;Protected function&quot;
+    
+    internal fun internalFunction() = &quot;Internal function&quot;
+}
+
+open class BaseClass {
+    protected val protectedValue = &quot;Accessible to subclasses&quot;
+    private val privateValue = &quot;Not accessible to subclasses&quot;
+    
+    protected fun protectedMethod() {
+        println(&quot;Protected method called&quot;)
+    }
+}
+
+class DerivedClass : BaseClass() {
+    fun accessProtected() {
+        println(protectedValue) // OK
+        protectedMethod() // OK
+        // println(privateValue) // Compilation error
+    }
+}
+
+// Top-level private function
+private fun topLevelPrivate() = &quot;Top level private&quot;
+
+// Top-level internal function
+internal fun topLevelInternal() = &quot;Top level internal&quot;
+
+fun main() {
+    val obj = PublicClass()
+    println(obj.publicProperty)
+    // println(obj.privateProperty) // Compilation error
+    println(obj.internalProperty) // OK in same module
+    
+    val derived = DerivedClass()
+    derived.accessProtected()
+    
+    println(topLevelInternal())
+    println(topLevelPrivate())
+}
+</pre><!----></div></div></div><h2 id="lesson-4-concurrent-programming" tabindex="-1"><a class="header-anchor" href="#lesson-4-concurrent-programming"><span>Lesson 4: Concurrent Programming</span></a></h2><p><strong>Kotlin coroutines are a powerful tool for managing background tasks, making asynchronous programming easier and more efficient</strong>. This comprehensive guide covers all aspects of concurrent programming in Kotlin.</p><h3 id="introduction-to-coroutines" tabindex="-1"><a class="header-anchor" href="#introduction-to-coroutines"><span>Introduction to Coroutines</span></a></h3><h4 id="what-are-coroutines" tabindex="-1"><a class="header-anchor" href="#what-are-coroutines"><span>What are Coroutines?</span></a></h4><p><strong>Coroutines in Kotlin are a powerful tool for handling asynchronous programming, enabling developers to write efficient, non-blocking code</strong>. They are lightweight threads that can be suspended and resumed at specific points, making your code more readable and maintainable.</p><h4 id="key-benefits" tabindex="-1"><a class="header-anchor" href="#key-benefits"><span>Key Benefits</span></a></h4><ul><li><strong>Lightweight</strong>: Much lighter than threads in terms of memory overhead</li><li><strong>Non-blocking</strong>: Don&#39;t block the calling thread</li><li><strong>Sequential Code</strong>: Write asynchronous code that looks synchronous</li><li><strong>Built-in cancellation support</strong>: <strong>Cancellation is propagated automatically through the running coroutine hierarchy</strong></li><li><strong>Fewer memory leaks</strong>: <strong>Use structured concurrency to run operations within a scope</strong></li></ul><h3 id="coroutine-builders" tabindex="-1"><a class="header-anchor" href="#coroutine-builders"><span>Coroutine Builders</span></a></h3><h4 id="launch-fire-and-forget" tabindex="-1"><a class="header-anchor" href="#launch-fire-and-forget"><span>Launch - Fire and Forget</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Launch Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    // Start a coroutine with launch
+    launch {
+        delay(1000)
+        println(&quot;Coroutine says: Hello, World!&quot;)
+    }
+    println(&quot;Main function continues...&quot;)
+}
+</pre><!----></div></div></div><p><strong>Characteristics:</strong></p><ul><li>Returns a <code>Job</code> object</li><li>Used for tasks that don&#39;t return a result</li><li>Fire-and-forget operations</li></ul><h4 id="async-result-oriented" tabindex="-1"><a class="header-anchor" href="#async-result-oriented"><span>Async - Result-Oriented</span></a></h4><p><strong>Launches a coroutine that returns a result asynchronously. Returns a <code>Deferred&lt;T&gt;</code>, which is like a Future in Java</strong> :</p><div class="kotlin-playground-wrapper"><div class="header">Async Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+suspend fun performTask(task: String): String {
+    delay(1000)
+    return &quot;Task $task completed&quot;
+}
+
+fun main() = runBlocking {
+    val task1 = async { performTask(&quot;A&quot;) }
+    val task2 = async { performTask(&quot;B&quot;) }
+    
+    println(task1.await())
+    println(task2.await())
+}
+</pre><!----></div></div></div><h4 id="runblocking-bridging-blocking-and-non-blocking" tabindex="-1"><a class="header-anchor" href="#runblocking-bridging-blocking-and-non-blocking"><span>RunBlocking - Bridging Blocking and Non-blocking</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">RunBlocking Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    launch {
+        delay(500)
+        println(&quot;Task 1 completed&quot;)
+    }
+    launch {
+        delay(500)
+        println(&quot;Task 2 completed&quot;)
+    }
+    println(&quot;Waiting for tasks to complete...&quot;)
+}
+</pre><!----></div></div></div><h3 id="dispatchers-thread-management" tabindex="-1"><a class="header-anchor" href="#dispatchers-thread-management"><span>Dispatchers - Thread Management</span></a></h3><p><strong>Dispatchers control where and how your coroutines run, like assigning them to specific threads or pools</strong> .</p><h4 id="types-of-dispatchers" tabindex="-1"><a class="header-anchor" href="#types-of-dispatchers"><span>Types of Dispatchers</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Dispatchers Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    // Default dispatcher - CPU-intensive work
+    launch(Dispatchers.Default) {
+        // Heavy computation
+        println(&quot;CPU work on ${Thread.currentThread().name}&quot;)
+    }
+    
+    // IO dispatcher - Network/File operations
+    launch(Dispatchers.IO) {
+        // Network request or file operation
+        println(&quot;IO work on ${Thread.currentThread().name}&quot;)
+    }
+    
+    // Unconfined dispatcher - Not recommended for general use
+    launch(Dispatchers.Unconfined) {
+        println(&quot;Unconfined work&quot;)
+    }
+    
+    delay(100) // Wait for all tasks to complete
+}
+</pre><!----></div></div></div><h4 id="withcontext-switching-context" tabindex="-1"><a class="header-anchor" href="#withcontext-switching-context"><span>WithContext - Switching Context</span></a></h4><p><strong>withContext() calls the given code with the specified coroutine context, is suspended until it completes, and returns the result</strong> :</p><div class="kotlin-playground-wrapper"><div class="header">WithContext Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+suspend fun fetchFromNetwork(): String {
+    delay(1000) // Simulate network delay
+    return &quot;Data from network&quot;
+}
+
+suspend fun updateUI(data: String) {
+    println(&quot;UI updated with: $data&quot;)
+}
+
+suspend fun fetchDataAndSave() {
+    val data = withContext(Dispatchers.IO) {
+        // Network call
+        fetchFromNetwork()
+    }
+    
+    withContext(Dispatchers.Default) {
+        // Update UI (using Default instead of Main for playground)
+        updateUI(data)
+    }
+}
+
+fun main() = runBlocking {
+    fetchDataAndSave()
+}
+</pre><!----></div></div></div><h3 id="structured-concurrency" tabindex="-1"><a class="header-anchor" href="#structured-concurrency"><span>Structured Concurrency</span></a></h3><p><strong>The CoroutineScope is the foundation of structured concurrency. It serves as a container for coroutines, defining the scope within which coroutines are launched</strong> .</p><h4 id="coroutinescope" tabindex="-1"><a class="header-anchor" href="#coroutinescope"><span>CoroutineScope</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">CoroutineScope Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    // Creating a CoroutineScope
+    val mainScope = CoroutineScope(Dispatchers.Default)
+    
+    // Launching a coroutine within the scope
+    mainScope.launch {
+        delay(1000)
+        println(&quot;Coroutine executed on the Default thread&quot;)
+    }
+    
+    // Wait for coroutine to complete
+    delay(1500)
+    
+    // Cancelling the entire scope cancels all launched coroutines
+    mainScope.cancel()
+    println(&quot;Scope cancelled&quot;)
+}
+</pre><!----></div></div></div><h4 id="structured-hierarchy" tabindex="-1"><a class="header-anchor" href="#structured-hierarchy"><span>Structured Hierarchy</span></a></h4><p><strong>With structured concurrency, you can specify the major context elements (like dispatcher) once, when creating the top-level coroutine. All the nested coroutines then inherit the context and modify it only if needed</strong> :</p><div class="kotlin-playground-wrapper"><div class="header">Structured Hierarchy Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+suspend fun loadData1(): String {
+    delay(1000)
+    return &quot;Data from source 1&quot;
+}
+
+suspend fun loadData2(): String {
+    delay(1500)
+    return &quot;Data from source 2&quot;
+}
+
+suspend fun loadData3(): String {
+    delay(500)
+    return &quot;Data from source 3&quot;
+}
+
+suspend fun loadDataConcurrently(): List&lt;String&gt; = coroutineScope {
+    val deferred1 = async { loadData1() }
+    val deferred2 = async { loadData2() }
+    val deferred3 = async { loadData3() }
+    
+    listOf(deferred1.await(), deferred2.await(), deferred3.await())
+}
+
+fun main() = runBlocking {
+    val results = loadDataConcurrently()
+    println(&quot;Results: $results&quot;)
+}
+</pre><!----></div></div></div><h4 id="supervision" tabindex="-1"><a class="header-anchor" href="#supervision"><span>Supervision</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Supervision Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    println(&quot;Starting supervised scope...&quot;)
+    
+    supervisorScope {
+        val child1 = launch {
+            try {
+                delay(1000)
+                throw Exception(&quot;Child 1 failed&quot;)
+            } catch (e: Exception) {
+                println(&quot;Child 1 failed: ${e.message}&quot;)
+            }
+        }
+        
+        val child2 = launch {
+            delay(2000)
+            println(&quot;Child 2 completed successfully&quot;)
+        }
+        
+        // Wait for both children to complete
+        child1.join()
+        child2.join()
+    }
+    
+    println(&quot;All children completed&quot;)
+}
+</pre><!----></div></div></div><h3 id="channels-communication-between-coroutines" tabindex="-1"><a class="header-anchor" href="#channels-communication-between-coroutines"><span>Channels - Communication Between Coroutines</span></a></h3><p><strong>Channels provide a way to share information between different coroutines</strong> .</p><h4 id="basic-channel-usage" tabindex="-1"><a class="header-anchor" href="#basic-channel-usage"><span>Basic Channel Usage</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Basic Channel Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+
+fun main() = runBlocking {
+    val channel = Channel&lt;String&gt;()
+    
+    // Producer
+    launch {
+        channel.send(&quot;Hello&quot;)
+        channel.send(&quot;World&quot;)
+        channel.close()
+    }
+    
+    // Consumer
+    launch {
+        for (message in channel) {
+            println(&quot;Received: $message&quot;)
+        }
+    }
+    
+    delay(100) // Wait for all tasks to complete
+}
+</pre><!----></div></div></div><h4 id="channel-types" tabindex="-1"><a class="header-anchor" href="#channel-types"><span>Channel Types</span></a></h4><p><strong>By default, a &quot;Rendezvous&quot; channel is created</strong> :</p><div class="kotlin-playground-wrapper"><div class="header">Channel Types Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+
+fun main() {
+    runBlocking {
+        // Different types of channels
+        val rendezvousChannel = Channel&lt;String&gt;()
+        val bufferedChannel = Channel&lt;String&gt;(10)
+        val conflatedChannel = Channel&lt;String&gt;(Channel.CONFLATED)
+        val unlimitedChannel = Channel&lt;String&gt;(Channel.UNLIMITED)
+        
+        println(&quot;Created different channel types:&quot;)
+        println(&quot;- Rendezvous channel (capacity 0)&quot;)
+        println(&quot;- Buffered channel (capacity 10)&quot;)
+        println(&quot;- Conflated channel (latest value only)&quot;)
+        println(&quot;- Unlimited channel (unlimited capacity)&quot;)
+        
+        // Demonstrating buffered channel
+        launch {
+            repeat(5) { i -&gt;
+                bufferedChannel.send(&quot;Message $i&quot;)
+                println(&quot;Sent: Message $i&quot;)
+            }
+            bufferedChannel.close()
+        }
+        
+        launch {
+            for (message in bufferedChannel) {
+                println(&quot;Received: $message&quot;)
+                delay(100)
+            }
+        }
+        
+        delay(600) // Wait for all operations to complete
+    }
+}
+</pre><!----></div></div></div><h4 id="producer-pattern" tabindex="-1"><a class="header-anchor" href="#producer-pattern"><span>Producer Pattern</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Producer Pattern Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+
+fun CoroutineScope.produceNumbers() = produce&lt;Int&gt; {
+    var x = 1
+    while (true) {
+        send(x++)
+        delay(100)
+    }
+}
+
+fun main() {
+    runBlocking {
+        val numbers = produceNumbers()
+        
+        repeat(5) {
+            println(numbers.receive())
+        }
+        
+        numbers.cancel()
+        println(&quot;Producer cancelled&quot;)
+    }
+}
+</pre><!----></div></div></div><h3 id="flow-reactive-streams" tabindex="-1"><a class="header-anchor" href="#flow-reactive-streams"><span>Flow - Reactive Streams</span></a></h3><p><strong>Think of Flows as streams of data flowing through your server-side code, like the continuous stream of orders coming from the tables</strong> .</p><h4 id="basic-flow" tabindex="-1"><a class="header-anchor" href="#basic-flow"><span>Basic Flow</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Basic Flow Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun simpleFlow(): Flow&lt;Int&gt; = flow {
+    for (i in 1..3) {
+        delay(100)
+        emit(i)
+    }
+}
+
+fun main() = runBlocking {
+    simpleFlow().collect { value -&gt;
+        println(&quot;Received: $value&quot;)
+    }
+}
+</pre><!----></div></div></div><h4 id="flow-operators" tabindex="-1"><a class="header-anchor" href="#flow-operators"><span>Flow Operators</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Flow Operators Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun main() = runBlocking {
+    flowOf(1, 2, 3, 4, 5)
+        .filter { it % 2 == 0 }
+        .map { it * it }
+        .collect { println(&quot;Result: $it&quot;) }
+}
+</pre><!----></div></div></div><h4 id="cold-vs-hot-flows" tabindex="-1"><a class="header-anchor" href="#cold-vs-hot-flows"><span>Cold vs Hot Flows</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Cold vs Hot Flows Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+// Cold Flow - starts when collected
+fun coldFlow() = flow {
+    println(&quot;Cold flow started&quot;)
+    emit(1)
+    emit(2)
+}
+
+fun main() {
+    runBlocking {
+        println(&quot;=== Cold Flow Demo ===&quot;)
+        coldFlow().collect { println(&quot;Cold flow value: $it&quot;) }
+        
+        println(&quot;\n=== Hot Flow Demo ===&quot;)
+        val sharedFlow = MutableSharedFlow&lt;Int&gt;()
+        
+        val job1 = launch {
+            sharedFlow.take(2).collect { println(&quot;Collector 1: $it&quot;) }
+        }
+        
+        val job2 = launch {
+            sharedFlow.take(2).collect { println(&quot;Collector 2: $it&quot;) }
+        }
+        
+        delay(100) // Wait for collectors to be set up
+        
+        sharedFlow.emit(1)
+        sharedFlow.emit(2)
+        
+        // Wait for both collectors to complete
+        job1.join()
+        job2.join()
+        
+        println(&quot;Demo completed!&quot;)
+    }
+}
+</pre><!----></div></div></div><h3 id="exception-handling" tabindex="-1"><a class="header-anchor" href="#exception-handling"><span>Exception Handling</span></a></h3><p><strong>Structured concurrency enhances error handling by propagating exceptions up to the nearest exception handler in the coroutine hierarchy</strong> .</p><h4 id="try-catch-in-coroutines" tabindex="-1"><a class="header-anchor" href="#try-catch-in-coroutines"><span>Try-Catch in Coroutines</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Try-Catch Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+suspend fun divideNumbers(a: Int, b: Int): Int {
+    delay(1000)
+    return a / b
+}
+
+fun main() = runBlocking {
+    try {
+        val result = coroutineScope {
+            async { divideNumbers(10, 0) }.await()
+        }
+        println(&quot;Result: $result&quot;)
+    } catch (e: Exception) {
+        println(&quot;Exception caught: $e&quot;)
+    }
+}
+</pre><!----></div></div></div><h4 id="coroutineexceptionhandler" tabindex="-1"><a class="header-anchor" href="#coroutineexceptionhandler"><span>CoroutineExceptionHandler</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Exception Handler Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    val handler = CoroutineExceptionHandler { _, exception -&gt;
+        println(&quot;Caught exception: $exception&quot;)
+    }
+    
+    val scope = CoroutineScope(Dispatchers.Default + handler)
+    
+    scope.launch {
+        throw IllegalArgumentException(&quot;Something went wrong&quot;)
+    }
+    
+    delay(1000)
+}
+</pre><!----></div></div></div><h3 id="cancellation-and-timeout" tabindex="-1"><a class="header-anchor" href="#cancellation-and-timeout"><span>Cancellation and Timeout</span></a></h3><h4 id="cooperative-cancellation" tabindex="-1"><a class="header-anchor" href="#cooperative-cancellation"><span>Cooperative Cancellation</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Cancellation Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    val job = launch {
+        try {
+            repeat(1000) { i -&gt;
+                println(&quot;Working $i...&quot;)
+                delay(500)
+            }
+        } catch (e: CancellationException) {
+            println(&quot;Job was cancelled&quot;)
+            throw e
+        } finally {
+            println(&quot;Cleanup work&quot;)
+        }
+    }
+    
+    delay(1300)
+    println(&quot;Cancelling job...&quot;)
+    job.cancelAndJoin()
+}
+</pre><!----></div></div></div><h4 id="timeout" tabindex="-1"><a class="header-anchor" href="#timeout"><span>Timeout</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Timeout Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    try {
+        withTimeout(1300) {
+            repeat(1000) { i -&gt;
+                println(&quot;Working $i...&quot;)
+                delay(500)
+            }
+        }
+    } catch (e: TimeoutCancellationException) {
+        println(&quot;Timed out!&quot;)
+    }
+}
+</pre><!----></div></div></div><h3 id="thread-safety-and-synchronization" tabindex="-1"><a class="header-anchor" href="#thread-safety-and-synchronization"><span>Thread Safety and Synchronization</span></a></h3><p><strong>One approach to addressing shared mutable state is by using thread-safe data structures provided by the Kotlin standard library, such as Atomic types</strong> .</p><h4 id="atomic-operations" tabindex="-1"><a class="header-anchor" href="#atomic-operations"><span>Atomic Operations</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Atomic Operations Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+import java.util.concurrent.atomic.AtomicInteger
+
+fun main() = runBlocking {
+    val counter = AtomicInteger(0)
+    
+    val jobs = List(100) {
+        GlobalScope.launch {
+            repeat(1000) {
+                counter.incrementAndGet()
+            }
+        }
+    }
+    
+    jobs.forEach { it.join() }
+    println(&quot;Final counter value: ${counter.get()}&quot;)
+}
+</pre><!----></div></div></div><h4 id="mutex" tabindex="-1"><a class="header-anchor" href="#mutex"><span>Mutex</span></a></h4><div class="kotlin-playground-wrapper"><div class="header">Mutex Example</div><div class="kotlin-playground-container"><div class="kotlin-playground" theme="default"><pre>import kotlinx.coroutines.*
+import kotlinx.coroutines.sync.*
+
+fun main() = runBlocking {
+    val mutex = Mutex()
+    var counter = 0
+    
+    val jobs = List(100) {
+        launch {
+            repeat(1000) {
+                mutex.withLock {
+                    counter++
+                }
+            }
+        }
+    }
+    
+    jobs.forEach { it.join() }
+    println(&quot;Final counter value: $counter&quot;)
+}
+</pre><!----></div></div></div><h2 id="lesson-5-evolution-of-kotlin" tabindex="-1"><a class="header-anchor" href="#lesson-5-evolution-of-kotlin"><span>Lesson 5 : Evolution of Kotlin</span></a></h2><div class="hint-container warning"><p class="hint-container-title">Warning</p><p>Kotlin playground not available for those new features</p></div><h3 id="explicit-backing-fields-issue-278" tabindex="-1"><a class="header-anchor" href="#explicit-backing-fields-issue-278"><span>Explicit Backing Fields (<a href="https://github.com/Kotlin/KEEP/issues/278" target="_blank" rel="noopener noreferrer">Issue 278</a>)</span></a></h3><div class="language-kotlin line-numbers-mode" data-highlighter="prismjs" data-ext="kt"><pre><code class="language-kotlin"><span class="line"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">Element</span><span class="token punctuation">(</span><span class="token keyword">val</span> name<span class="token operator">:</span> String<span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">class</span> C <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">val</span> elementList<span class="token operator">:</span> List<span class="token operator">&lt;</span>Element<span class="token operator">&gt;</span></span>
+<span class="line">        field <span class="token operator">=</span> <span class="token function">mutableListOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line">    </span>
+<span class="line">    <span class="token keyword">fun</span> <span class="token function">addElement</span><span class="token punctuation">(</span>element<span class="token operator">:</span> Element<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token punctuation">(</span>field <span class="token keyword">as</span> MutableList<span class="token operator">&lt;</span>Element<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">val</span> c <span class="token operator">=</span> <span class="token function">C</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line">    </span>
+<span class="line">    c<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span><span class="token function">Element</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;First&quot;</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class="line">    c<span class="token punctuation">.</span><span class="token function">addElement</span><span class="token punctuation">(</span><span class="token function">Element</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Second&quot;</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class="line">    </span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Elements: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">c<span class="token punctuation">.</span>elementList</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Size: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">c<span class="token punctuation">.</span>elementList<span class="token punctuation">.</span>size</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    </span>
+<span class="line">    <span class="token comment">// field is the backing field, elementList exposes it as List&lt;Element&gt;</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="collection-literals-kt-43871" tabindex="-1"><a class="header-anchor" href="#collection-literals-kt-43871"><span>Collection Literals (<a href="https://youtrack.jetbrains.com/issue/KT-43871" target="_blank" rel="noopener noreferrer">KT-43871</a>)</span></a></h3><div class="language-kotlin line-numbers-mode" data-highlighter="prismjs" data-ext="kt"><pre><code class="language-kotlin"><span class="line"><span class="token comment">// Proposed collection literals syntax (not yet implemented)</span></span>
+<span class="line"><span class="token keyword">val</span> list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span> <span class="token comment">// List&lt;Int&gt;</span></span>
+<span class="line"><span class="token keyword">val</span> map <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string-literal singleline"><span class="token string">&quot;one&quot;</span></span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">&quot;two&quot;</span></span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">&quot;three&quot;</span></span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">]</span> <span class="token comment">// Map&lt;String, Int&gt;</span></span>
+<span class="line"><span class="token keyword">val</span> <span class="token keyword">set</span><span class="token operator">:</span> Set<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span></span>
+<span class="line"><span class="token keyword">val</span> map<span class="token operator">:</span> MutableMap<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Int<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string-literal singleline"><span class="token string">&quot;one&quot;</span></span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">&quot;two&quot;</span></span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">&quot;three&quot;</span></span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">]</span></span>
+<span class="line"><span class="token keyword">val</span> array <span class="token operator">=</span> Array <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span> <span class="token comment">// Array&lt;Int&gt;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">typealias</span> IntList <span class="token operator">=</span> List<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span></span>
+<span class="line">IntList <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">fun</span> <span class="token function">foo</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Set<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Received set: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">a</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token comment">// Using the proposed literals</span></span>
+<span class="line">    <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span></span>
+<span class="line">    </span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;List: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">list</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Map: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">map</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span> </span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Set: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression"><span class="token keyword">set</span></span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Array: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">array<span class="token punctuation">.</span><span class="token function">contentToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    </span>
+<span class="line">    <span class="token keyword">val</span> intList <span class="token operator">=</span> IntList <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;IntList: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">intList</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="name-based-destructuring-kotlin-2-4" tabindex="-1"><a class="header-anchor" href="#name-based-destructuring-kotlin-2-4"><span>Name based destructuring (<a href="https://kotlinlang.org/docs/destructuring-declarations.html" target="_blank" rel="noopener noreferrer">Kotlin 2.4</a>)</span></a></h3><div class="language-kotlin line-numbers-mode" data-highlighter="prismjs" data-ext="kt"><pre><code class="language-kotlin"><span class="line"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">Talk</span><span class="token punctuation">(</span><span class="token keyword">val</span> title<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token keyword">val</span> speakerName<span class="token operator">:</span> String<span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">val</span> talk <span class="token operator">=</span> <span class="token function">Talk</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Kotlin Coroutines&quot;</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">&quot;John Doe&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    </span>
+<span class="line">    <span class="token comment">// Name-based destructuring (proposed syntax)</span></span>
+<span class="line">    <span class="token punctuation">(</span><span class="token keyword">val</span> speakerName<span class="token punctuation">,</span> <span class="token keyword">val</span> title<span class="token punctuation">)</span> <span class="token operator">=</span> talk</span>
+<span class="line">    </span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Good!&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Speaker: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">speakerName</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Title: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">title</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    </span>
+<span class="line">    <span class="token comment">// Benefits of name-based destructuring</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;\nBenefits:&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;• Order doesn&#39;t matter&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;• Properties selected by name&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;• More readable than positional&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="rich-errors-kt-68296" tabindex="-1"><a class="header-anchor" href="#rich-errors-kt-68296"><span>Rich Errors (<a href="https://youtrack.jetbrains.com/issue/KT-68296" target="_blank" rel="noopener noreferrer">KT-68296</a>)</span></a></h3><div class="language-kotlin line-numbers-mode" data-highlighter="prismjs" data-ext="kt"><pre><code class="language-kotlin"><span class="line"><span class="token comment">// Rich errors with union types (proposed syntax)</span></span>
+<span class="line"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">User</span><span class="token punctuation">(</span><span class="token keyword">val</span> name<span class="token operator">:</span> String<span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">TransactionId</span><span class="token punctuation">(</span><span class="token keyword">val</span> id<span class="token operator">:</span> String<span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">FetchingError</span><span class="token punctuation">(</span><span class="token keyword">val</span> message<span class="token operator">:</span> String<span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">TransactionError</span><span class="token punctuation">(</span><span class="token keyword">val</span> errorMessage<span class="token operator">:</span> String<span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">fun</span> <span class="token function">fetchUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> User | FetchingError <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">return</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0.5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token function">User</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Alice&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token function">FetchingError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Network error&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">fun</span> User<span class="token punctuation">.</span><span class="token function">charge</span><span class="token punctuation">(</span>amount<span class="token operator">:</span> Double<span class="token punctuation">)</span><span class="token operator">:</span> TransactionId | TransactionError <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">return</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>amount <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> amount <span class="token operator">&lt;=</span> <span class="token number">1000</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token function">TransactionId</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;txn_</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token function">TransactionError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Invalid amount: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">amount</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">val</span> user <span class="token operator">=</span> <span class="token function">fetchUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token keyword">val</span> transaction <span class="token operator">=</span> user<span class="token punctuation">.</span><span class="token function">charge</span><span class="token punctuation">(</span>amount <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">)</span></span>
+<span class="line">    </span>
+<span class="line">    <span class="token keyword">when</span> <span class="token punctuation">(</span>transaction<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token keyword">is</span> TransactionId <span class="token operator">-&gt;</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Transaction succeeded&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">        <span class="token keyword">is</span> FetchingError <span class="token operator">-&gt;</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Fetching failed&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">        <span class="token keyword">is</span> TransactionError <span class="token operator">-&gt;</span> </span>
+<span class="line">            <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Transaction failed: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">transaction<span class="token punctuation">.</span>errorMessage</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line">    </span>
+<span class="line">    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Rich errors provide type-safe error handling&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="must-return-values" tabindex="-1"><a class="header-anchor" href="#must-return-values"><span>Must return values</span></a></h3><div class="language-kotlin line-numbers-mode" data-highlighter="prismjs" data-ext="kt"><pre><code class="language-kotlin"><span class="line"><span class="token comment">// Must-use return values (proposed syntax)</span></span>
+<span class="line"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">User</span><span class="token punctuation">(</span><span class="token keyword">val</span> name<span class="token operator">:</span> String<span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">TransactionId</span><span class="token punctuation">(</span><span class="token keyword">val</span> id<span class="token operator">:</span> String<span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">FetchingError</span><span class="token punctuation">(</span><span class="token keyword">val</span> message<span class="token operator">:</span> String<span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">TransactionError</span><span class="token punctuation">(</span><span class="token keyword">val</span> errorMessage<span class="token operator">:</span> String<span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">fun</span> <span class="token function">fetchUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> User | FetchingError <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">return</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0.5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token function">User</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Alice&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token function">FetchingError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Network error&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">fun</span> User<span class="token punctuation">.</span><span class="token function">charge</span><span class="token punctuation">(</span>amount<span class="token operator">:</span> Double<span class="token punctuation">)</span><span class="token operator">:</span> TransactionId | TransactionError <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">return</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>amount <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> amount <span class="token operator">&lt;=</span> <span class="token number">1000</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token function">TransactionId</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;txn_</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token function">TransactionError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Invalid amount: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">amount</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">val</span> user <span class="token operator">=</span> <span class="token function">fetchUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token keyword">when</span> <span class="token punctuation">(</span><span class="token keyword">val</span> transaction <span class="token operator">=</span> user<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">charge</span><span class="token punctuation">(</span>amount <span class="token operator">=</span> <span class="token number">100.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token keyword">is</span> TransactionId <span class="token operator">-&gt;</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Transaction completed! Thanks!&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">        <span class="token keyword">is</span> TransactionError <span class="token operator">-&gt;</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;Error: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">transaction<span class="token punctuation">.</span>errorMessage</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">        <span class="token keyword">else</span> <span class="token operator">-&gt;</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">&quot;User fetch failed&quot;</span></span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line">    </span>
+<span class="line">    <span class="token comment">// Must-use prevents ignoring critical return values</span></span>
+<span class="line">    <span class="token comment">// fetchUser() // Would cause compiler error - return value must be used</span></span>
+<span class="line"><span class="token punctuation">}</span></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="additional-kotlin-language-features" tabindex="-1"><a class="header-anchor" href="#additional-kotlin-language-features"><span>Additional Kotlin Language Features</span></a></h3><table><thead><tr><th>Feature</th><th>Description</th><th>Status</th><th>Example Use Case</th></tr></thead><tbody><tr><td><strong>Multi-field value classes</strong></td><td>Extension of value classes to support multiple fields while maintaining performance benefits</td><td>Proposed</td><td><code>value class Coordinates(val x: Double, val y: Double)</code> - Efficient data containers with multiple properties</td></tr><tr><td><strong>Context parameters</strong></td><td>Implicit parameter passing mechanism, similar to Scala&#39;s implicit parameters</td><td>Experimental</td><td>Dependency injection, configuration passing without explicit parameter threading</td></tr><tr><td><strong>Infinite loop guards</strong></td><td>Compiler protection against accidental infinite loops in certain contexts</td><td>Proposed</td><td>Prevent <code>while(true)</code> without break conditions, timeout mechanisms for long-running operations</td></tr><tr><td><strong>HexFormat</strong></td><td>Built-in hexadecimal formatting and parsing utilities</td><td>Available in Kotlin 1.9+</td><td><code>HexFormat.of().formatHex(byteArray)</code> - Easy hex string conversion for cryptography, debugging</td></tr><tr><td><strong>Kotlin statics and static extensions</strong></td><td>Enhanced static member support and extension functions on companion objects</td><td>Proposed</td><td>Better Java interop, cleaner static utility functions, enhanced companion object capabilities</td></tr></tbody></table><h3 id="resources-for-latest-updates" tabindex="-1"><a class="header-anchor" href="#resources-for-latest-updates"><span>Resources for Latest Updates</span></a></h3><table><thead><tr><th>Resource</th><th>Purpose</th></tr></thead><tbody><tr><td><a href="https://github.com/Kotlin/KEEP" target="_blank" rel="noopener noreferrer">github.com/Kotlin/KEEP</a></td><td>Official Kotlin Enhancement Proposals - track feature development and proposals</td></tr><tr><td><a href="https://x.com/kotlin" target="_blank" rel="noopener noreferrer">x.com/kotlin</a></td><td>Official Kotlin Twitter/X account - announcements, updates, and community news</td></tr></tbody></table></div><!--[--><!--]--></div><footer class="vp-page-meta"><div class="vp-meta-item edit-link"><a class="auto-link external-link label" href="https://github.com/worldline/learning-kotlin-multiplatform/edit/main/0.language/README.md" aria-label="Edit this page" rel="noopener noreferrer" target="_blank"><!--[--><!--[--><svg class="edit-icon" viewbox="0 0 1024 1024"><g fill="currentColor"><path d="M430.818 653.65a60.46 60.46 0 0 1-50.96-93.281l71.69-114.012 7.773-10.365L816.038 80.138A60.46 60.46 0 0 1 859.225 62a60.46 60.46 0 0 1 43.186 18.138l43.186 43.186a60.46 60.46 0 0 1 0 86.373L588.879 565.55l-8.637 8.637-117.466 68.234a60.46 60.46 0 0 1-31.958 11.229z"></path><path d="M728.802 962H252.891A190.883 190.883 0 0 1 62.008 771.98V296.934a190.883 190.883 0 0 1 190.883-192.61h267.754a60.46 60.46 0 0 1 0 120.92H252.891a69.962 69.962 0 0 0-69.098 69.099V771.98a69.962 69.962 0 0 0 69.098 69.098h475.911A69.962 69.962 0 0 0 797.9 771.98V503.363a60.46 60.46 0 1 1 120.922 0V771.98A190.883 190.883 0 0 1 728.802 962z"></path></g></svg><!--]--><!--]-->Edit this page<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-meta-item git-info"><div class="vp-meta-item last-updated"><span class="meta-item-label">Last Updated: </span><time class="meta-item-info" datetime="2025-07-30T13:37:20.000Z" data-allow-mismatch>7/30/25, 1:37 PM</time></div><div class="vp-meta-item contributors"><span class="meta-item-label">Contributors: </span><span class="meta-item-info"><!--[--><!--[--><span class="contributor" title="email: brah.gharbi@gmail.com">Brah</span><!----><!--]--><!--]--></span></div></div></footer><nav class="vp-page-nav" aria-label="page navigation"><a class="route-link auto-link prev" href="/learning-kotlin-multiplatform/1.overview/" aria-label="🚀 Let&#39;s start"><!--[--><div class="hint"><span class="arrow left"></span> Prev</div><div class="link"><span class="external-link">🚀 Let&#39;s start</span></div><!--]--></a><a class="route-link auto-link next" href="/learning-kotlin-multiplatform/2.configure/" aria-label="Configure KMP"><!--[--><div class="hint">Next <span class="arrow right"></span></div><div class="link"><span class="external-link">Configure KMP</span></div><!--]--></a></nav><!--[--><!--]--></main><!--]--></div><!--[--><!----><!----><!--]--><!--]--></div>
+    <script type="module" src="/learning-kotlin-multiplatform/assets/app-CarcV5a4.js" defer></script>
+  </body>
+</html>
